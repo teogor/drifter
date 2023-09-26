@@ -1,0 +1,28 @@
+public final class dev/teogor/drifter/compose/OnLifecycleEventKt {
+	public static final fun OnLifecycleEvent (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class dev/teogor/drifter/compose/UvpComposableKt {
+	public static final fun UvpComposable (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class dev/teogor/drifter/compose/components/UnityPlayerView : android/widget/FrameLayout {
+	public static final field $stable I
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public final fun loadPlayer (Ljava/lang/Runnable;Lkotlin/jvm/functions/Function0;)V
+	public static synthetic fun loadPlayer$default (Ldev/teogor/drifter/compose/components/UnityPlayerView;Ljava/lang/Runnable;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
+	public final fun onDestroy ()V
+	public fun onGenericMotionEvent (Landroid/view/MotionEvent;)Z
+	public fun onKeyDown (ILandroid/view/KeyEvent;)Z
+	public fun onKeyUp (ILandroid/view/KeyEvent;)Z
+	public final fun onPause ()V
+	public final fun onResume ()V
+	public final fun onStart ()V
+	public final fun onStop ()V
+	public fun onTouchEvent (Landroid/view/MotionEvent;)Z
+	public final fun pauseUnityPlayer ()Z
+	public final fun resumeUnityPlayer ()Z
+}
+

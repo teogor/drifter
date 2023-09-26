@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2023 teogor (Teodor Grigor)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="108dp"
+  android:height="108dp"
+  android:viewportWidth="108"
+  android:viewportHeight="108">
+  <group
+    android:name="logoGroup"
+    android:scaleX="0.44"
+    android:scaleY="0.44"
+    android:translateX="30.24"
+    android:translateY="30.24">
+    <path
+      android:name="path"
+      android:fillColor="#ffffff"
+      android:pathData="M53.56,40.69C58.2,45.71 58.23,54.67 51.84,58.02C47.36,60.37 36.66,59.26 31.26,59.24A0.51,0.51 0,0 1,30.75 58.73L30.75,29.51Q30.75,29.01 31.25,29.01C47.8,28.97 66.65,25.2 74.08,44.78Q74.43,45.71 75.2,45.08L86.11,36.23A0.42,0.42 0,0 0,85.78 35.49Q81.53,36.18 77.38,34.98A0.29,0.29 0,0 1,77.48 34.42Q88.38,35.02 95.48,27.04Q95.99,26.47 95.23,26.59C91.75,27.13 88.07,28.34 84.87,28.4C75.7,28.6 65.5,24.91 56.68,22.71A0.36,0.35 -37.9,0 1,56.77 22.01L107.21,21.99Q108.05,21.99 107.44,22.56Q97.61,31.86 87.27,41.26Q82.21,45.86 74.93,46.31Q74.41,46.34 74.5,46.86C76.76,59.08 70.82,71.19 58.95,75.43Q55.56,76.64 49.27,76.78C37.91,77.02 27.29,76.79 18.43,76.93Q17.83,76.94 17.38,77.32L13.16,80.9A0.39,0.39 0,0 0,13.54 81.57C25.16,77.44 35.48,82 45.89,84.68Q52.14,86.29 45.69,86.12Q23.26,85.5 0.86,86.05A0.41,0.41 0,0 1,0.57 85.34L20.93,65.89A1.48,1.44 22.7,0 1,21.94 65.49Q36.54,65.53 50.98,65.5C66.89,65.46 69.39,42.87 53.76,40.32Q53.11,40.21 53.56,40.69ZM41.75,43.29L41.75,54.41A0.42,0.42 0,0 0,42.17 54.83L46.2,54.83A5.83,5.62 0,0 0,52.03 49.21L52.03,48.49A5.83,5.62 -0,0 0,46.2 42.87L42.17,42.87A0.42,0.42 0,0 0,41.75 43.29Z" />
+  </group>
+</vector>

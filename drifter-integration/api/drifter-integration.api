@@ -1,0 +1,323 @@
+public final class dev/teogor/drifter/integration/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public abstract class dev/teogor/drifter/integration/activities/OverrideUnityActivity : com/unity3d/player/UnityPlayerActivity {
+	public static final field Companion Ldev/teogor/drifter/integration/activities/OverrideUnityActivity$Companion;
+	public fun <init> ()V
+	protected fun onCreate (Landroid/os/Bundle;)V
+	protected fun onDestroy ()V
+	protected abstract fun showMainActivity (Ljava/lang/String;)V
+}
+
+public final class dev/teogor/drifter/integration/activities/OverrideUnityActivity$Companion {
+	public final fun getInstance ()Ldev/teogor/drifter/integration/activities/OverrideUnityActivity;
+	public final fun setInstance (Ldev/teogor/drifter/integration/activities/OverrideUnityActivity;)V
+}
+
+public final class dev/teogor/drifter/integration/activities/UnityPlayerInstantiatorActivity : android/app/Activity {
+	public fun <init> ()V
+}
+
+public final class dev/teogor/drifter/integration/core/AndroidUtils {
+	public static final field Companion Ldev/teogor/drifter/integration/core/AndroidUtils$Companion;
+	public fun <init> ()V
+	public final fun getContext ()Landroid/content/Context;
+	public final fun isPhoneLocked ()Z
+}
+
+public final class dev/teogor/drifter/integration/core/AndroidUtils$Companion {
+	public final fun getInstance ()Ldev/teogor/drifter/integration/core/AndroidUtils;
+}
+
+public abstract interface class dev/teogor/drifter/integration/core/IUnityPlayerInstanceCreatedListener {
+	public abstract fun onUnityPlayerInstanceCreated ()V
+}
+
+public class dev/teogor/drifter/integration/core/Message {
+	public fun <init> ()V
+}
+
+public class dev/teogor/drifter/integration/core/PlayerPrefs {
+	public static final field Companion Ldev/teogor/drifter/integration/core/PlayerPrefs$Companion;
+	protected fun <init> ()V
+	public final fun contains (Ljava/lang/String;)Z
+	public final fun getBoolean (Ljava/lang/String;Z)Z
+	public final fun getFloat (Ljava/lang/String;F)F
+	public static final fun getInstance ()Ldev/teogor/drifter/integration/core/PlayerPrefs;
+	public final fun getInt (Ljava/lang/String;I)I
+	public final fun getLong (Ljava/lang/String;J)J
+	public final fun getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public final fun setBoolean (Ljava/lang/String;Z)V
+	public final fun setFloat (Ljava/lang/String;F)V
+	public final fun setInt (Ljava/lang/String;I)V
+	public final fun setLong (Ljava/lang/String;J)V
+	public final fun setString (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun toggleBoolean (Ljava/lang/String;Z)Z
+}
+
+public final class dev/teogor/drifter/integration/core/PlayerPrefs$Companion {
+	public final fun getInstance ()Ldev/teogor/drifter/integration/core/PlayerPrefs;
+}
+
+public class dev/teogor/drifter/integration/core/SharedElement {
+	public field content Ljava/lang/Object;
+	protected fun <init> ()V
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun getContent ()Ljava/lang/Object;
+	public final fun getInstance ()Ldev/teogor/drifter/integration/core/SharedElement;
+	public final fun getObject (Ljava/lang/String;)Ljava/lang/Object;
+	public final fun setContent (Ljava/lang/Object;)V
+	public final fun toJson ()Ljava/lang/String;
+}
+
+public class dev/teogor/drifter/integration/core/Storage {
+	public fun <init> ()V
+	public final fun getStorageElement (Ljava/lang/String;)Ljava/lang/String;
+	protected final fun value (Ljava/lang/Object;)Ljava/lang/String;
+	protected final fun writeElement (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public abstract interface annotation class dev/teogor/drifter/integration/core/UnityCallback : java/lang/annotation/Annotation {
+}
+
+public final class dev/teogor/drifter/integration/core/UnityDispatcher {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ldev/teogor/drifter/integration/core/Message;)V
+	public final fun getFunctionName ()Ljava/lang/String;
+	public final fun getFunctionParameter ()Ldev/teogor/drifter/integration/core/Message;
+	public final fun getGameObject ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/integration/core/Validator {
+	public static final field Companion Ldev/teogor/drifter/integration/core/Validator$Companion;
+	public fun <init> ()V
+	public final fun dataChangedRead ()V
+	public final fun getContext ()Landroid/content/Context;
+	public final fun getStorageElement (Ljava/lang/String;)Ljava/lang/String;
+	public final fun isDataChanged ()Z
+	public final fun markAsRead (Ljava/lang/String;)V
+	public final fun setDataChanged ()V
+	public final fun toast (Ljava/lang/String;)V
+	public final fun writeElement (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public final class dev/teogor/drifter/integration/core/Validator$Companion {
+	public final fun getInstance ()Ldev/teogor/drifter/integration/core/Validator;
+}
+
+public final class dev/teogor/drifter/integration/initializer/ActivityContextProvider {
+	public static final field INSTANCE Ldev/teogor/drifter/integration/initializer/ActivityContextProvider;
+	public final fun getApplicationContext ()Landroid/content/Context;
+	public final fun getCurrentActivity ()Landroid/app/Activity;
+	public final fun setApplicationContext (Landroid/content/Context;)V
+	public final fun setCurrentActivity (Landroid/app/Activity;)V
+}
+
+public final class dev/teogor/drifter/integration/initializer/ActivityTracker {
+	public fun <init> (Landroid/content/Context;)V
+}
+
+public final class dev/teogor/drifter/integration/initializer/ActivityTrackerInitializer : androidx/startup/Initializer {
+	public fun <init> ()V
+	public fun create (Landroid/content/Context;)Ldev/teogor/drifter/integration/initializer/ActivityTracker;
+	public synthetic fun create (Landroid/content/Context;)Ljava/lang/Object;
+	public fun dependencies ()Ljava/util/List;
+}
+
+public final class dev/teogor/drifter/integration/model/Vector2 : dev/teogor/drifter/integration/core/Message {
+	public static final field Companion Ldev/teogor/drifter/integration/model/Vector2$Companion;
+	public fun <init> (FF)V
+	public final fun getX ()F
+	public final fun getY ()F
+}
+
+public final class dev/teogor/drifter/integration/model/Vector2$Companion {
+	public final fun asVector (Landroid/view/MotionEvent;)Ldev/teogor/drifter/integration/model/Vector2;
+}
+
+public final class dev/teogor/drifter/integration/model/Vector3 {
+	public fun <init> (FFF)V
+	public final fun asSharedElement ()Ldev/teogor/drifter/integration/core/SharedElement;
+	public final fun component1 ()F
+	public final fun component2 ()F
+	public final fun component3 ()F
+	public final fun copy (FFF)Ldev/teogor/drifter/integration/model/Vector3;
+	public static synthetic fun copy$default (Ldev/teogor/drifter/integration/model/Vector3;FFFILjava/lang/Object;)Ldev/teogor/drifter/integration/model/Vector3;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getX ()F
+	public final fun getY ()F
+	public final fun getZ ()F
+	public fun hashCode ()I
+	public final fun setX (F)V
+	public final fun setY (F)V
+	public final fun setZ (F)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/integration/player/UnityPlayerHolder {
+	public fun <init> (Ldev/teogor/drifter/integration/player/UnityPlayerPauseResumeManager;)V
+	public final fun isVisible ()Z
+	public final fun onVisibilityChanged (ZLandroid/view/SurfaceHolder;)Z
+	public final fun unregister ()V
+}
+
+public final class dev/teogor/drifter/integration/player/UnityPlayerInstanceManager {
+	public static final field Companion Ldev/teogor/drifter/integration/player/UnityPlayerInstanceManager$Companion;
+	public fun <init> ()V
+	public final fun createUnityPlayerDirectly (Landroid/content/ContextWrapper;)V
+	public final fun createUnityPlayerFromActivity (Landroid/app/Activity;)V
+	public final fun createUnityPlayerFromActivity (Landroid/app/Activity;Z)V
+	public final fun createUnityPlayerHolder ()Ldev/teogor/drifter/integration/player/UnityPlayerHolder;
+	public final fun getActiveUnityPlayerHolder ()Ldev/teogor/drifter/integration/player/UnityPlayerHolder;
+	public final fun getUnityPlayerPauseResumeManager ()Ldev/teogor/drifter/integration/player/UnityPlayerPauseResumeManager;
+	public final fun getUnityPlayerWrapperInstance ()Ldev/teogor/drifter/integration/player/UnityPlayerWrapper;
+	public final fun isUnityPlayerPaused ()Z
+	public final fun registerUnityPlayerInstanceCreatedListener (Ldev/teogor/drifter/integration/core/IUnityPlayerInstanceCreatedListener;)V
+	public final fun requestCreateUnityPlayer (Landroid/content/ContextWrapper;)V
+	public final fun setActiveUnityPlayerHolder (Ldev/teogor/drifter/integration/player/UnityPlayerHolder;)V
+}
+
+public final class dev/teogor/drifter/integration/player/UnityPlayerInstanceManager$Companion {
+	public final fun getInstance ()Ldev/teogor/drifter/integration/player/UnityPlayerInstanceManager;
+}
+
+public final class dev/teogor/drifter/integration/player/UnityPlayerPauseResumeManager {
+	public fun <init> ()V
+	public final fun getUnityPlayerHoldersCount ()I
+	public final fun getVisibleUnityPlayerHoldersCount ()I
+	public final fun handleUnityPlayerHolderVisibilityChanged (Ldev/teogor/drifter/integration/player/UnityPlayerHolder;Landroid/view/SurfaceHolder;)Z
+	public final fun isUnityPlayerPaused ()Z
+	public final fun setUnityPlayerWrapper (Ldev/teogor/drifter/integration/player/UnityPlayerWrapper;)V
+	public final fun unregisterUnityPlayerHolder (Ldev/teogor/drifter/integration/player/UnityPlayerHolder;)V
+}
+
+public final class dev/teogor/drifter/integration/player/UnityPlayerWrapper {
+	public static final field Companion Ldev/teogor/drifter/integration/player/UnityPlayerWrapper$Companion;
+	public fun <init> (Landroid/content/ContextWrapper;)V
+	public final fun getApplicationContext ()Landroid/content/Context;
+	public final fun getUnityPlayer ()Lcom/unity3d/player/UnityPlayer;
+	public final fun handleSurfaceDestroyed (Landroid/view/SurfaceHolder;)V
+	public final fun injectConfigurationChange (Landroid/content/res/Configuration;)V
+	public final fun injectInputEvent (Landroid/view/InputEvent;)Z
+	public final fun pausePlayer ()V
+	public final fun quitPlayer ()V
+	public final fun resumePlayer ()V
+	public final fun setContext (Landroid/content/ContextWrapper;)V
+	public final fun setPlayerSurface (Landroid/view/SurfaceHolder;)V
+}
+
+public final class dev/teogor/drifter/integration/player/UnityPlayerWrapper$Companion {
+	public final fun getUnityPlayerCurrentActivity ()Landroid/app/Activity;
+	public final fun setUnityPlayerCurrentActivity (Landroid/app/Activity;)V
+}
+
+public abstract class dev/teogor/drifter/integration/player/UnityPlayerWrapperInstantiator {
+	public fun <init> (Landroid/content/ContextWrapper;)V
+	protected abstract fun getSurfaceHolder ()Landroid/view/SurfaceHolder;
+	public final fun instantiate ()V
+	protected abstract fun isVisible ()Z
+	protected abstract fun onAlreadyInstantiated ()V
+	protected abstract fun onSetUnityPlayerHolder (Ldev/teogor/drifter/integration/player/UnityPlayerHolder;)V
+	protected abstract fun onSetUnityPlayerWrapper (Ldev/teogor/drifter/integration/player/UnityPlayerWrapper;)V
+	protected abstract fun onUnityPlayerInstanceCreated ()V
+}
+
+public final class dev/teogor/drifter/integration/utilities/ActivityThemeUtility {
+	public static final field INSTANCE Ldev/teogor/drifter/integration/utilities/ActivityThemeUtility;
+	public static final fun getThemeResId (Landroid/app/Activity;)I
+}
+
+public final class dev/teogor/drifter/integration/utilities/DataSync {
+	public static final field COLOUR_CHANGED Ljava/lang/String;
+	public static final field CYCLE_CHANGED Ljava/lang/String;
+	public static final field DATA_SYNC_EMPTY Ljava/lang/String;
+	public static final field DEBUG_ENABLED Ljava/lang/String;
+	public static final field EDITOR_ENABLED Ljava/lang/String;
+	public static final field INSTANCE Ldev/teogor/drifter/integration/utilities/DataSync;
+	public static final field NAVIGATION_BAR_PREFS_DARK Ljava/lang/String;
+	public static final field NAVIGATION_BAR_PREFS_ENABLED Ljava/lang/String;
+	public static final field NAVIGATION_BAR_PREFS_HEIGHT Ljava/lang/String;
+	public static final field NAVIGATION_BAR_PREFS_OPACITY Ljava/lang/String;
+	public static final field NAVIGATION_BAR_SCRIPT Ljava/lang/String;
+	public static final field NAVIGATION_BAR_SET_DARK Ljava/lang/String;
+	public static final field NAVIGATION_BAR_SET_ENABLED Ljava/lang/String;
+	public static final field NAVIGATION_BAR_SET_HEIGHT Ljava/lang/String;
+	public static final field NAVIGATION_BAR_SET_OPACITY Ljava/lang/String;
+	public static final field ON_CLICK Ljava/lang/String;
+	public static final field RESET_EDITOR Ljava/lang/String;
+	public static final field STATUS_BAR_PREFS_DARK Ljava/lang/String;
+	public static final field STATUS_BAR_PREFS_ENABLED Ljava/lang/String;
+	public static final field STATUS_BAR_PREFS_HEIGHT Ljava/lang/String;
+	public static final field STATUS_BAR_PREFS_OPACITY Ljava/lang/String;
+	public static final field STATUS_BAR_SCRIPT Ljava/lang/String;
+	public static final field STATUS_BAR_SET_DARK Ljava/lang/String;
+	public static final field STATUS_BAR_SET_ENABLED Ljava/lang/String;
+	public static final field STATUS_BAR_SET_HEIGHT Ljava/lang/String;
+	public static final field STATUS_BAR_SET_OPACITY Ljava/lang/String;
+	public static final field WATER_COLOUR Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/integration/utilities/DebugLog {
+	public static final field INSTANCE Ldev/teogor/drifter/integration/utilities/DebugLog;
+	public static final fun d (Ljava/lang/Object;)V
+	public static final fun e (Ljava/lang/Object;)V
+	public static final fun logStartupMessage ()V
+	public static final fun v (Ljava/lang/Object;)V
+}
+
+public final class dev/teogor/drifter/integration/utilities/ExtensionsKt {
+	public static final fun getAsString (Ldev/teogor/drifter/integration/core/Message;)Ljava/lang/String;
+	public static final fun getAsVector2 (Landroid/view/MotionEvent;)Ldev/teogor/drifter/integration/model/Vector2;
+}
+
+public final class dev/teogor/drifter/integration/utilities/MultiTapDetector {
+	public static final field Companion Ldev/teogor/drifter/integration/utilities/MultiTapDetector$Companion;
+	public field screenSize Landroid/graphics/Point;
+	public fun <init> (Landroid/graphics/Point;)V
+	public final fun getMaxTimeBetweenTaps ()J
+	public final fun getNumberOfTaps ()I
+	public final fun getTapZoneRadiusRelative ()F
+	public final fun onTouchEvent (Landroid/view/MotionEvent;)V
+	public final fun registerMultiTapDetectedListener (Ldev/teogor/drifter/integration/utilities/MultiTapDetector$IMultiTapDetectedListener;)V
+	public final fun setMaxTimeBetweenTaps (J)V
+	public final fun setNumberOfTaps (I)V
+	public final fun setTapZoneRadiusRelative (F)V
+	public final fun unregisterMultiTapDetectedListener (Ldev/teogor/drifter/integration/utilities/MultiTapDetector$IMultiTapDetectedListener;)V
+}
+
+public final class dev/teogor/drifter/integration/utilities/MultiTapDetector$Companion {
+}
+
+public abstract interface class dev/teogor/drifter/integration/utilities/MultiTapDetector$IMultiTapDetectedListener {
+	public abstract fun onMultiTapDetected (FF)V
+}
+
+public final class dev/teogor/drifter/integration/utilities/StandardExceptionHandler : java/lang/Thread$UncaughtExceptionHandler {
+	public static final field Companion Ldev/teogor/drifter/integration/utilities/StandardExceptionHandler$Companion;
+	public final fun attach ()V
+	public fun uncaughtException (Ljava/lang/Thread;Ljava/lang/Throwable;)V
+}
+
+public final class dev/teogor/drifter/integration/utilities/StandardExceptionHandler$Companion {
+	public final fun getInstance ()Ldev/teogor/drifter/integration/utilities/StandardExceptionHandler;
+}
+
+public final class dev/teogor/drifter/integration/utilities/UnityVersionInfo {
+	public static final field Companion Ldev/teogor/drifter/integration/utilities/UnityVersionInfo$Companion;
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMHasApi23PermissionRequestSupport ()Z
+	public final fun hasApi23PermissionRequestSupport ()Z
+	public final fun isUnity540orNewer ()Z
+	public final fun isUnity550orNewer ()Z
+	public final fun isUnityNonActivityConstructorBugFixed ()Z
+	public static final fun updateUnityVersionIfNeeded (Landroid/content/Context;)V
+}
+
+public final class dev/teogor/drifter/integration/utilities/UnityVersionInfo$Companion {
+	public final fun getInstance ()Ldev/teogor/drifter/integration/utilities/UnityVersionInfo;
+	public final fun updateUnityVersionIfNeeded (Landroid/content/Context;)V
+}
+

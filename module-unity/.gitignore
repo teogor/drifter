@@ -1,0 +1,10 @@
+# avoid publishing unity build to VS
+
+/build
+
+/symbols
+/src/main/assets/bin/Data/
+/src/main/assets/UnityServicesProjectConfiguration.json
+/src/main/Il2CppOutputProject/
+/src/main/jniLibs/
+/src/main/jniStaticLibs/

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
+                <projects>
+                  <project path="$PROJECT_DIR$/buildSrc" />
+                </projects>
+              </build>
+              <build path="$PROJECT_DIR$/drifter-plugin" name="drifter-plugin">
+                <projects>
+                  <project path="$PROJECT_DIR$/drifter-plugin" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/drifter-bom" />
+            <option value="$PROJECT_DIR$/drifter-compose" />
+            <option value="$PROJECT_DIR$/drifter-core" />
+            <option value="$PROJECT_DIR$/drifter-integration" />
+            <option value="$PROJECT_DIR$/drifter-plugin" />
+            <option value="$PROJECT_DIR$/drifter-wallpaper" />
+            <option value="$PROJECT_DIR$/module-unity" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
