@@ -1,0 +1,232 @@
+public class com/unity3d/player/UnityPlayer : android/widget/FrameLayout, com/unity3d/player/IUnityPlayerLifecycleEvents {
+	public static final field ANR_TIMEOUT_SECONDS I
+	public static field currentActivity Landroid/app/Activity;
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Lcom/unity3d/player/IUnityPlayerLifecycleEvents;)V
+	public static fun UnitySendMessage (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	protected fun addPhoneCallListener ()V
+	public fun addViewToPlayer (Landroid/view/View;Z)Z
+	public fun configurationChanged (Landroid/content/res/Configuration;)V
+	public fun destroy ()V
+	protected fun disableLogger ()V
+	public fun displayChanged (ILandroid/view/Surface;)Z
+	protected fun executeGLThreadJobs ()V
+	protected fun getClipboardText ()Ljava/lang/String;
+	protected fun getKeyboardLayout ()Ljava/lang/String;
+	protected fun getLaunchURL ()Ljava/lang/String;
+	protected fun getNetworkConnectivity ()I
+	public fun getNetworkProxySettings (Ljava/lang/String;)Ljava/lang/String;
+	public fun getSettings ()Landroid/os/Bundle;
+	protected fun getSplashMode ()I
+	protected fun getUaaLLaunchProcessType ()I
+	public fun getView ()Landroid/view/View;
+	protected fun hideSoftInput ()V
+	public fun init (IZ)V
+	protected fun initializeGoogleAr ()Z
+	public fun injectEvent (Landroid/view/InputEvent;)Z
+	protected fun isFinishing ()Z
+	protected fun isUaaLUseCase ()Z
+	protected fun kill ()V
+	protected fun loadLibrary (Ljava/lang/String;)Z
+	public fun lowMemory ()V
+	public final fun nativeLowMemory ()V
+	public final fun nativeMuteMasterAudio (Z)V
+	public fun newIntent (Landroid/content/Intent;)V
+	public fun onGenericMotionEvent (Landroid/view/MotionEvent;)Z
+	public fun onKeyDown (ILandroid/view/KeyEvent;)Z
+	public fun onKeyLongPress (ILandroid/view/KeyEvent;)Z
+	public fun onKeyMultiple (IILandroid/view/KeyEvent;)Z
+	public fun onKeyUp (ILandroid/view/KeyEvent;)Z
+	public fun onTouchEvent (Landroid/view/MotionEvent;)Z
+	public fun onUnityPlayerQuitted ()V
+	public fun onUnityPlayerUnloaded ()V
+	public fun pause ()V
+	protected fun pauseJavaAndCallUnloadCallback ()V
+	public fun queueGLThreadEvent (Ljava/lang/Runnable;)V
+	public fun quit ()V
+	public fun removeViewFromPlayer (Landroid/view/View;)V
+	public fun reportError (Ljava/lang/String;Ljava/lang/String;)V
+	public fun reportSoftInputArea (Landroid/graphics/Rect;)V
+	public fun reportSoftInputIsVisible (Z)V
+	public fun reportSoftInputSelection (II)V
+	public fun reportSoftInputStr (Ljava/lang/String;IZ)V
+	protected fun requestUserAuthorization (Ljava/lang/String;)V
+	public fun resume ()V
+	public fun sendSurfaceChangedEvent ()V
+	protected fun setCharacterLimit (I)V
+	protected fun setClipboardText (Ljava/lang/String;)V
+	protected fun setHideInputField (Z)V
+	public fun setMainSurfaceViewAspectRatio (F)V
+	protected fun setSelection (II)V
+	protected fun setSoftInputStr (Ljava/lang/String;)V
+	protected fun showSoftInput (Ljava/lang/String;IZZZZLjava/lang/String;IZZ)V
+	protected fun showVideoPlayer (Ljava/lang/String;IIIZII)Z
+	protected fun skipPermissionsDialog ()Z
+	public fun startOrientationListener (I)Z
+	public fun stopOrientationListener ()Z
+	protected fun toggleGyroscopeSensor (Z)V
+	public fun unload ()V
+	public fun updateGLDisplay (ILandroid/view/Surface;)V
+	public fun windowFocusChanged (Z)V
+}
+
+public class com/unity3d/player/UnityPlayer$PauseAndShutdownRunnable : java/lang/Runnable {
+	public fun run ()V
+}
+
+public class com/unity3d/player/UnityPlayer$ShutdownRunnable : java/lang/Runnable {
+	public fun run ()V
+}
+
+public class com/unity3d/player/UnityPlayer$UnityPlayerRunnableA : java/lang/Runnable {
+	public fun run ()V
+}
+
+public class com/unity3d/player/UnityPlayer$UnityPlayerRunnableC : java/lang/Runnable {
+	public fun run ()V
+}
+
+public abstract class com/unity3d/player/UnityPlayer$UnityRunnable : java/lang/Runnable {
+	public abstract fun execute ()V
+	public final fun run ()V
+}
+
+public class com/unity3d/player/UnityPlayer$UnityRunnableH : com/unity3d/player/UnityPlayer$UnityRunnable {
+	public fun execute ()V
+}
+
+public class com/unity3d/player/UnityPlayer$UnityRunnableI : com/unity3d/player/UnityPlayer$UnityRunnable {
+	public fun execute ()V
+}
+
+public class com/unity3d/player/UnityPlayer$UnityRunnableJ : com/unity3d/player/UnityPlayer$UnityRunnable {
+	public fun execute ()V
+}
+
+public class com/unity3d/player/UnityPlayer$UnityRunnableL : com/unity3d/player/UnityPlayer$UnityRunnable {
+	public fun execute ()V
+}
+
+public class com/unity3d/player/UnityPlayer$UnityRunnableM : com/unity3d/player/U$a {
+	public fun a ()V
+}
+
+public class com/unity3d/player/UnityPlayer$UnityThread : java/lang/Thread {
+	public fun run ()V
+}
+
+public class com/unity3d/player/UnityPlayer$r : java/lang/Runnable {
+	public fun run ()V
+}
+
+public class com/unity3d/player/UnityPlayer$t : java/lang/Runnable {
+	public fun run ()V
+}
+
+public class com/unity3d/player/UnityPlayerActivity : android/app/Activity, com/unity3d/player/IUnityPlayerLifecycleEvents {
+	protected field mUnityPlayer Lcom/unity3d/player/UnityPlayer;
+	public fun <init> ()V
+	public fun dispatchKeyEvent (Landroid/view/KeyEvent;)Z
+	protected final fun getMUnityPlayer ()Lcom/unity3d/player/UnityPlayer;
+	public fun onConfigurationChanged (Landroid/content/res/Configuration;)V
+	protected fun onCreate (Landroid/os/Bundle;)V
+	protected fun onDestroy ()V
+	public fun onGenericMotionEvent (Landroid/view/MotionEvent;)Z
+	public fun onKeyDown (ILandroid/view/KeyEvent;)Z
+	public fun onKeyUp (ILandroid/view/KeyEvent;)Z
+	public fun onLowMemory ()V
+	protected fun onNewIntent (Landroid/content/Intent;)V
+	protected fun onPause ()V
+	protected fun onResume ()V
+	protected fun onStart ()V
+	protected fun onStop ()V
+	public fun onTouchEvent (Landroid/view/MotionEvent;)Z
+	public fun onTrimMemory (I)V
+	public fun onUnityPlayerQuitted ()V
+	public fun onUnityPlayerUnloaded ()V
+	public fun onWindowFocusChanged (Z)V
+	protected final fun setMUnityPlayer (Lcom/unity3d/player/UnityPlayer;)V
+	protected final fun updateUnityCommandLineArguments (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/unity3d/player/callbacks/UnitySurfaceHolderCallback : android/view/SurfaceHolder$Callback {
+	public fun <init> (Lcom/unity3d/player/components/UnityFrameLayout;)V
+	public fun surfaceChanged (Landroid/view/SurfaceHolder;III)V
+	public fun surfaceCreated (Landroid/view/SurfaceHolder;)V
+	public fun surfaceDestroyed (Landroid/view/SurfaceHolder;)V
+}
+
+public final class com/unity3d/player/components/UnityFrameLayout : android/widget/FrameLayout {
+	public field unityPlayer Lcom/unity3d/player/UnityPlayer;
+	public field unitySurfaceView Lcom/unity3d/player/components/UnitySurfaceView;
+	public fun <init> (Landroid/content/Context;Lcom/unity3d/player/UnityPlayer;)V
+	public final fun isSurfaceViewValid ()Z
+	public final fun removeNativeView ()V
+	public final fun setAspectRatio (F)V
+}
+
+public final class com/unity3d/player/components/UnitySplashView : android/view/View {
+	public static final field Companion Lcom/unity3d/player/components/UnitySplashView$Companion;
+	public fun <init> (Landroid/content/Context;Lcom/unity3d/player/components/UnitySplashView$UnitySplashMode;)V
+	public final fun getSplashMode ()Lcom/unity3d/player/components/UnitySplashView$UnitySplashMode;
+}
+
+public final class com/unity3d/player/components/UnitySplashView$Companion {
+}
+
+public final class com/unity3d/player/components/UnitySplashView$UnitySplashMode : java/lang/Enum {
+	public static final field Fill Lcom/unity3d/player/components/UnitySplashView$UnitySplashMode;
+	public static final field Fit Lcom/unity3d/player/components/UnitySplashView$UnitySplashMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/unity3d/player/components/UnitySplashView$UnitySplashMode;
+	public static fun values ()[Lcom/unity3d/player/components/UnitySplashView$UnitySplashMode;
+}
+
+public final class com/unity3d/player/components/UnitySurfaceView : android/view/SurfaceView {
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IILcom/unity3d/player/UnityPlayer;)V
+	public synthetic fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IILcom/unity3d/player/UnityPlayer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun hasAspectRatio ()Z
+	public fun onGenericMotionEvent (Landroid/view/MotionEvent;)Z
+	public fun onTouchEvent (Landroid/view/MotionEvent;)Z
+	public final fun setAspectRatio (F)V
+}
+
+public final class com/unity3d/player/utils/PhoneStateChangeListener {
+	public fun <init> (Landroid/content/Context;Lcom/unity3d/player/UnityPlayer;)V
+	public final fun registerPhoneListenerCallState ()V
+	public final fun registerPhoneListenerNone ()V
+}
+
+public final class com/unity3d/player/utils/PlatformSupport {
+	public static final field INSTANCE Lcom/unity3d/player/utils/PlatformSupport;
+	public final fun getMARSHMALLOW_SUPPORT ()Z
+	public final fun getNOUGAT_SUPPORT ()Z
+}
+
+public final class com/unity3d/player/utils/models/FocusState : java/lang/Enum {
+	public static final field DEFERRED Lcom/unity3d/player/utils/models/FocusState;
+	public static final field GAINED Lcom/unity3d/player/utils/models/FocusState;
+	public static final field LOST Lcom/unity3d/player/utils/models/FocusState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()I
+	public static fun valueOf (Ljava/lang/String;)Lcom/unity3d/player/utils/models/FocusState;
+	public static fun values ()[Lcom/unity3d/player/utils/models/FocusState;
+}
+
+public final class com/unity3d/player/utils/models/UnityMessage : java/lang/Enum {
+	public static final field FOCUS_GAINED Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field FOCUS_LOST Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field NEXT_FRAME Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field ORIENTATION_ANGLE_CHANGE Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field PAUSE Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field QUIT Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field RESUME Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field SURFACE_ACQUIRED Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field SURFACE_LOST Lcom/unity3d/player/utils/models/UnityMessage;
+	public static final field URL_ACTIVATED Lcom/unity3d/player/utils/models/UnityMessage;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()I
+	public static fun valueOf (Ljava/lang/String;)Lcom/unity3d/player/utils/models/UnityMessage;
+	public static fun values ()[Lcom/unity3d/player/utils/models/UnityMessage;
+}
+
