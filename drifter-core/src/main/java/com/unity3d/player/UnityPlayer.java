@@ -177,15 +177,33 @@ public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEve
     this.m_MainThread.start();
   }
 
-  public static void UnitySendMessage(String str, String str2, String str3) {
+  /**
+   * Sends a message to a Unity GameObject with a specified method name and parameter.
+   *
+   * @param gameObject The name of the Unity GameObject to receive the message.
+   * @param methodName The name of the method to invoke on the GameObject.
+   * @param funcParam  The parameter to pass to the method as a UTF-8 encoded string.
+   *
+   * @throws UnsupportedOperationException If native libraries are not loaded.
+   */
+  public static void UnitySendMessage(String gameObject, String methodName, String funcParam) {
     if (!J.d()) {
-//      AbstractC0024u.Log(5, "Native libraries not loaded - dropping message for " + str + "." + str2);
+      // AbstractC0024u.Log(5, "Native libraries not loaded - dropping message for " + str + "." + str2);
       return;
     }
-    nativeUnitySendMessage(str, str2, str3.getBytes(StandardCharsets.UTF_8));
+    nativeUnitySendMessage(gameObject, methodName, funcParam.getBytes(StandardCharsets.UTF_8));
   }
 
-  private static native void nativeUnitySendMessage(String str, String str2, byte[] bArr);
+  /**
+   * Sends a message to a Unity GameObject with a specified method name and parameter.
+   *
+   * <p>This method is native and should be implemented in a platform-specific manner.</p>
+   *
+   * @param gameObject The name of the Unity GameObject to receive the message.
+   * @param methodName The name of the method to invoke on the GameObject.
+   * @param messageData The message data to pass to the method as a byte array.
+   */
+  private static native void nativeUnitySendMessage(String gameObject, String methodName, byte[] messageData);
 
   private static String logLoadLibMainError(String str, String str2) {
     String str3 = "Failed to load 'libmain.so'\n\n" + str2;
