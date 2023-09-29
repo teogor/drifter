@@ -17,8 +17,8 @@ import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.publish.applyPublishOptions
 
 plugins {
-  alias(libs.plugins.androidLibrary)
-  alias(libs.plugins.kotlinAndroid)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.jetbrains.kotlin.android)
 
   id("dev.teogor.publish")
 }
@@ -28,7 +28,7 @@ android {
   compileSdk = 34
 
   defaultConfig {
-    minSdk = 24
+    minSdk = 21
 
     consumerProguardFiles("proguard-unity.txt")
   }

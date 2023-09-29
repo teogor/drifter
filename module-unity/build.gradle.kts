@@ -18,8 +18,8 @@ import dev.teogor.drifter.plugin.models.PlatformArch
 import dev.teogor.drifter.plugin.unityOptions
 
 plugins {
-  alias(libs.plugins.androidLibrary)
-  alias(libs.plugins.kotlinAndroid)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.jetbrains.kotlin.android)
 
   id("dev.teogor.drifter.plugin")
 }
@@ -33,7 +33,7 @@ android {
   compileSdk = 34
 
   defaultConfig {
-    minSdk = 24
+    minSdk = 21
   }
 
   compileOptions {
