@@ -17,6 +17,7 @@
 package dev.teogor.drifter.integration.core
 
 // todo same as UnityStorage
+@Deprecated("to be removed later on")
 open class Storage {
   protected fun <T : Any> value(param: T): String {
     return SharedElement(param).toJson()

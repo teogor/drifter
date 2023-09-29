@@ -20,6 +20,7 @@ import android.content.Context
 import android.widget.Toast
 import dev.teogor.drifter.integration.initializer.ActivityContextProvider.applicationContext
 
+@Deprecated("to be removed later on")
 class Validator {
   @get:UnityCallback
   var isDataChanged = false
