@@ -55,7 +55,7 @@ gradlePlugin {
       id = "dev.teogor.drifter.plugin"
       implementationClass = "dev.teogor.drifter.plugin.DrifterPlugin"
       displayName = "Gradle Unity Configurator for Drifter Plugin"
-      description = "Bridging the Gap between Unity and Android Development for Effortless Integration and Performance Enhancement."
+      description = "Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
       tags.set(listOf("drifter", "unity", "android", "integration", "performance", "development", "android-library"))
     }
   }
