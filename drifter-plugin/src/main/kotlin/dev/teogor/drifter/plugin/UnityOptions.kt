@@ -24,7 +24,7 @@ fun Project.unityOptions(
     unityOptions = unityOptions,
   )
 
-  importUnityTask(
+  createUnityAssetSyncTask(
     unityOptions = unityOptions,
   )
 
