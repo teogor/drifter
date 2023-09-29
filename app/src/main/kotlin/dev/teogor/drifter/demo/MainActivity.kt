@@ -56,8 +56,8 @@ import androidx.lifecycle.Lifecycle
 import dev.teogor.drifter.compose.OnLifecycleEvent
 import dev.teogor.drifter.compose.UvpComposable
 import dev.teogor.drifter.demo.ui.theme.UnityViewTheme
-import dev.teogor.drifter.demo.unity.AndroidHandler
-import dev.teogor.drifter.demo.unity.Storage
+import dev.teogor.drifter.demo.unity.UnityController
+import dev.teogor.drifter.demo.unity.UnityStorage
 import dev.teogor.drifter.wallpaper.LiveWallpaperUtility
 
 class MainActivity : ComponentActivity() {
@@ -84,8 +84,8 @@ class MainActivity : ComponentActivity() {
             ) {
               val context = LocalContext.current
 
-              val androidHandler = AndroidHandler()
-              val storage = Storage()
+              val controller = UnityController()
+              val storage = UnityStorage()
 
               UvpComposable(
                 modifier = Modifier
@@ -96,15 +96,16 @@ class MainActivity : ComponentActivity() {
                     shape = RoundedCornerShape(20.dp),
                   ),
                 onCreated = {
-                  androidHandler.apply {
+                  controller.apply {
                     setEditorMode(true)
-                    setEditorColour(storage.selectedColour, false)
+                    setEditorColor(storage.waterColor, false)
+                    setEditorCycleOption(storage.cycleOption)
                   }
                 },
               )
 
               UnityColorPicker(
-                androidHandler = androidHandler,
+                controller = controller,
                 storage = storage,
               )
 
@@ -127,8 +128,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun UnityColorPicker(
-  androidHandler: AndroidHandler,
-  storage: Storage,
+  controller: UnityController,
+  storage: UnityStorage,
 ) {
   val colors = listOf(
     Color(0xFFB19CD9), // Lavender
@@ -154,7 +155,7 @@ fun UnityColorPicker(
   )
 
   var selectedColor by remember {
-    val color = storage.selectedColour
+    val color = storage.waterColor
     mutableStateOf(
       if (color == Color.Unspecified || !colors.contains(color)) {
         colors[0]
@@ -165,18 +166,18 @@ fun UnityColorPicker(
   }
 
   LaunchedEffect(selectedColor) {
-    androidHandler.setEditorColour(selectedColor)
+    controller.setEditorColor(selectedColor)
   }
 
   OnLifecycleEvent { _, event ->
     when (event) {
       Lifecycle.Event.ON_RESUME -> {
-        androidHandler.setEditorMode(true)
-        androidHandler.setEditorColour(selectedColor)
+        controller.setEditorMode(true)
+        controller.setEditorColor(selectedColor)
       }
 
       Lifecycle.Event.ON_PAUSE -> {
-        androidHandler.setEditorMode(false)
+        controller.setEditorMode(false)
       }
 
       else -> {}
@@ -203,7 +204,7 @@ fun UnityColorPicker(
 
   Button(
     onClick = {
-      storage.selectedColour = selectedColor
+      storage.waterColor = selectedColor
     },
     modifier = Modifier
       .padding(top = 4.dp),

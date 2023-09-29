@@ -19,6 +19,7 @@ package dev.teogor.drifter.integration.core
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+@Deprecated("to be removed later on")
 open class SharedElement<T : Any> {
   lateinit var content: T
 

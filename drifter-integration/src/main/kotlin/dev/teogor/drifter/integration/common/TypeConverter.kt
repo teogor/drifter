@@ -14,28 +14,12 @@
  * limitations under the License.
  */
 
-package dev.teogor.drifter.demo.unity
+package dev.teogor.drifter.integration.common
 
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-
-class Storage : UnityStorage() {
-
-  var selectedColour: Color = Color.Unspecified
-    get() {
-      val colourContent = getStorageElement(
-        key = StorageElements.COLOUR,
-      )
-      if (colourContent != null) {
-        field = Color(colourContent.toUInt().toInt())
-      }
-      return field
-    }
-    set(value) {
-      field = value
-      writeElement(
-        key = StorageElements.COLOUR,
-        content = value.toArgb().toUInt().toString(),
-      )
-    }
+class TypeConverter<T>(
+  private val toString: (T) -> String,
+  private val fromString: (String) -> T,
+) {
+  fun convertToString(value: T): String = toString(value)
+  fun convertFromString(string: String): T = fromString(string)
 }

@@ -20,6 +20,7 @@ import android.content.Context
 import android.widget.Toast
 import dev.teogor.drifter.integration.initializer.ActivityContextProvider.applicationContext
 
+@Deprecated("to be removed later on")
 class Validator {
   @get:UnityCallback
   var isDataChanged = false
@@ -56,6 +57,21 @@ class Validator {
     )
   }
 
+  @Suppress("UNCHECKED_CAST")
+  @UnityCallback
+  fun <T> getStorageElement(
+    key: String,
+    defaultValue: T,
+  ): T {
+    return when (defaultValue) {
+      is Int -> PlayerPrefs.instance.getInt(
+        key,
+        defaultValue,
+      ) as? T ?: defaultValue
+      else -> throw RuntimeException("Invalid t format")
+    }
+  }
+
   @UnityCallback
   fun toast(content: String?) {
     Toast.makeText(context, content, Toast.LENGTH_SHORT).show()
@@ -63,6 +79,10 @@ class Validator {
 
   fun writeElement(key: String, content: String?) {
     PlayerPrefs.instance.setString(key, content)
+  }
+
+  fun writeElement(key: String, content: Int) {
+    PlayerPrefs.instance.setInt(key, content)
   }
 
   companion object {

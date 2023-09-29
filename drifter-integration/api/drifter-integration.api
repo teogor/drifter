@@ -22,6 +22,12 @@ public final class dev/teogor/drifter/integration/activities/UnityPlayerInstanti
 	public fun <init> ()V
 }
 
+public final class dev/teogor/drifter/integration/common/TypeConverter {
+	public fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
+	public final fun convertFromString (Ljava/lang/String;)Ljava/lang/Object;
+	public final fun convertToString (Ljava/lang/Object;)Ljava/lang/String;
+}
+
 public final class dev/teogor/drifter/integration/core/AndroidUtils {
 	public static final field Companion Ldev/teogor/drifter/integration/core/AndroidUtils$Companion;
 	public fun <init> ()V
@@ -84,11 +90,24 @@ public class dev/teogor/drifter/integration/core/Storage {
 public abstract interface annotation class dev/teogor/drifter/integration/core/UnityCallback : java/lang/annotation/Annotation {
 }
 
+public class dev/teogor/drifter/integration/core/UnityControllerBase {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun invokeAction (Ljava/lang/String;Lorg/json/JSONObject;)V
+}
+
 public final class dev/teogor/drifter/integration/core/UnityDispatcher {
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ldev/teogor/drifter/integration/core/Message;)V
 	public final fun getFunctionName ()Ljava/lang/String;
 	public final fun getFunctionParameter ()Ldev/teogor/drifter/integration/core/Message;
 	public final fun getGameObject ()Ljava/lang/String;
+}
+
+public class dev/teogor/drifter/integration/core/UnityStorageBase {
+	public fun <init> ()V
+	protected fun getStorageElement (Ljava/lang/String;Ljava/lang/Object;Ldev/teogor/drifter/integration/common/TypeConverter;)Ljava/lang/Object;
+	public static synthetic fun getStorageElement$default (Ldev/teogor/drifter/integration/core/UnityStorageBase;Ljava/lang/String;Ljava/lang/Object;Ldev/teogor/drifter/integration/common/TypeConverter;ILjava/lang/Object;)Ljava/lang/Object;
+	protected fun writeElement (Ljava/lang/String;Ljava/lang/Object;Ldev/teogor/drifter/integration/common/TypeConverter;)Ljava/lang/Object;
+	public static synthetic fun writeElement$default (Ldev/teogor/drifter/integration/core/UnityStorageBase;Ljava/lang/String;Ljava/lang/Object;Ldev/teogor/drifter/integration/common/TypeConverter;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
 public final class dev/teogor/drifter/integration/core/Validator {
@@ -97,10 +116,12 @@ public final class dev/teogor/drifter/integration/core/Validator {
 	public final fun dataChangedRead ()V
 	public final fun getContext ()Landroid/content/Context;
 	public final fun getStorageElement (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getStorageElement (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun isDataChanged ()Z
 	public final fun markAsRead (Ljava/lang/String;)V
 	public final fun setDataChanged ()V
 	public final fun toast (Ljava/lang/String;)V
+	public final fun writeElement (Ljava/lang/String;I)V
 	public final fun writeElement (Ljava/lang/String;Ljava/lang/String;)V
 }
 

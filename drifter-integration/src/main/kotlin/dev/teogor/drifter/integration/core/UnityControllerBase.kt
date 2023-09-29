@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package dev.teogor.drifter.demo.unity
+package dev.teogor.drifter.integration.core
 
-annotation class StorageElements {
+import com.unity3d.player.UnityPlayer
+import org.json.JSONObject
 
-  companion object {
-    var COLOUR = "STORAGE_COLOUR"
-    var EDITOR_COLOUR = "STORAGE_EDITOR_COLOUR"
-    var EDITOR_CYCLE = "STORAGE_EDITOR_CYCLE"
-    var EDITOR_POSITION = "STORAGE_EDITOR_POSITION"
-    var EDITOR_STATE = "STORAGE_EDITOR_STATE"
+open class UnityControllerBase(
+  private val receiver: String,
+) {
+
+  fun invokeAction(methodName: String, data: JSONObject) {
+    UnityPlayer.UnitySendMessage(receiver, methodName, data.toString())
   }
 }
