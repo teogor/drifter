@@ -16,17 +16,52 @@
 
 package dev.teogor.drifter.demo.unity
 
-import dev.teogor.drifter.integration.core.Validator
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import dev.teogor.drifter.demo.unity.models.CycleOption
+import dev.teogor.drifter.demo.unity.models.StorageKeys
+import dev.teogor.drifter.integration.common.TypeConverter
+import dev.teogor.drifter.integration.core.UnityStorageBase
 
-// todo same as Storage
-open class UnityStorage {
-  protected open fun writeElement(key: String, content: String?) {
-    Validator.instance.writeElement(key, content)
-  }
+class UnityStorage : UnityStorageBase() {
 
-  open fun getStorageElement(
-    key: String,
-  ): String? {
-    return Validator.instance.getStorageElement(key)
-  }
+  private val colorConverter = TypeConverter(
+    toString = { color -> color.toArgb().toString() },
+    fromString = { string -> Color(string.toInt()) },
+  )
+
+  var waterColor: Color = Color(0xFF6FA3EF)
+    get() {
+      field = getStorageElement(
+        key = StorageKeys.WaterColor,
+        defaultValue = field,
+        converter = colorConverter,
+      )
+      return field
+    }
+    set(value) {
+      println("Write Color ::")
+      field = writeElement(
+        key = StorageKeys.WaterColor,
+        content = value,
+        converter = colorConverter,
+      )
+    }
+
+  var cycleOption: CycleOption = CycleOption.Day
+    get() {
+      val cycleOptionContent = getStorageElement(
+        key = StorageKeys.CycleOption,
+        defaultValue = field.ordinal,
+      )
+      field = CycleOption.entries[cycleOptionContent]
+      return field
+    }
+    set(value) {
+      field = value
+      writeElement(
+        key = StorageKeys.CycleOption,
+        content = value.ordinal,
+      )
+    }
 }
