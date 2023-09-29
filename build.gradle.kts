@@ -1,11 +1,16 @@
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 plugins {
-  alias(libs.plugins.androidApplication) apply false
-  alias(libs.plugins.androidLibrary) apply false
-  alias(libs.plugins.kotlinAndroid) apply false
+  alias(libs.plugins.android.application) apply false
+  alias(libs.plugins.android.library) apply false
+  alias(libs.plugins.jetbrains.kotlin.android) apply false
   alias(libs.plugins.vanniktech.maven) apply false
   id("dev.teogor.publish") apply false
+
+  alias(libs.plugins.ceres.android.application) apply false
+  alias(libs.plugins.ceres.android.application.compose) apply false
+  alias(libs.plugins.ceres.android.library) apply false
+  alias(libs.plugins.ceres.android.library.compose) apply false
 
   alias(libs.plugins.dokka)
   alias(libs.plugins.spotless)

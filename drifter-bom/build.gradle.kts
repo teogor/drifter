@@ -18,40 +18,40 @@ import dev.teogor.publish.applyPublishOptions
 
 plugins {
   id("java-platform")
-
   id("dev.teogor.publish")
 }
 
-publishOptions {
+afterEvaluate {
+  publishOptions {
 
-  defaultLibraryInfo(
-    artifactId = "bom",
-    version = "1.0.0-alpha01",
-  )
-
-  configureBomModule {
-    acceptedModules = listOf(
-      "drifter-compose",
-      "drifter-core",
-      "drifter-integration",
-      "drifter-wallpaper",
+    defaultLibraryInfo(
+      artifactId = "bom",
+      version = "1.0.0-alpha01",
     )
-  }
 
-  mavenPublishing {
-    publishToMavenCentral(SonatypeHost.S01)
-    signAllPublications()
-
-    @Suppress("UnstableApiUsage")
-    pom {
-      coordinates(
-        groupId = this@publishOptions.groupId,
-        artifactId = this@publishOptions.artifactId,
-        version = this@publishOptions.version,
+    configureBomModule {
+      acceptedModules = listOf(
+        "drifter-compose",
+        "drifter-core",
+        "drifter-integration",
+        "drifter-wallpaper",
       )
+    }
 
-      applyPublishOptions(this@publishOptions)
+    mavenPublishing {
+      publishToMavenCentral(SonatypeHost.S01)
+      signAllPublications()
+
+      @Suppress("UnstableApiUsage")
+      pom {
+        coordinates(
+          groupId = this@publishOptions.groupId,
+          artifactId = this@publishOptions.artifactId,
+          version = this@publishOptions.version,
+        )
+
+        applyPublishOptions(this@publishOptions)
+      }
     }
   }
-
 }

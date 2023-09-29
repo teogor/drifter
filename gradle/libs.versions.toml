@@ -1,9 +1,36 @@
 [versions]
+# @todo-ceres required by id::ceres.android.{application/library}
+androidDesugarJdkLibs = "2.0.3"
+
+# @todo-ceres required by id::ceres.android.application.compose
+androidxComposeCompiler = "1.5.3"
+androidxComposeBom = "2023.09.01"
+
+# @todo-ceres required by id::ceres.android.application.firebase
+firebaseBom = "32.3.1"
+firebaseCrashlyticsPlugin = "2.9.9"
+firebasePerfPlugin = "1.4.2"
+
+# @todo-ceres required by id::ceres.android.library
+junit4 = "4.13.2"
+
+# @todo-ceres required by id::ceres.android.hilt
+hilt = "2.47"
+hiltExt = "1.0.0"
+
+# @todo-ceres required by ceres.*
+ceres-bom = "1.0.0-alpha01"
+ceres-plugin = "1.0.0-alpha01"
+
+# @todo-ceres required by id::ceres.*
+androidGradlePlugin = "8.2.0-beta06"
+gmsPlugin = "4.4.0"
+protobufPlugin = "0.9.4"
+
 apiValidator = "0.13.2"
-agp = "8.2.0-beta05"
 annotation = "1.7.0"
 buildConfig = "3.1.0"
-kotlin = "1.9.0"
+kotlin = "1.9.10"
 core-ktx = "1.12.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
@@ -17,10 +44,44 @@ material = "1.9.0"
 startup-runtime = "1.2.0-alpha02"
 gson = "2.10.1"
 vanniktechMavenPlugin = "0.25.3"
-dokka = "1.8.20"
-spotless = "6.20.0"
+dokka = "1.9.0"
+spotless = "6.21.0"
 
 [libraries]
+# @todo-ceres required by id::ceres.android.application
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
+
+# @todo-ceres required by id::ceres.android.application.compose
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+
+# @todo-ceres required by id::ceres.android.application.firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-crashlytics-gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-performance-gradle = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
+firebase-performance = { group = "com.google.firebase", name = "firebase-perf-ktx" }
+
+# @todo-ceres required by id::ceres.android.library
+junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
+
+# @todo-ceres required by id::ceres.android.hilt
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
+hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
+
+# @todo-ceres required by ceres
+ceres-bom = { group = "dev.teogor.ceres", name = "bom", version.ref = "ceres-bom" }
+ceres-framework-core = { group = "dev.teogor.ceres", name = "framework-core" }
+ceres-screen-builder = { group = "dev.teogor.ceres", name = "screen-builder" }
+ceres-screen-core = { group = "dev.teogor.ceres", name = "screen-core" }
+ceres-screen-ui = { group = "dev.teogor.ceres", name = "screen-ui" }
+ceres-ui-theme = { group = "dev.teogor.ceres", name = "ui-theme" }
+ceres-monetisation-admob = { group = "dev.teogor.ceres", name = "monetisation-admob" }
+ceres-monetisation-messaging = { group = "dev.teogor.ceres", name = "monetisation-messaging" }
+
 buildconfig-plugin = { module = "com.github.gmazzo:gradle-buildconfig-pluginn", version.ref = "buildConfig" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startup-runtime" }
@@ -42,17 +103,43 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 # Dependencies of the included build-logic
-android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 [plugins]
-androidApplication = { id = "com.android.application", version.ref = "agp" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
-kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 vanniktech-maven = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechMavenPlugin" }
 buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 apiValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "apiValidator" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+
+# @todo-ceres required by id::ceres.*
+ceres-android-application = { id = "dev.teogor.ceres.android.application", version.ref = "ceres-plugin" }
+ceres-android-application-compose = { id = "dev.teogor.ceres.android.application.compose", version.ref = "ceres-plugin" }
+ceres-android-application-firebase = { id = "dev.teogor.ceres.android.application.firebase", version.ref = "ceres-plugin" }
+ceres-android-application-flavors = { id = "dev.teogor.ceres.android.application.flavors", version.ref = "ceres-plugin" }
+ceres-android-application-jacoco = { id = "dev.teogor.ceres.android.application.jacoco", version.ref = "ceres-plugin" }
+ceres-android-feature = { id = "dev.teogor.ceres.android.feature", version.ref = "ceres-plugin" }
+ceres-android-hilt = { id = "dev.teogor.ceres.android.hilt", version.ref = "ceres-plugin" }
+ceres-android-library = { id = "dev.teogor.ceres.android.library", version.ref = "ceres-plugin" }
+ceres-android-library-compose = { id = "dev.teogor.ceres.android.library.compose", version.ref = "ceres-plugin" }
+ceres-android-library-config = { id = "dev.teogor.ceres.android.library.config", version.ref = "ceres-plugin" }
+ceres-android-room = { id = "dev.teogor.ceres.android.room", version.ref = "ceres-plugin" }
+ceres-android-test = { id = "dev.teogor.ceres.android.test", version.ref = "ceres-plugin" }
+ceres-docs = { id = "dev.teogor.ceres.docs", version.ref = "ceres-plugin" }
+
+# @todo-ceres required by id::ceres.*
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
+firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
+gms = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }

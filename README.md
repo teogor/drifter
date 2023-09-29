@@ -68,6 +68,11 @@ The `drifter-wallpaper` module focuses on wallpaper-related features and tools f
 
 The `drifter-plugin` module provides a Gradle plugin that can be used to enhance your Android project build process. It offers features such as code generation, resource management, and more.
 
+This Gradle plugin simplifies Unity integration for your project by providing two essential tasks:
+
+1. **BuildIl2CppTask**: Compiles and builds Il2Cpp for Unity integration.
+2. **UnityAssetSyncTask**: Synchronizes Unity exported assets for project preparation.
+
 [Explore the source code](/drifter-plugin)
 
 ## Find this repository useful? :heart:

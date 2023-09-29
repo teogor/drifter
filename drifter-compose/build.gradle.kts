@@ -17,18 +17,16 @@ import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.publish.applyPublishOptions
 
 plugins {
-  alias(libs.plugins.androidLibrary)
-  alias(libs.plugins.kotlinAndroid)
+  alias(libs.plugins.ceres.android.library)
+  alias(libs.plugins.ceres.android.library.compose)
 
   id("dev.teogor.publish")
 }
 
 android {
   namespace = "dev.teogor.drifter.compose"
-  compileSdk = 34
 
   defaultConfig {
-    minSdk = 24
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
@@ -42,23 +40,6 @@ android {
         "proguard-rules.pro",
       )
     }
-  }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-  }
-
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_11.toString()
-  }
-
-  buildFeatures {
-    compose = true
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion = "1.5.1"
   }
 }
 
