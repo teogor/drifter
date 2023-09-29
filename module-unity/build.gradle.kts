@@ -18,8 +18,7 @@ import dev.teogor.drifter.plugin.models.PlatformArch
 import dev.teogor.drifter.plugin.unityOptions
 
 plugins {
-  alias(libs.plugins.android.library)
-  alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.ceres.android.library)
 
   id("dev.teogor.drifter.plugin")
 }
@@ -29,21 +28,6 @@ val unityStreamingAssetsList: List<String> = unityStreamingAssets?.split(",") ?:
 
 android {
   namespace = "dev.teogor.drifter.demo.unity.library"
-
-  compileSdk = 34
-
-  defaultConfig {
-    minSdk = 21
-  }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-  }
-
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_11.toString()
-  }
 
   unityOptions(
     androidConfig = this,

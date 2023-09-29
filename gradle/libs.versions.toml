@@ -28,7 +28,6 @@ gmsPlugin = "4.4.0"
 protobufPlugin = "0.9.4"
 
 apiValidator = "0.13.2"
-agp = "8.2.0-beta06"
 annotation = "1.7.0"
 buildConfig = "3.1.0"
 kotlin = "1.9.10"
@@ -104,7 +103,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 # Dependencies of the included build-logic
-android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }

@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 plugins {
-  alias(libs.plugins.android.application)
-  alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.ceres.android.application)
+  alias(libs.plugins.ceres.android.application.compose)
 }
 
 android {
   namespace = "dev.teogor.drifter.demo"
-  compileSdk = 34
 
   defaultConfig {
     applicationId = "dev.teogor.drifter.demo"
-    minSdk = 21
-    targetSdk = 34
     versionCode = 1
     versionName = "1.0.0-alpha01"
 
@@ -45,19 +42,7 @@ android {
       signingConfig = signingConfigs.getByName("debug")
     }
   }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-  }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_11.toString()
-  }
-  buildFeatures {
-    compose = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = "1.5.3"
-  }
+
   packaging {
     resources {
       excludes += "/META-INF/{AL2.0,LGPL2.1}"

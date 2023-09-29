@@ -7,6 +7,11 @@ plugins {
   alias(libs.plugins.vanniktech.maven) apply false
   id("dev.teogor.publish") apply false
 
+  alias(libs.plugins.ceres.android.application) apply false
+  alias(libs.plugins.ceres.android.application.compose) apply false
+  alias(libs.plugins.ceres.android.library) apply false
+  alias(libs.plugins.ceres.android.library.compose) apply false
+
   alias(libs.plugins.dokka)
   alias(libs.plugins.spotless)
   alias(libs.plugins.apiValidator)
