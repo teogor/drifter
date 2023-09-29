@@ -94,6 +94,7 @@ fun Project.createUnityAssetSyncTask(
 
   tasks.register<UnityAssetSyncTask>("syncUnityAssets") {
     setUnityOptions(unityOptions)
+    dependsOn("buildIl2Cpp")
   }
 
 }

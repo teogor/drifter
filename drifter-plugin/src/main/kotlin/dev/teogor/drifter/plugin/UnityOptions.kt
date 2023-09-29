@@ -19,12 +19,17 @@ fun Project.unityOptions(
   androidConfig.applyUnityManifestPlaceholders(
     unityOptions = unityOptions,
   )
-  unityBuildTask(
-    commonExtension = androidConfig,
+
+  createBuildIl2CppTask(
     unityOptions = unityOptions,
   )
 
   createUnityAssetSyncTask(
+    unityOptions = unityOptions,
+  )
+
+  unityBuildTask(
+    commonExtension = androidConfig,
     unityOptions = unityOptions,
   )
 
