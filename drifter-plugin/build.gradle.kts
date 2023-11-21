@@ -47,9 +47,11 @@ dependencies {
   compileOnly(libs.ksp.gradlePlugin)
 }
 
+@Suppress("UnstableApiUsage")
 gradlePlugin {
   website.set("https://github.com/teogor/drifter")
   vcsUrl.set("https://github.com/teogor/drifter")
+
   plugins {
     register("unityConfiguratorPlugin") {
       id = "dev.teogor.drifter.plugin"

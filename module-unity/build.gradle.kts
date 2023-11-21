@@ -48,7 +48,7 @@ android {
     configuration = Configuration.Release
     streamingAssets += unityStreamingAssetsList
 
-    exportFolder = "E:\\ZeoOwl\\.github\\aquarium-unity\\Export"
+    exportFolder = "E:\\ZeoOwl\\dev\\.github\\aquarium-unity\\Export"
   }
 }
 
