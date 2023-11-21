@@ -108,8 +108,7 @@ data class TeogorDeveloper(
 val ktlintVersion = "0.50.0"
 
 val excludeModules = listOf(
-  "app",
-  "module-unity",
+  project.name,
 )
 
 subprojects {

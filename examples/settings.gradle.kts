@@ -13,18 +13,18 @@ dependencyResolutionManagement {
     google()
     mavenCentral()
   }
+
+  versionCatalogs {
+    create("libs") {
+      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
+    }
+  }
 }
 
 rootProject.name = "Drifter"
 
-// Drifter BoM
-include(":drifter-bom")
+// Demo Modules
+include(":app")
+include(":module-unity")
 
-// Drifter Modules
-include(":drifter-compose")
-include(":drifter-core")
-include(":drifter-integration")
-include(":drifter-plugin")
-include(":drifter-wallpaper")
-
-// includeBuild("examples")
+includeBuild("..\\")
