@@ -13,13 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.vanniktech.maven.publish.SonatypeHost
-import dev.teogor.publish.applyPublishOptions
-
 plugins {
   alias(libs.plugins.ceres.android.library)
-
-  id("dev.teogor.publish")
+  alias(libs.plugins.winds)
 }
 
 android {
@@ -53,27 +49,9 @@ dependencies {
   implementation(libs.appcompat)
 }
 
-publishOptions {
-
-  defaultLibraryInfo(
-    artifactId = "wallpaper",
-    version = "1.0.0-alpha01",
-  )
-
-  mavenPublishing {
-    publishToMavenCentral(SonatypeHost.S01)
-    signAllPublications()
-
-    @Suppress("UnstableApiUsage")
-    pom {
-      coordinates(
-        groupId = this@publishOptions.groupId,
-        artifactId = this@publishOptions.artifactId,
-        version = this@publishOptions.version,
-      )
-
-      applyPublishOptions(this@publishOptions)
-    }
+winds {
+  mavenPublish {
+    displayName = "Wallpaper"
+    name = "wallpaper"
   }
-
 }

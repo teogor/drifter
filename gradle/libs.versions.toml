@@ -23,11 +23,11 @@ ceres-bom = "1.0.0-alpha01"
 ceres-plugin = "1.0.0-alpha01"
 
 # @todo-ceres required by id::ceres.*
-androidGradlePlugin = "8.2.0-beta06"
+androidGradlePlugin = "8.2.0-rc03"
 gmsPlugin = "4.4.0"
 protobufPlugin = "0.9.4"
 
-apiValidator = "0.13.2"
+api-validator = "0.13.2"
 annotation = "1.7.0"
 buildConfig = "3.1.0"
 kotlin = "1.9.10"
@@ -46,6 +46,7 @@ gson = "2.10.1"
 vanniktechMavenPlugin = "0.25.3"
 dokka = "1.9.0"
 spotless = "6.21.0"
+winds = "1.0.0-alpha03"
 
 [libraries]
 # @todo-ceres required by id::ceres.android.application
@@ -112,7 +113,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 vanniktech-maven = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechMavenPlugin" }
 buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-apiValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "apiValidator" }
+api-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "api-validator" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 
 # @todo-ceres required by id::ceres.*
@@ -143,3 +144,4 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+winds = { id = "dev.teogor.winds", version.ref = "winds" }
