@@ -13,45 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.vanniktech.maven.publish.SonatypeHost
-import dev.teogor.publish.applyPublishOptions
 
 plugins {
-  id("java-platform")
-  id("dev.teogor.publish")
+  alias(libs.plugins.winds)
 }
 
-afterEvaluate {
-  publishOptions {
+winds {
+  mavenPublish {
+    displayName = "BoM"
+    name = "bom"
 
-    defaultLibraryInfo(
-      artifactId = "bom",
-      version = "1.0.0-alpha01",
-    )
-
-    configureBomModule {
-      acceptedModules = listOf(
-        "drifter-compose",
-        "drifter-core",
-        "drifter-integration",
-        "drifter-wallpaper",
-      )
-    }
-
-    mavenPublishing {
-      publishToMavenCentral(SonatypeHost.S01)
-      signAllPublications()
-
-      @Suppress("UnstableApiUsage")
-      pom {
-        coordinates(
-          groupId = this@publishOptions.groupId,
-          artifactId = this@publishOptions.artifactId,
-          version = this@publishOptions.version,
-        )
-
-        applyPublishOptions(this@publishOptions)
-      }
-    }
+    defineBoM()
   }
 }

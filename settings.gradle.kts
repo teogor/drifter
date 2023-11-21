@@ -1,5 +1,8 @@
 pluginManagement {
-  includeBuild("drifter-plugin/")
+  includeBuild("drifter-plugin") {
+    name = ":drifter:plugin"
+  }
+
   repositories {
     google()
     mavenCentral()
@@ -7,6 +10,7 @@ pluginManagement {
   }
 }
 
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
@@ -25,7 +29,8 @@ include(":module-unity")
 include(":drifter-bom")
 
 // Drifter Modules
-include(":drifter-integration")
 include(":drifter-compose")
 include(":drifter-core")
+include(":drifter-integration")
+include(":drifter-plugin")
 include(":drifter-wallpaper")
