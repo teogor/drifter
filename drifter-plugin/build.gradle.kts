@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   `kotlin-dsl`
   id("com.gradle.plugin-publish") version "1.1.0"
-  alias(libs.plugins.vanniktech.maven)
   alias(libs.plugins.buildconfig)
+  alias(libs.plugins.winds)
 }
 
 group = "dev.teogor.drifter.plugin"

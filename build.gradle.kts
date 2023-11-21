@@ -1,4 +1,4 @@
-
+import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.winds.api.MavenPublish
 import dev.teogor.winds.api.getValue
 import dev.teogor.winds.api.model.Developer
@@ -6,6 +6,7 @@ import dev.teogor.winds.api.model.LicenseType
 import dev.teogor.winds.api.model.createVersion
 import dev.teogor.winds.api.provider.Scm
 import dev.teogor.winds.gradle.utils.afterWindsPluginConfiguration
+import dev.teogor.winds.gradle.utils.attachTo
 import org.jetbrains.dokka.gradle.DokkaPlugin
 
 plugins {
@@ -28,7 +29,7 @@ plugins {
 
 winds {
   buildFeatures {
-    mavenPublish = false
+    mavenPublish = true
 
     docsGenerator = true
   }
@@ -39,7 +40,8 @@ winds {
 
     canBePublished = false
 
-    description = "\uD83C\uDFAE Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
+    description =
+      "\uD83C\uDFAE Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
 
     groupId = "dev.teogor.drifter"
     artifactIdElements = 1
@@ -74,23 +76,28 @@ winds {
   }
 }
 
+val excludedModulesForWinds = listOf(
+  ":drifter-plugin",
+)
 afterWindsPluginConfiguration { winds ->
-  val mavenPublish: MavenPublish by winds
-  if (mavenPublish.canBePublished) {
-    // mavenPublishing {
-    //   publishToMavenCentral(SonatypeHost.S01)
-    //   signAllPublications()
-    //
-    //   @Suppress("UnstableApiUsage")
-    //   pom {
-    //     coordinates(
-    //       groupId = mavenPublish.groupId!!,
-    //       artifactId = mavenPublish.artifactId!!,
-    //       version = mavenPublish.version!!.toString(),
-    //     )
-    //     mavenPublish attachTo this
-    //   }
-    // }
+  if (!excludedModulesForWinds.contains(path)) {
+    val mavenPublish: MavenPublish by winds
+    if (mavenPublish.canBePublished) {
+      mavenPublishing {
+        publishToMavenCentral(SonatypeHost.S01)
+        signAllPublications()
+
+        @Suppress("UnstableApiUsage")
+        pom {
+          coordinates(
+            groupId = mavenPublish.groupId!!,
+            artifactId = mavenPublish.artifactId!!,
+            version = mavenPublish.version!!.toString(),
+          )
+          mavenPublish attachTo this
+        }
+      }
+    }
   }
 }
 
