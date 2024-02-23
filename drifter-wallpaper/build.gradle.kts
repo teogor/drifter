@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-  implementation(project(":drifter-integration"))
+  implementation(projects.drifterIntegration)
 
   implementation(libs.androidx.startup.runtime)
   implementation(libs.gson)

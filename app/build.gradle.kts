@@ -53,7 +53,7 @@ android {
 dependencies {
   implementation(project(":module-unity"))
 
-  implementation(project(":examples:drifter-compose"))
+  implementation(project(":drifter-compose"))
   implementation(project(":drifter-core"))
   implementation(project(":drifter-integration"))
   implementation(project(":drifter-wallpaper"))

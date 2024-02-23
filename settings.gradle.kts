@@ -1,4 +1,7 @@
 pluginManagement {
+  includeBuild("${rootProject.projectDir}\\drifter-plugin") {
+    name = "drifter-gradle-plugin-test"
+  }
   repositories {
     google()
     mavenCentral()
@@ -15,16 +18,18 @@ dependencyResolutionManagement {
   }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "Drifter"
 
-// Drifter BoM
-include(":drifter-bom")
+// Demo Application
+include(":app")
+include(":module-unity")
 
-// Drifter Modules
+// Drifter
+include(":drifter-bom")
 include(":drifter-compose")
 include(":drifter-core")
 include(":drifter-integration")
 include(":drifter-plugin")
 include(":drifter-wallpaper")
-
-// includeBuild("examples")

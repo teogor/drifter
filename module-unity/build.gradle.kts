@@ -53,7 +53,7 @@ android {
 }
 
 dependencies {
-  api(project(":drifter-wallpaper"))
+  implementation(projects.drifterWallpaper)
 
   implementation(libs.appcompat)
   implementation(libs.gson)

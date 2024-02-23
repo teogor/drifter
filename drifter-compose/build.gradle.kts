@@ -41,9 +41,9 @@ android {
 }
 
 dependencies {
-  implementation(project(":drifter-core"))
-  implementation(project(":drifter-integration"))
-  implementation(project(":drifter-wallpaper"))
+  implementation(projects.drifterCore)
+  implementation(projects.drifterIntegration)
+  implementation(projects.drifterWallpaper)
 
   implementation(platform(libs.compose.bom))
   implementation(libs.ui)
