@@ -1,6 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.winds.api.MavenPublish
 import dev.teogor.winds.api.getValue
+import dev.teogor.winds.api.model.DependencyType
 import dev.teogor.winds.api.model.Developer
 import dev.teogor.winds.api.model.LicenseType
 import dev.teogor.winds.api.model.createVersion
@@ -73,6 +74,7 @@ winds {
     name = "Drifter"
     identifier = "drifter"
     alertOnDependentModules = true
+    dependencyGatheringType = DependencyType.LOCAL
   }
 }
 
