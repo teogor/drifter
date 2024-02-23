@@ -1,0 +1,5 @@
+public class dev/teogor/drifter/common/UnityMessageSender {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun sendMessage (Ljava/lang/String;Lorg/json/JSONObject;)V
+}
+
