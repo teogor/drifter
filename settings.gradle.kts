@@ -18,7 +18,13 @@ dependencyResolutionManagement {
   }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "Drifter"
+
+// Demo Application
+include(":app")
+include(":module-unity")
 
 // Drifter
 include(":drifter-bom")
@@ -27,7 +33,3 @@ include(":drifter-core")
 include(":drifter-integration")
 include(":drifter-plugin")
 include(":drifter-wallpaper")
-
-// Demo Application
-include(":app")
-include(":module-unity")
