@@ -19,6 +19,13 @@ package dev.teogor.drifter.integration.core
 import com.unity3d.player.UnityPlayer
 import org.json.JSONObject
 
+@Deprecated(
+  message = "This class is deprecated in favor of UnityMessageSender. Please migrate to the newer class for improved access and functionality.",
+  replaceWith = ReplaceWith(
+    "UnityMessageSender",
+    "dev.teogor.drifter.common.UnityMessageSender",
+  ),
+)
 open class UnityControllerBase(
   private val receiver: String,
 ) {

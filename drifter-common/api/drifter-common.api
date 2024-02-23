@@ -7,6 +7,14 @@ public class dev/teogor/drifter/common/UnityMessageSender {
 	public final fun sendMessage (Ljava/lang/String;Lorg/json/JSONObject;)V
 }
 
+public class dev/teogor/drifter/common/UnityPlayerPrefs {
+	public fun <init> ()V
+	protected fun get (Ljava/lang/String;Ljava/lang/Object;Ldev/teogor/drifter/common/Serializable;)Ljava/lang/Object;
+	public static synthetic fun get$default (Ldev/teogor/drifter/common/UnityPlayerPrefs;Ljava/lang/String;Ljava/lang/Object;Ldev/teogor/drifter/common/Serializable;ILjava/lang/Object;)Ljava/lang/Object;
+	protected fun set (Ljava/lang/String;Ljava/lang/Object;Ldev/teogor/drifter/common/Serializable;)Ljava/lang/Object;
+	public static synthetic fun set$default (Ldev/teogor/drifter/common/UnityPlayerPrefs;Ljava/lang/String;Ljava/lang/Object;Ldev/teogor/drifter/common/Serializable;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
 public abstract interface annotation class dev/teogor/drifter/common/UnityPrefAccess : java/lang/annotation/Annotation {
 }
 
