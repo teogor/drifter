@@ -61,6 +61,7 @@ public final class dev/teogor/drifter/plugin/models/Configuration : java/lang/En
 }
 
 public final class dev/teogor/drifter/plugin/models/PlatformArch {
+	public static final field Companion Ldev/teogor/drifter/plugin/models/PlatformArch$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
@@ -71,6 +72,13 @@ public final class dev/teogor/drifter/plugin/models/PlatformArch {
 	public final fun getArchitecture ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/plugin/models/PlatformArch$Companion {
+	public final fun getArm64 ()Ldev/teogor/drifter/plugin/models/PlatformArch;
+	public final fun getArmv7 ()Ldev/teogor/drifter/plugin/models/PlatformArch;
+	public final fun getChromeOs ()Ldev/teogor/drifter/plugin/models/PlatformArch;
+	public final fun getWebXR ()Ldev/teogor/drifter/plugin/models/PlatformArch;
 }
 
 public final class dev/teogor/drifter/plugin/models/UnityOptions {

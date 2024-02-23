@@ -26,4 +26,23 @@ package dev.teogor.drifter.plugin.models
 data class PlatformArch(
   val abi: String,
   val architecture: String,
-)
+) {
+  companion object {
+    val Armv7 = PlatformArch(
+      abi = "armeabi-v7a",
+      architecture = "armv7",
+    )
+    val Arm64 = PlatformArch(
+      abi = "arm64-v8a",
+      architecture = "arm64",
+    )
+    val ChromeOs = PlatformArch(
+      abi = "x86",
+      architecture = "x86",
+    )
+    val WebXR = PlatformArch(
+      abi = "x86_64",
+      architecture = "x86_64",
+    )
+  }
+}
