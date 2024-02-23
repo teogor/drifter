@@ -7,3 +7,6 @@ public class dev/teogor/drifter/common/UnityMessageSender {
 	public final fun sendMessage (Ljava/lang/String;Lorg/json/JSONObject;)V
 }
 
+public abstract interface annotation class dev/teogor/drifter/common/UnityPrefAccess : java/lang/annotation/Annotation {
+}
+
