@@ -18,6 +18,13 @@ package dev.teogor.drifter.integration.core
 
 import dev.teogor.drifter.integration.common.TypeConverter
 
+@Deprecated(
+  message = "This class is deprecated in favor of UnityPlayerPrefs. Please migrate to the newer class for improved access and functionality.",
+  replaceWith = ReplaceWith(
+    "UnityPlayerPrefs",
+    "dev.teogor.drifter.common.UnityPlayerPrefs",
+  ),
+)
 open class UnityStorageBase {
   protected open fun <T> writeElement(
     key: String,
