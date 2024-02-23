@@ -46,7 +46,7 @@ gson = "2.10.1"
 vanniktechMavenPlugin = "0.25.3"
 dokka = "1.9.0"
 spotless = "6.21.0"
-winds = "1.0.0-alpha03"
+winds = "1.0.0-beta02"
 
 [libraries]
 # @todo-ceres required by id::ceres.android.application

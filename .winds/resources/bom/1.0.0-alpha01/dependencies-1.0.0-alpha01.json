@@ -1,0 +1,116 @@
+[
+  {
+    "completeName": "Drifter Compose",
+    "name": "compose",
+    "displayName": "Compose",
+    "description": "🎮 Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly.",
+    "groupId": "dev.teogor.drifter",
+    "artifactId": "compose",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "flag": "Alpha",
+      "versionQualifier": 1
+    },
+    "path": ":drifter-compose",
+    "dependencies": [
+    ],
+    "canBePublished": true,
+    "names": [
+      "Drifter",
+      "Compose"
+    ]
+  },
+  {
+    "completeName": "Drifter Core",
+    "name": "core",
+    "displayName": "Core",
+    "description": "🎮 Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly.",
+    "groupId": "dev.teogor.drifter",
+    "artifactId": "core",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "flag": "Alpha",
+      "versionQualifier": 1
+    },
+    "path": ":drifter-core",
+    "dependencies": [
+    ],
+    "canBePublished": true,
+    "names": [
+      "Drifter",
+      "Core"
+    ]
+  },
+  {
+    "completeName": "Drifter Integration",
+    "name": "integration",
+    "displayName": "Integration",
+    "description": "🎮 Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly.",
+    "groupId": "dev.teogor.drifter",
+    "artifactId": "integration",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "flag": "Alpha",
+      "versionQualifier": 1
+    },
+    "path": ":drifter-integration",
+    "dependencies": [
+    ],
+    "canBePublished": true,
+    "names": [
+      "Drifter",
+      "Integration"
+    ]
+  },
+  {
+    "completeName": "Drifter",
+    "name": "drifter",
+    "displayName": "Drifter",
+    "description": "🎮 Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly.",
+    "groupId": "dev.teogor.drifter",
+    "artifactId": "drifter",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "flag": "Alpha",
+      "versionQualifier": 1
+    },
+    "path": ":drifter-plugin",
+    "dependencies": [
+    ],
+    "canBePublished": true,
+    "names": [
+      "Drifter"
+    ]
+  },
+  {
+    "completeName": "Drifter Wallpaper",
+    "name": "wallpaper",
+    "displayName": "Wallpaper",
+    "description": "🎮 Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly.",
+    "groupId": "dev.teogor.drifter",
+    "artifactId": "wallpaper",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "flag": "Alpha",
+      "versionQualifier": 1
+    },
+    "path": ":drifter-wallpaper",
+    "dependencies": [
+    ],
+    "canBePublished": true,
+    "names": [
+      "Drifter",
+      "Wallpaper"
+    ]
+  }
+]
