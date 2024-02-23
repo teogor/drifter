@@ -48,11 +48,11 @@ fun Project.unityBuildTask(
     }
 
     afterEvaluate {
-      if (project(path).tasks.named("mergeDebugJniLibFolders").getOrNull() != null) {
+      if (project(path).tasks.findByName("mergeDebugJniLibFolders") != null) {
         project(path).tasks.named("mergeDebugJniLibFolders").get()
           .dependsOn(buildIl2CppTask)
       }
-      if (project(path).tasks.named("mergeReleaseJniLibFolders").getOrNull() != null) {
+      if (project(path).tasks.findByName("mergeReleaseJniLibFolders") != null) {
         project(path).tasks.named("mergeReleaseJniLibFolders").get()
           .dependsOn(buildIl2CppTask)
       }
