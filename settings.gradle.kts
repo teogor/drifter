@@ -28,6 +28,7 @@ include(":module-unity")
 
 // Drifter
 include(":drifter-bom")
+include(":drifter-common")
 include(":drifter-compose")
 include(":drifter-core")
 include(":drifter-integration")
