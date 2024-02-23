@@ -25,6 +25,7 @@ android {
 
 dependencies {
   implementation(projects.drifterCore)
+  implementation(projects.drifterIntegration)
 }
 
 winds {

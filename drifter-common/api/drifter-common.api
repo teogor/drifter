@@ -1,3 +1,7 @@
+public final class dev/teogor/drifter/common/Serializable {
+	public fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
+}
+
 public class dev/teogor/drifter/common/UnityMessageSender {
 	public fun <init> (Ljava/lang/String;)V
 	public final fun sendMessage (Ljava/lang/String;Lorg/json/JSONObject;)V
