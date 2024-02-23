@@ -25,6 +25,16 @@ public final class dev/teogor/drifter/plugin/DrifterPlugin : org/gradle/api/Plug
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
+public final class dev/teogor/drifter/plugin/DrifterPropertiesKt {
+	public static final fun getDrifterUnityPathExport (Lorg/gradle/api/Project;)Ljava/lang/String;
+	public static final fun getDrifterUnityPathNdk (Lorg/gradle/api/Project;)Ljava/lang/String;
+	public static final fun getSafeDrifterUnityPathExport (Lorg/gradle/api/Project;)Ljava/lang/String;
+	public static final fun getSafeDrifterUnityPathNdk (Lorg/gradle/api/Project;)Ljava/lang/String;
+}
+
+public abstract interface annotation class dev/teogor/drifter/plugin/InternalDrifterApi : java/lang/annotation/Annotation {
+}
+
 public class dev/teogor/drifter/plugin/UnityAssetSyncTask : org/gradle/api/DefaultTask {
 	public fun <init> ()V
 	public final fun importContent ()V

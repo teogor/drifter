@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import dev.teogor.drifter.plugin.getSafeDrifterUnityPathExport
+import dev.teogor.drifter.plugin.getSafeDrifterUnityPathNdk
 import dev.teogor.drifter.plugin.models.Configuration
 import dev.teogor.drifter.plugin.models.PlatformArch
 import dev.teogor.drifter.plugin.unityOptions
@@ -39,7 +42,7 @@ android {
     version = "2022.3.7f1"
 
     ndkVersion = "23.1.7779620"
-    ndkPath = "D:\\Unity\\Editor\\2022.3.7f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK"
+    ndkPath = getSafeDrifterUnityPathNdk()
 
     platforms = listOf(
       PlatformArch("armeabi-v7a", "armv7"),
@@ -48,7 +51,7 @@ android {
     configuration = Configuration.Release
     streamingAssets += unityStreamingAssetsList
 
-    exportFolder = "E:\\ZeoOwl\\dev\\.github\\aquarium-unity\\Export"
+    exportFolder = getSafeDrifterUnityPathExport()
   }
 }
 
