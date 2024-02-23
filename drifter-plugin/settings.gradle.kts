@@ -20,11 +20,3 @@ dependencyResolutionManagement {
     }
   }
 }
-
-rootProject.name = "Drifter"
-
-// Demo Modules
-include(":app")
-include(":module-unity")
-
-includeBuild("..\\")
