@@ -13,27 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-  repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-  }
-}
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-  repositories {
-    google()
-    mavenCentral()
-  }
+package dev.teogor.drifter.codegen.model
 
-  versionCatalogs {
-    create("libs") {
-      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
-    }
-  }
-}
+import com.squareup.kotlinpoet.TypeName
 
-include(":gradle-plugin-api")
+data class ConverterType(
+  val name: String,
+  val packageName: String,
+  val receiverType: TypeName,
+  val returnType: TypeName,
+)

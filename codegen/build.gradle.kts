@@ -13,27 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-  repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
+plugins {
+  id("java-library")
+  alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.winds)
+}
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_11.toString()
   }
 }
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-  repositories {
-    google()
-    mavenCentral()
-  }
+dependencies {
+  api(projects.runtime)
 
-  versionCatalogs {
-    create("libs") {
-      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
-    }
-  }
+  api(libs.kotlin.poet)
+  api(libs.kotlin.poet.ksp)
 }
 
-include(":gradle-plugin-api")
+winds {
+  mavenPublish {
+    displayName = "Codegen"
+    name = "codegen"
+  }
+}

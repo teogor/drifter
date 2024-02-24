@@ -13,27 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-  repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-  }
+
+package dev.teogor.drifter.codegen.facades
+
+import com.squareup.kotlinpoet.FileSpec
+import java.io.OutputStream
+import java.io.OutputStreamWriter
+import java.nio.charset.StandardCharsets
+
+interface CodeOutputStreamMaker {
+
+  fun makeFile(
+    name: String,
+    packageName: String,
+    vararg sourceIds: String,
+  ): OutputStream
 }
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-  repositories {
-    google()
-    mavenCentral()
-  }
-
-  versionCatalogs {
-    create("libs") {
-      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
+fun CodeOutputStreamMaker.writeTo(
+  file: FileSpec,
+  fileName: String = file.name,
+  packageName: String = file.packageName,
+) {
+  makeFile(
+    fileName,
+    packageName,
+  ).use { out ->
+    OutputStreamWriter(out, StandardCharsets.UTF_8).use { writer ->
+      file.writeTo(writer)
     }
   }
 }
-
-include(":gradle-plugin-api")

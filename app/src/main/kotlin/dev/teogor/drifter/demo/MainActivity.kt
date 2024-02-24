@@ -56,8 +56,6 @@ import androidx.lifecycle.Lifecycle
 import dev.teogor.drifter.compose.OnLifecycleEvent
 import dev.teogor.drifter.compose.UvpComposable
 import dev.teogor.drifter.demo.ui.theme.UnityViewTheme
-import dev.teogor.drifter.demo.unity.UnityController
-import dev.teogor.drifter.demo.unity.UnityStorage
 import dev.teogor.drifter.wallpaper.LiveWallpaperUtility
 
 class MainActivity : ComponentActivity() {
@@ -84,8 +82,8 @@ class MainActivity : ComponentActivity() {
             ) {
               val context = LocalContext.current
 
-              val controller = UnityController()
-              val storage = UnityStorage()
+              val controller = AquariumMessageSender()
+              val storage = AquariumStorage()
 
               UvpComposable(
                 modifier = Modifier
@@ -98,8 +96,8 @@ class MainActivity : ComponentActivity() {
                 onCreated = {
                   controller.apply {
                     setEditorMode(true)
-                    setEditorColor(storage.waterColor, false)
-                    setEditorCycleOption(storage.cycleOption)
+                    animateToWaterColor(storage.waterColor, false)
+                    cycleOption(storage.cycleOption)
                   }
                 },
               )
@@ -128,8 +126,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun UnityColorPicker(
-  controller: UnityController,
-  storage: UnityStorage,
+  controller: AquariumMessageSender,
+  storage: AquariumStorage,
 ) {
   val colors = listOf(
     Color(0xFFB19CD9), // Lavender
@@ -166,14 +164,14 @@ fun UnityColorPicker(
   }
 
   LaunchedEffect(selectedColor) {
-    controller.setEditorColor(selectedColor)
+    controller.animateToWaterColor(selectedColor, true)
   }
 
   OnLifecycleEvent { _, event ->
     when (event) {
       Lifecycle.Event.ON_RESUME -> {
         controller.setEditorMode(true)
-        controller.setEditorColor(selectedColor)
+        controller.animateToWaterColor(selectedColor, true)
       }
 
       Lifecycle.Event.ON_PAUSE -> {
