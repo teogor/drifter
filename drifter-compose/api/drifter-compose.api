@@ -1,8 +1,6 @@
-public final class dev/teogor/drifter/compose/OnLifecycleEventKt {
-	public static final fun OnLifecycleEvent (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
-}
-
-public final class dev/teogor/drifter/compose/UvpComposableKt {
+public final class dev/teogor/drifter/compose/UnityEngineViewKt {
+	public static final fun UnityEngineScaffold (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun UnityEngineView (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;II)V
 	public static final fun UvpComposable (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;II)V
 }
 

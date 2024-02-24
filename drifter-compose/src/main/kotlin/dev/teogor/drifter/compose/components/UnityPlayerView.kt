@@ -85,7 +85,7 @@ class UnityPlayerView : FrameLayout {
 
   fun loadPlayer(
     runnable: Runnable? = null,
-    onCreated: () -> Unit,
+    onUnityEngineCreated: () -> Unit,
   ) {
     this.runnable = runnable
 
@@ -115,7 +115,7 @@ class UnityPlayerView : FrameLayout {
                 mLiveWallpaperUnityFacade =
                   LiveWallpaperUnityFacade.instance
                 resumeUnityPlayer()
-                onCreated()
+                onUnityEngineCreated()
               }
 
               override fun onUnityPlayerInstanceCreated() {
