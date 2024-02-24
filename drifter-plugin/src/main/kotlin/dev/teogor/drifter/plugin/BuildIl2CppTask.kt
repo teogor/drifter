@@ -23,13 +23,11 @@ import dev.teogor.drifter.plugin.models.UnityOptions
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.CopySpec
+import org.gradle.api.file.DeleteSpec
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskExecutionException
 import org.gradle.kotlin.dsl.register
 import org.gradle.process.ExecSpec
-import java.io.File
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
 
 open class BuildIl2CppTask : DefaultTask() {
 
@@ -123,81 +121,77 @@ open class BuildIl2CppTask : DefaultTask() {
 
     // Create a copy task to move the file to the desired location
     tasks.create("copyLibil2cpp$abi") {
-      val builder = ProcessBuilder()
-      builder.command(
-        "$workingDir/src/main/Il2CppOutputProject/IL2CPP/build/deploy/il2cpp$executableExtension",
-        *commandLineArgs.toTypedArray(),
-      )
-      builder.environment()["ANDROID_SDK_ROOT"] = sdkDirectory
-      val process = builder.start()
-      process.waitFor()
+      val execSpec = exec {
+        // Explicitly cast to ExecSpec to address lambda capture limitations and
+        // guarantee type safety for the extension method call.
+        @Suppress("USELESS_CAST", "KotlinRedundantDiagnosticSuppress")
+        (this as ExecSpec).configureIl2CppExec(
+          executablePath = getIl2CppExecutablePath(
+            workingDir,
+            executableExtension,
+          ),
+          commandLineArgs = commandLineArgs,
+          sdkDirectory = sdkDirectory,
+        )
+      }
+      execSpec.assertNormalExitValue()
 
-      val sourceFile = File("$workingDir/src/main/jniLibs/$abi/libil2cpp.dbg.so")
-      val destinationFile = File("$workingDir/symbols/$abi/")
+      copy {
+        // Explicitly cast to CopySpec to address lambda capture limitations and
+        // guarantee type safety for the extension method call.
+        @Suppress("USELESS_CAST", "KotlinRedundantDiagnosticSuppress")
+        (this as CopySpec).copyIl2CppSymbols(
+          workingDir = workingDir,
+          abi = abi,
+        )
+      }
 
-      Files.copy(
-        sourceFile.toPath(),
-        destinationFile.toPath().resolve("tlibil2cpp.so"),
-        StandardCopyOption.REPLACE_EXISTING,
-      )
-
-      delete("$workingDir/src/main/jniLibs/$abi/libil2cpp.dbg.so")
-      delete("$workingDir/src/main/jniLibs/$abi/libil2cpp.sym.so")
+      delete {
+        // Explicitly cast to DeleteSpec to address lambda capture limitations and
+        // guarantee type safety for the extension method call.
+        @Suppress("USELESS_CAST", "KotlinRedundantDiagnosticSuppress")
+        (this as DeleteSpec).deleteUnnecessaryIl2CppFiles(
+          workingDir = workingDir,
+          abi = abi,
+        )
+      }
     }
+  }
 
-    // val execAction = project.exec {
-    //   executable =
-    //     "$workingDir/src/main/Il2CppOutputProject/IL2CPP/build/deploy/il2cpp$executableExtension"
-    //   args(commandLineArgs)
-    //   environment("ANDROID_SDK_ROOT", sdkDirectory)
-    // }
-
-    // val execAction = project.exec {
-    //   providerExecSpec(executableExtension, commandLineArgs, sdkDirectory)
-    // }
-
-    // Create a copy task to move the file to the desired location
-    // tasks.create("copyLibil2cpp$abi") {
-    //   val builder = ProcessBuilder()
-    //   builder.command("$workingDir/src/main/Il2CppOutputProject/IL2CPP/build/deploy/il2cpp$executableExtension", *commandLineArgs.toTypedArray())
-    //   builder.environment()["ANDROID_SDK_ROOT"] = sdkDirectory
-    //   val process = builder.start()
-    //   process.waitFor()
-    //
-    //   val sourceFile = File("$workingDir/src/main/jniLibs/$abi/libil2cpp.dbg.so")
-    //   val destinationFile = File("$workingDir/symbols/$abi/")
-    //
-    //   Files.copy(
-    //     sourceFile.toPath(),
-    //     destinationFile.toPath(),
-    //     StandardCopyOption.REPLACE_EXISTING
-    //   )
-    //
-    //   val newFileName = "libil2cpp.so"
-    //   Files.move(
-    //     destinationFile.toPath().resolve("libil2cpp.dbg.so"),
-    //     destinationFile.toPath().resolve(newFileName),
-    //     StandardCopyOption.REPLACE_EXISTING
-    //   )
-    //
-    //   delete("$workingDir/src/main/jniLibs/$abi/libil2cpp.dbg.so")
-    //   delete("$workingDir/src/main/jniLibs/$abi/libil2cpp.sym.so")
-    // }
+  private fun getIl2CppExecutablePath(
+    workingDir: String,
+    executableExtension: String,
+  ): String {
+    return "$workingDir/src/main/Il2CppOutputProject/IL2CPP/build/deploy/il2cpp$executableExtension"
   }
 }
 
-private fun ExecSpec.providerExecSpec(
-  executableExtension: String,
+/**
+ * Configures an [ExecSpec] for executing the Il2Cpp compiler.
+ *
+ * @receiver The [ExecSpec] to be configured.
+ * @param executablePath The path to the Il2Cpp executable.
+ * @param commandLineArgs The command-line arguments to pass to the Il2Cpp executable.
+ * @param sdkDirectory The path to the Android SDK root directory.
+ */
+private fun ExecSpec.configureIl2CppExec(
+  executablePath: String,
   commandLineArgs: MutableList<String>,
   sdkDirectory: String,
 ) {
-  executable =
-    "$workingDir/src/main/Il2CppOutputProject/IL2CPP/build/deploy/il2cpp$executableExtension"
-  args(commandLineArgs)
+  executable = executablePath
+  args(*commandLineArgs.toTypedArray())
   environment("ANDROID_SDK_ROOT", sdkDirectory)
 }
 
-private fun CopySpec.providerCopySpec(
+/**
+ * Copies Il2Cpp symbol files to the appropriate destination.
+ *
+ * @receiver The [CopySpec] to be configured.
+ * @param workingDir The root directory of the Il2Cpp project.
+ * @param abi The target ABI for the symbol files.
+ */
+private fun CopySpec.copyIl2CppSymbols(
   workingDir: String,
   abi: String,
 ) {
@@ -206,6 +200,27 @@ private fun CopySpec.providerCopySpec(
   rename("libil2cpp.dbg.so", "tlibil2cpp.so")
 }
 
+/**
+ * Deletes unnecessary Il2Cpp files from the jniLibs directory.
+ *
+ * @receiver The [DeleteSpec] to be configured.
+ * @param workingDir The root directory of the Il2Cpp project.
+ * @param abi The target ABI for the files to be deleted.
+ */
+private fun DeleteSpec.deleteUnnecessaryIl2CppFiles(
+  workingDir: String,
+  abi: String,
+) {
+  delete("$workingDir/src/main/jniLibs/$abi/libil2cpp.dbg.so")
+  delete("$workingDir/src/main/jniLibs/$abi/libil2cpp.sym.so")
+}
+
+/**
+ * Creates a Gradle task for building Il2Cpp.
+ *
+ * @receiver The Gradle Project instance.
+ * @param unityOptions The configuration options for Unity integration.
+ */
 fun Project.createBuildIl2CppTask(
   unityOptions: UnityOptions,
 ) {
