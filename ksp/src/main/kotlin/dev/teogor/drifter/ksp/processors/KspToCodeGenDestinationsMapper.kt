@@ -13,27 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-  repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
+
+package dev.teogor.drifter.ksp.processors
+
+import com.google.devtools.ksp.processing.Resolver
+import com.google.devtools.ksp.symbol.KSFile
+import dev.teogor.drifter.ksp.commons.KSFileSourceMapper
+
+class KspToCodeGenDestinationsMapper(
+  private val resolver: Resolver,
+) : KSFileSourceMapper {
+  private val sourceFilesById = mutableMapOf<String, KSFile?>()
+
+  override fun mapToKSFile(sourceId: String): KSFile? {
+    return sourceFilesById[sourceId]
   }
 }
-
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-  repositories {
-    google()
-    mavenCentral()
-  }
-
-  versionCatalogs {
-    create("libs") {
-      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
-    }
-  }
-}
-
-include(":gradle-plugin-api")

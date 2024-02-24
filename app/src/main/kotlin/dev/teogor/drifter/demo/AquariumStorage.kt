@@ -14,44 +14,44 @@
  * limitations under the License.
  */
 
-package dev.teogor.drifter.demo.unity
+package dev.teogor.drifter.demo
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import dev.teogor.drifter.demo.unity.models.CycleOption
-import dev.teogor.drifter.demo.unity.models.StorageKeys
-import dev.teogor.drifter.integration.common.TypeConverter
-import dev.teogor.drifter.integration.core.UnityStorageBase
+import dev.teogor.drifter.common.UnityPlayerPrefs
+import dev.teogor.drifter.common.UnityPrefAccess
+import dev.teogor.drifter.common.createSerializable
+import dev.teogor.drifter.demo.models.CycleOption
 
-class UnityStorage : UnityStorageBase() {
-
-  private val colorConverter = TypeConverter(
-    toString = { color -> color.toArgb().toString() },
-    fromString = { string -> Color(string.toInt()) },
+class AquariumStorage : UnityPlayerPrefs() {
+  private val colorConverter = createSerializable(
+    encodeToString = { color -> color.toArgb().toString() },
+    decodeFromString = { string -> Color(string.toInt()) },
   )
 
+  @OptIn(UnityPrefAccess::class)
   var waterColor: Color = Color(0xFF6FA3EF)
     get() {
-      field = getStorageElement(
-        key = StorageKeys.WaterColor,
+      field = get(
+        key = AquariumKeyConstants.WATER_COLOR,
         defaultValue = field,
         converter = colorConverter,
       )
       return field
     }
     set(value) {
-      println("Write Color ::")
-      field = writeElement(
-        key = StorageKeys.WaterColor,
-        content = value,
+      field = set(
+        key = AquariumKeyConstants.WATER_COLOR,
+        value = value,
         converter = colorConverter,
       )
     }
 
+  @OptIn(UnityPrefAccess::class)
   var cycleOption: CycleOption = CycleOption.Day
     get() {
-      val cycleOptionContent = getStorageElement(
-        key = StorageKeys.CycleOption,
+      val cycleOptionContent = get(
+        key = AquariumKeyConstants.CYCLE_OPTION,
         defaultValue = field.ordinal,
       )
       field = CycleOption.entries[cycleOptionContent]
@@ -59,9 +59,9 @@ class UnityStorage : UnityStorageBase() {
     }
     set(value) {
       field = value
-      writeElement(
-        key = StorageKeys.CycleOption,
-        content = value.ordinal,
+      set(
+        key = AquariumKeyConstants.CYCLE_OPTION,
+        value = value.ordinal,
       )
     }
 }

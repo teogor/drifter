@@ -13,27 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-  repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-  }
-}
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-  repositories {
-    google()
-    mavenCentral()
-  }
+package dev.teogor.drifter.codegen.model
 
-  versionCatalogs {
-    create("libs") {
-      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
-    }
-  }
-}
-
-include(":gradle-plugin-api")
+data class CodeGenConfig(
+  val addDocumentation: Boolean,
+  val generateOperations: Boolean,
+  val generatedPackageName: String?,
+)

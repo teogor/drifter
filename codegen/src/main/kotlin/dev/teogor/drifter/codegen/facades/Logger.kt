@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-  repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
+
+package dev.teogor.drifter.codegen.facades
+
+interface Logger {
+
+  fun logging(message: String)
+
+  fun info(message: String)
+
+  fun warn(message: String)
+
+  fun error(message: String)
+
+  fun exception(e: Throwable)
+
+  companion object {
+    lateinit var instance: Logger
   }
 }
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-  repositories {
-    google()
-    mavenCentral()
-  }
-
-  versionCatalogs {
-    create("libs") {
-      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
-    }
-  }
-}
-
-include(":gradle-plugin-api")
+val logger: Logger
+  get() = Logger.instance

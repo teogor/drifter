@@ -14,6 +14,7 @@ plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.jetbrains.kotlin.android) apply false
+  alias(libs.plugins.kotlin.jvm) apply false
 
   alias(libs.plugins.ceres.android.application) apply false
   alias(libs.plugins.ceres.android.application.compose) apply false
@@ -80,6 +81,8 @@ winds {
 
 val excludedModulesForWinds = listOf(
   ":drifter-plugin",
+  ":app",
+  ":module-unity",
 )
 afterWindsPluginConfiguration { winds ->
   if (!excludedModulesForWinds.contains(path)) {
@@ -118,6 +121,8 @@ val ktlintVersion = "0.50.0"
 
 val excludeModules = listOf(
   project.name,
+  "app",
+  "module-unity",
 )
 
 subprojects {

@@ -16,13 +16,14 @@
 plugins {
   alias(libs.plugins.ceres.android.application)
   alias(libs.plugins.ceres.android.application.compose)
+  alias(libs.plugins.ksp)
 }
 
 android {
   namespace = "dev.teogor.drifter.demo"
 
   defaultConfig {
-    applicationId = "dev.teogor.drifter.demo"
+    applicationId = "com.zeoowl.lwp.aquarium"
     versionCode = 1
     versionName = "1.0.0-alpha01"
 
@@ -51,12 +52,16 @@ android {
 }
 
 dependencies {
-  implementation(project(":module-unity"))
+  implementation(projects.moduleUnity)
 
-  implementation(project(":drifter-compose"))
-  implementation(project(":drifter-core"))
-  implementation(project(":drifter-integration"))
-  implementation(project(":drifter-wallpaper"))
+  implementation(projects.runtime)
+  ksp(projects.ksp)
+
+  implementation(projects.drifterCommon)
+  implementation(projects.drifterCompose)
+  implementation(projects.drifterCore)
+  implementation(projects.drifterIntegration)
+  implementation(projects.drifterWallpaper)
 
   implementation(libs.gson)
   implementation(libs.core.ktx)
@@ -74,4 +79,8 @@ dependencies {
   androidTestImplementation(libs.ui.test.junit4)
   debugImplementation(libs.ui.tooling)
   debugImplementation(libs.ui.test.manifest)
+}
+
+ksp {
+  logging.captureStandardError(LogLevel.INFO)
 }

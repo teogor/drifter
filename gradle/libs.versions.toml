@@ -3,8 +3,8 @@
 androidDesugarJdkLibs = "2.0.3"
 
 # @todo-ceres required by id::ceres.android.application.compose
-androidxComposeCompiler = "1.5.3"
-androidxComposeBom = "2023.09.01"
+androidxComposeCompiler = "1.5.8"
+androidxComposeBom = "2024.02.01"
 
 # @todo-ceres required by id::ceres.android.application.firebase
 firebaseBom = "32.3.1"
@@ -30,7 +30,6 @@ protobufPlugin = "0.9.4"
 api-validator = "0.13.2"
 annotation = "1.7.0"
 buildConfig = "3.1.0"
-kotlin = "1.9.10"
 core-ktx = "1.12.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
@@ -39,7 +38,8 @@ lifecycle-runtime-ktx = "2.6.2"
 activity-compose = "1.7.2"
 compose-bom = "2023.09.01"
 appcompat = "1.6.1"
-ksp = "1.9.0-1.0.13"
+kotlin = "1.9.22"
+ksp = "1.9.22-1.0.17"
 material = "1.9.0"
 startup-runtime = "1.2.0-alpha02"
 gson = "2.10.1"
@@ -47,6 +47,7 @@ vanniktechMavenPlugin = "0.25.3"
 dokka = "1.9.0"
 spotless = "6.21.0"
 winds = "1.0.0-beta02"
+kotlin-poet = "1.14.2"
 
 [libraries]
 # @todo-ceres required by id::ceres.android.application
@@ -102,6 +103,9 @@ ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+kotlin-poet = { module = "com.squareup:kotlinpoet", version.ref = "kotlin-poet" }
+kotlin-poet-ksp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlin-poet" }
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }

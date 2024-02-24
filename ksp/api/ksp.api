@@ -1,0 +1,51 @@
+public final class dev/teogor/drifter/ksp/ProcessorProvider : com/google/devtools/ksp/processing/SymbolProcessorProvider {
+	public fun <init> ()V
+	public fun create (Lcom/google/devtools/ksp/processing/SymbolProcessorEnvironment;)Lcom/google/devtools/ksp/processing/SymbolProcessor;
+}
+
+public final class dev/teogor/drifter/ksp/codegen/KspCodeOutputStreamMaker : dev/teogor/drifter/codegen/facades/CodeOutputStreamMaker {
+	public fun <init> (Lcom/google/devtools/ksp/processing/CodeGenerator;Ldev/teogor/drifter/ksp/commons/KSFileSourceMapper;)V
+	public fun makeFile (Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Ljava/io/OutputStream;
+}
+
+public final class dev/teogor/drifter/ksp/codegen/KspLogger : dev/teogor/drifter/codegen/facades/Logger {
+	public fun <init> (Lcom/google/devtools/ksp/processing/KSPLogger;)V
+	public fun error (Ljava/lang/String;)V
+	public fun exception (Ljava/lang/Throwable;)V
+	public fun info (Ljava/lang/String;)V
+	public fun logging (Ljava/lang/String;)V
+	public fun warn (Ljava/lang/String;)V
+}
+
+public abstract interface class dev/teogor/drifter/ksp/commons/KSFileSourceMapper {
+	public abstract fun mapToKSFile (Ljava/lang/String;)Lcom/google/devtools/ksp/symbol/KSFile;
+}
+
+public final class dev/teogor/drifter/ksp/processors/ConfigParser {
+	public static final field Companion Ldev/teogor/drifter/ksp/processors/ConfigParser$Companion;
+	public fun <init> (Ljava/util/Map;)V
+	public final fun parse ()Ldev/teogor/drifter/codegen/model/CodeGenConfig;
+}
+
+public final class dev/teogor/drifter/ksp/processors/ConfigParser$Companion {
+}
+
+public final class dev/teogor/drifter/ksp/processors/KspToCodeGenDestinationsMapper : dev/teogor/drifter/ksp/commons/KSFileSourceMapper {
+	public fun <init> (Lcom/google/devtools/ksp/processing/Resolver;)V
+	public fun mapToKSFile (Ljava/lang/String;)Lcom/google/devtools/ksp/symbol/KSFile;
+}
+
+public final class dev/teogor/drifter/ksp/processors/Processor : com/google/devtools/ksp/processing/SymbolProcessor {
+	public fun <init> (Lcom/google/devtools/ksp/processing/CodeGenerator;Lcom/google/devtools/ksp/processing/KSPLogger;Ljava/util/Map;)V
+	public fun process (Lcom/google/devtools/ksp/processing/Resolver;)Ljava/util/List;
+}
+
+public final class dev/teogor/drifter/ksp/processors/ProcessorKt {
+	public static final fun isDataClass (Lcom/google/devtools/ksp/symbol/KSClassDeclaration;)Z
+}
+
+public final class dev/teogor/drifter/ksp/processors/WrongConfigurationSetup : java/lang/RuntimeException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+

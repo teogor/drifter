@@ -13,27 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-  repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-  }
+
+package dev.teogor.drifter.ksp.codegen
+
+import com.google.devtools.ksp.processing.KSPLogger
+import dev.teogor.drifter.codegen.facades.Logger
+
+class KspLogger(
+  private val kspLogger: KSPLogger,
+) : Logger {
+
+  override fun logging(message: String) = kspLogger.logging(message)
+
+  override fun info(message: String) = kspLogger.info(message)
+
+  override fun warn(message: String) = kspLogger.warn(message)
+
+  override fun error(message: String) = kspLogger.error(message)
+
+  override fun exception(e: Throwable) = kspLogger.exception(e)
 }
-
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-  repositories {
-    google()
-    mavenCentral()
-  }
-
-  versionCatalogs {
-    create("libs") {
-      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
-    }
-  }
-}
-
-include(":gradle-plugin-api")

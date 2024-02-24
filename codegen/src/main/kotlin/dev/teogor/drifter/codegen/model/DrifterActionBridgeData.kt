@@ -13,27 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-  repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
+
+package dev.teogor.drifter.codegen.model
+
+data class DrifterActionBridgeData(
+  val name: String,
+  val receiverGameObject: String,
+  val externalMethods: List<AdvancedMethodsData>?,
+  val simpleName: String,
+  val packageName: String,
+  val params: List<BridgeKeyData>,
+) {
+  val isError: Boolean
+    get() = params.isEmpty()
+
+  val baseName: String
+    get() = name.ifEmpty { simpleName }
+
+  companion object {
+    val INVALID = DrifterActionBridgeData(
+      name = "",
+      receiverGameObject = "",
+      simpleName = "",
+      packageName = "",
+      params = emptyList(),
+      externalMethods = null,
+    )
   }
 }
-
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-  repositories {
-    google()
-    mavenCentral()
-  }
-
-  versionCatalogs {
-    create("libs") {
-      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
-    }
-  }
-}
-
-include(":gradle-plugin-api")

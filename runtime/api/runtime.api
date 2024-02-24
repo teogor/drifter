@@ -1,0 +1,19 @@
+public abstract interface annotation class dev/teogor/drifter/DrifterEncoder : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class dev/teogor/drifter/DrifterMappingKey : java/lang/annotation/Annotation {
+	public abstract fun exposedMethod ()Ljava/lang/String;
+	public abstract fun storageKey ()Ljava/lang/String;
+}
+
+public abstract interface annotation class dev/teogor/drifter/DrifterModule : java/lang/annotation/Annotation {
+	public abstract fun methods ()Ljava/lang/Class;
+	public abstract fun name ()Ljava/lang/String;
+	public abstract fun receiver ()Ljava/lang/String;
+}
+
+public abstract interface annotation class dev/teogor/drifter/DrifterUnityMethod : java/lang/annotation/Annotation {
+	public abstract fun name ()Ljava/lang/String;
+	public abstract fun parameters ()[Ljava/lang/String;
+}
+

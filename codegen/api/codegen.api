@@ -1,0 +1,179 @@
+public final class dev/teogor/drifter/codegen/CodeGenerator : dev/teogor/drifter/codegen/servicelocator/ServiceLocatorAccessor {
+	public fun <init> (Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Ldev/teogor/drifter/codegen/model/CodeGenConfig;)V
+	public final fun generate (Ljava/util/List;Ljava/util/List;)V
+	public fun getCodeGenConfig ()Ldev/teogor/drifter/codegen/model/CodeGenConfig;
+	public fun getCodeOutputStreamMaker ()Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;
+}
+
+public final class dev/teogor/drifter/codegen/commons/ConstantsKt {
+	public static final fun getUnityMessageSender ()Lcom/squareup/kotlinpoet/ClassName;
+}
+
+public final class dev/teogor/drifter/codegen/commons/UtilsKt {
+	public static final fun fileBuilder (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/squareup/kotlinpoet/FileSpec;
+	public static final fun findCommonBase (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun getSafe (Lcom/squareup/kotlinpoet/TypeName;)Lcom/squareup/kotlinpoet/TypeName;
+	public static final fun getShortName (Lcom/squareup/kotlinpoet/TypeName;)Ljava/lang/String;
+	public static final fun sanitizePackageName (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toSnakeCase (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toTitleCase (Ljava/lang/String;Z)Ljava/lang/String;
+	public static synthetic fun toTitleCase$default (Ljava/lang/String;ZILjava/lang/Object;)Ljava/lang/String;
+	public static final fun writeWith (Lcom/squareup/kotlinpoet/FileSpec;Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun writeWith$default (Lcom/squareup/kotlinpoet/FileSpec;Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public abstract interface class dev/teogor/drifter/codegen/facades/CodeOutputStreamMaker {
+	public abstract fun makeFile (Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Ljava/io/OutputStream;
+}
+
+public final class dev/teogor/drifter/codegen/facades/CodeOutputStreamMakerKt {
+	public static final fun writeTo (Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Lcom/squareup/kotlinpoet/FileSpec;Ljava/lang/String;Ljava/lang/String;)V
+	public static synthetic fun writeTo$default (Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Lcom/squareup/kotlinpoet/FileSpec;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
+}
+
+public abstract interface class dev/teogor/drifter/codegen/facades/Logger {
+	public static final field Companion Ldev/teogor/drifter/codegen/facades/Logger$Companion;
+	public abstract fun error (Ljava/lang/String;)V
+	public abstract fun exception (Ljava/lang/Throwable;)V
+	public abstract fun info (Ljava/lang/String;)V
+	public abstract fun logging (Ljava/lang/String;)V
+	public abstract fun warn (Ljava/lang/String;)V
+}
+
+public final class dev/teogor/drifter/codegen/facades/Logger$Companion {
+	public static field instance Ldev/teogor/drifter/codegen/facades/Logger;
+	public final fun getInstance ()Ldev/teogor/drifter/codegen/facades/Logger;
+	public final fun setInstance (Ldev/teogor/drifter/codegen/facades/Logger;)V
+}
+
+public final class dev/teogor/drifter/codegen/facades/LoggerKt {
+	public static final fun getLogger ()Ldev/teogor/drifter/codegen/facades/Logger;
+}
+
+public final class dev/teogor/drifter/codegen/model/AdvancedMethodsData {
+	public fun <init> (Ljava/lang/String;Ljava/util/List;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/util/List;)Ldev/teogor/drifter/codegen/model/AdvancedMethodsData;
+	public static synthetic fun copy$default (Ldev/teogor/drifter/codegen/model/AdvancedMethodsData;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ldev/teogor/drifter/codegen/model/AdvancedMethodsData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getParams ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/codegen/model/BridgeKeyData {
+	public static final field Companion Ldev/teogor/drifter/codegen/model/BridgeKeyData$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/squareup/kotlinpoet/TypeName;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lcom/squareup/kotlinpoet/TypeName;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/squareup/kotlinpoet/TypeName;)Ldev/teogor/drifter/codegen/model/BridgeKeyData;
+	public static synthetic fun copy$default (Ldev/teogor/drifter/codegen/model/BridgeKeyData;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/squareup/kotlinpoet/TypeName;ILjava/lang/Object;)Ldev/teogor/drifter/codegen/model/BridgeKeyData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getActualUnityNativeMethod ()Ljava/lang/String;
+	public final fun getKeyName ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getStorageKeyName ()Ljava/lang/String;
+	public final fun getStorageKeyValue ()Ljava/lang/String;
+	public final fun getType ()Lcom/squareup/kotlinpoet/TypeName;
+	public final fun getUnityNativeMethod ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/codegen/model/BridgeKeyData$Companion {
+	public final fun getNOT_PROVIDED ()Ldev/teogor/drifter/codegen/model/BridgeKeyData;
+}
+
+public final class dev/teogor/drifter/codegen/model/CodeGenConfig {
+	public fun <init> (ZZLjava/lang/String;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Z
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (ZZLjava/lang/String;)Ldev/teogor/drifter/codegen/model/CodeGenConfig;
+	public static synthetic fun copy$default (Ldev/teogor/drifter/codegen/model/CodeGenConfig;ZZLjava/lang/String;ILjava/lang/Object;)Ldev/teogor/drifter/codegen/model/CodeGenConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAddDocumentation ()Z
+	public final fun getGenerateOperations ()Z
+	public final fun getGeneratedPackageName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/codegen/model/ConverterType {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/squareup/kotlinpoet/TypeName;Lcom/squareup/kotlinpoet/TypeName;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lcom/squareup/kotlinpoet/TypeName;
+	public final fun component4 ()Lcom/squareup/kotlinpoet/TypeName;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lcom/squareup/kotlinpoet/TypeName;Lcom/squareup/kotlinpoet/TypeName;)Ldev/teogor/drifter/codegen/model/ConverterType;
+	public static synthetic fun copy$default (Ldev/teogor/drifter/codegen/model/ConverterType;Ljava/lang/String;Ljava/lang/String;Lcom/squareup/kotlinpoet/TypeName;Lcom/squareup/kotlinpoet/TypeName;ILjava/lang/Object;)Ldev/teogor/drifter/codegen/model/ConverterType;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getPackageName ()Ljava/lang/String;
+	public final fun getReceiverType ()Lcom/squareup/kotlinpoet/TypeName;
+	public final fun getReturnType ()Lcom/squareup/kotlinpoet/TypeName;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/codegen/model/DrifterActionBridgeData {
+	public static final field Companion Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;
+	public static synthetic fun copy$default (Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBaseName ()Ljava/lang/String;
+	public final fun getExternalMethods ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getPackageName ()Ljava/lang/String;
+	public final fun getParams ()Ljava/util/List;
+	public final fun getReceiverGameObject ()Ljava/lang/String;
+	public final fun getSimpleName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isError ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/codegen/model/DrifterActionBridgeData$Companion {
+	public final fun getINVALID ()Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;
+}
+
+public abstract class dev/teogor/drifter/codegen/servicelocator/OutputWriter {
+	public fun <init> (Ldev/teogor/drifter/codegen/model/CodeGenConfig;)V
+	public final fun addDocumentation (Lcom/squareup/kotlinpoet/FunSpec$Builder;Lcom/squareup/kotlinpoet/CodeBlock;)Lcom/squareup/kotlinpoet/FunSpec$Builder;
+	public final fun addDocumentation (Lcom/squareup/kotlinpoet/FunSpec$Builder;Ljava/lang/String;[Ljava/lang/Object;)Lcom/squareup/kotlinpoet/FunSpec$Builder;
+	public final fun addDocumentation (Lcom/squareup/kotlinpoet/TypeSpec$Builder;Lcom/squareup/kotlinpoet/CodeBlock;)Lcom/squareup/kotlinpoet/TypeSpec$Builder;
+	public final fun addDocumentation (Lcom/squareup/kotlinpoet/TypeSpec$Builder;Ljava/lang/String;[Ljava/lang/Object;)Lcom/squareup/kotlinpoet/TypeSpec$Builder;
+	public final fun getPackageName (Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;)Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/codegen/writers/ActionMappingsOutputWriter : dev/teogor/drifter/codegen/servicelocator/OutputWriter {
+	public fun <init> (Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Ldev/teogor/drifter/codegen/model/CodeGenConfig;)V
+	public final fun write (Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;)Lcom/squareup/kotlinpoet/TypeName;
+}
+
+public final class dev/teogor/drifter/codegen/writers/ActionParamsOutputWriter : dev/teogor/drifter/codegen/servicelocator/OutputWriter {
+	public fun <init> (Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Ldev/teogor/drifter/codegen/model/CodeGenConfig;)V
+	public final fun write (Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;Ljava/util/List;)Lcom/squareup/kotlinpoet/TypeName;
+}
+
+public final class dev/teogor/drifter/codegen/writers/KeyConstantsOutputWriter : dev/teogor/drifter/codegen/servicelocator/OutputWriter {
+	public fun <init> (Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Ldev/teogor/drifter/codegen/model/CodeGenConfig;)V
+	public final fun write (Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;)Lcom/squareup/kotlinpoet/TypeName;
+}
+
+public final class dev/teogor/drifter/codegen/writers/UnityMessageSenderOutputWriter : dev/teogor/drifter/codegen/servicelocator/OutputWriter {
+	public fun <init> (Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;Ldev/teogor/drifter/codegen/model/CodeGenConfig;)V
+	public final fun write (Ldev/teogor/drifter/codegen/model/DrifterActionBridgeData;Lcom/squareup/kotlinpoet/TypeName;Lcom/squareup/kotlinpoet/TypeName;)Lcom/squareup/kotlinpoet/TypeName;
+}
+
