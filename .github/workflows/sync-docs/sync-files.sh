@@ -30,7 +30,7 @@ git config --global user.name "$USER_NAME"
 git clone --single-branch --branch $DESTINATION_BRANCH "https://x-access-token:$API_TOKEN_GITHUB@$GIT_SERVER/$DESTINATION_REPO.git" "$CLONE_DIR"
 
 # Determine the destination file path
-DEST_COPY="$CLONE_DIR/$DESTINATION_FOLDER"
+DEST_COPY="$CLONE_DIR/$DESTINATION_FOLDER/"
 
 if [ ! -z "$RENAME" ]; then
   echo "Renaming file to: ${RENAME}"
@@ -46,15 +46,8 @@ fi
 # Copy the source file to the destination repository
 echo "Copying contents to Git repo: $SOURCE_FILE"
 
-mkdir -p $CLONE_DIR/$DESTINATION_FOLDER
-
-if [ -z "$USE_RSYNC" ]; then
-  echo "Copying using cp"
-  cp -R "$SOURCE_FILE" "$DEST_COPY"
-else
-  echo "Copying using rsync"
-  rsync -avrh "$SOURCE_FILE" "$DEST_COPY"
-fi
+# Move the source file instead of copying it to avoid creating duplicates
+cp -r "$SOURCE_FILE" "$DEST_COPY"
 
 # Check out the specified branch or create a new one
 cd "$CLONE_DIR"
