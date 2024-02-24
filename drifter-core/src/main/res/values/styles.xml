@@ -43,15 +43,14 @@
     <item name="android:title">false</item>
   </style>
 
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-    <!-- Customize your theme here. -->
-    <item name="colorPrimary">#212121</item>
-    <item name="colorPrimaryDark">#212121</item>
-    <item name="colorAccent">#212121</item>
+  <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <item name="android:colorPrimary">#212121</item>
+    <item name="android:colorPrimaryDark">#212121</item>
+    <item name="android:colorAccent">#212121</item>
   </style>
 
-  <style name="AppTheme.NoActionBar">
-    <item name="windowActionBar">false</item>
-    <item name="windowNoTitle">true</item>
+  <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <item name="android:windowActionBar">false</item>
+    <item name="android:windowNoTitle">true</item>
   </style>
 </resources>
