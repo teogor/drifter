@@ -74,6 +74,8 @@ hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hi
 
 # @todo-ceres required by ceres
 ceres-bom = { group = "dev.teogor.ceres", name = "bom", version.ref = "teogor-ceres" }
+ceres-core-common = { group = "dev.teogor.ceres", name = "core-common" }
+ceres-core-register = { group = "dev.teogor.ceres", name = "core-register" }
 ceres-framework-core = { group = "dev.teogor.ceres", name = "framework-core" }
 ceres-screen-builder = { group = "dev.teogor.ceres", name = "screen-builder" }
 ceres-screen-core = { group = "dev.teogor.ceres", name = "screen-core" }

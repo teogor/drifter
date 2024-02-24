@@ -17,19 +17,20 @@
 package dev.teogor.drifter.integration.player
 
 import android.app.Activity
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Configuration
 import android.view.InputEvent
 import android.view.Surface
 import android.view.SurfaceHolder
-import android.view.SurfaceView
-import com.unity3d.player.UnityPlayer
 import dev.teogor.drifter.integration.initializer.ActivityContextProvider.currentActivity
 import dev.teogor.drifter.integration.utilities.DebugLog.d
 import dev.teogor.drifter.integration.utilities.DebugLog.v
 import dev.teogor.drifter.integration.utilities.UnityVersionInfo.Companion.updateUnityVersionIfNeeded
+import dev.teogor.drifter.unity.common.IUnityPlayer
+import dev.teogor.drifter.unity.common.LocalUnityEngine
+import dev.teogor.drifter.unity.common.UnityOptions
+import dev.teogor.drifter.unity.common.UnityPlayerManager
 import java.lang.reflect.Field
 import java.util.Locale
 
@@ -43,7 +44,8 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
    * @return Application `Context`.
    */
   val applicationContext: Context
-  private val mUnityPlayer: UnityPlayer
+
+  private val iUnityPlayer: IUnityPlayer
   private var mUnityPlayerContextWrapperField: Field? = null
 
   /**
@@ -54,8 +56,16 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
   init {
     updateUnityVersionIfNeeded(contextWrapper)
     applicationContext = contextWrapper.applicationContext
-    mUnityPlayer = UnityPlayer(contextWrapper)
-    setupUnityPlayerInnerState(contextWrapper)
+    iUnityPlayer = LocalUnityEngine.current.createUnityPlayer(
+      contextWrapper = contextWrapper,
+      options = UnityOptions().apply {
+        setContextFieldConfigurator {
+          mUnityPlayerContextWrapperField = it
+          setContext(null)
+        }
+      },
+    )
+    UnityPlayerManager.setUnityPlayer(iUnityPlayer)
   }
 
   /**
@@ -63,14 +73,14 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
    */
   fun resumePlayer() {
     d("UnityPlayerWrapper: Resuming")
-    mUnityPlayer.resume()
-    mUnityPlayer.windowFocusChanged(true)
+    iUnityPlayer.resume()
+    iUnityPlayer.windowFocusChanged(true)
   }
 
-  val unityPlayer: UnityPlayer
+  val unityPlayer: IUnityPlayer
     get() {
-      UnityPlayer.currentActivity = currentActivity
-      return mUnityPlayer
+      UnityPlayerManager.activity = currentActivity
+      return iUnityPlayer
     }
 
   /**
@@ -78,8 +88,8 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
    */
   fun pausePlayer() {
     d("UnityPlayerWrapper: Pausing")
-    mUnityPlayer.windowFocusChanged(false)
-    mUnityPlayer.pause()
+    iUnityPlayer.windowFocusChanged(false)
+    iUnityPlayer.pause()
   }
 
   /**
@@ -88,7 +98,7 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
    */
   fun quitPlayer() {
     d("UnityPlayerWrapper: Shutting down UnityPlayer")
-    mUnityPlayer.quit()
+    iUnityPlayer.quit()
   }
 
   /**
@@ -134,7 +144,7 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
    * @param inputEvent
    */
   fun injectInputEvent(inputEvent: InputEvent?): Boolean {
-    return mUnityPlayer.injectEvent(inputEvent)
+    return iUnityPlayer.injectEvent(inputEvent)
   }
 
   /**
@@ -143,7 +153,7 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
    * @param configuration
    */
   fun injectConfigurationChange(configuration: Configuration?) {
-    mUnityPlayer.configurationChanged(configuration)
+    iUnityPlayer.configurationChanged(configuration)
   }
 
   /**
@@ -158,9 +168,9 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
     }
     try {
       if (contextWrapper == null) {
-        mUnityPlayerContextWrapperField!![mUnityPlayer] = applicationContext
+        mUnityPlayerContextWrapperField!![iUnityPlayer] = applicationContext
       } else {
-        mUnityPlayerContextWrapperField!![mUnityPlayer] = contextWrapper
+        mUnityPlayerContextWrapperField!![iUnityPlayer] = contextWrapper
       }
     } catch (e: Throwable) {
       e.printStackTrace()
@@ -168,62 +178,14 @@ class UnityPlayerWrapper(contextWrapper: ContextWrapper) {
   }
 
   private fun setPlayerSurfaceDirect(surface: Surface?) {
-    mUnityPlayer.displayChanged(0, surface)
-  }
-
-  /**
-   * Processes UnityPlayer instance to make it behave like if it actually wasn't launched from an Activity.
-   *
-   * @param contextWrapper
-   */
-  private fun setupUnityPlayerInnerState(contextWrapper: ContextWrapper) {
-    // Completely detach Unity from Activity
-    val playerFields = UnityPlayer::class.java.declaredFields
-    for (field in playerFields) {
-      // Unregister SurfaceView callbacks
-      when (field.type) {
-        SurfaceView::class.java -> {
-          try {
-            field.isAccessible = true
-            val surfaceView = field[mUnityPlayer]
-            val callbacksField = surfaceView.javaClass.getDeclaredField("mCallbacks")
-            callbacksField.isAccessible = true
-            val callbacks = callbacksField[surfaceView] as MutableList<*>
-            callbacks.clear()
-          } catch (e: Throwable) {
-            e.printStackTrace()
-          }
-        }
-        BroadcastReceiver::class.java -> {
-          try {
-            field.isAccessible = true
-            val shutdownReceiver = field[mUnityPlayer] as? BroadcastReceiver
-            contextWrapper.unregisterReceiver(shutdownReceiver)
-            field[mUnityPlayer] = null
-          } catch (e: IllegalArgumentException) {
-            if (e.message != null) {
-              if (!e.message!!.contains("Receiver not registered")) {
-                e.printStackTrace()
-              }
-            }
-          } catch (e: Throwable) {
-            e.printStackTrace()
-          }
-        }
-        ContextWrapper::class.java -> {
-          field.isAccessible = true
-          mUnityPlayerContextWrapperField = field
-          setContext(null)
-        }
-      }
-    }
+    iUnityPlayer.displayChanged(0, surface)
   }
 
   companion object {
     var unityPlayerCurrentActivity: Activity?
-      get() = UnityPlayer.currentActivity
+      get() = UnityPlayerManager.activity
       set(activity) {
-        UnityPlayer.currentActivity = activity
+        UnityPlayerManager.activity = activity
       }
   }
 }

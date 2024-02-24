@@ -59,9 +59,12 @@ dependencies {
 
   implementation(projects.drifterCommon)
   implementation(projects.drifterCompose)
-  implementation(projects.drifterCore)
+  implementation(projects.unity.v202237f1)
   implementation(projects.drifterIntegration)
   implementation(projects.drifterWallpaper)
+
+  implementation(platform(libs.ceres.bom))
+  implementation(libs.ceres.core.register)
 
   implementation(libs.gson)
   implementation(libs.core.ktx)

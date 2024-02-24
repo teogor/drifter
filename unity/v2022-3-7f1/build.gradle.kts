@@ -14,24 +14,39 @@
  * limitations under the License.
  */
 
-package dev.teogor.drifter.integration.activities
+plugins {
+  alias(libs.plugins.ceres.android.library)
+  alias(libs.plugins.winds)
+}
 
-import android.os.Bundle
-import dev.teogor.drifter.unity.common.BaseUnityPlayerActivity
+android {
+  namespace = "dev.teogor.drifter.core"
 
-abstract class OverrideUnityActivity : BaseUnityPlayerActivity() {
-  protected abstract fun showMainActivity(setToColor: String?)
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    instance = this
+  defaultConfig {
+    consumerProguardFiles("proguard-unity.txt")
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
-    instance = null
+  buildTypes {
+    release {
+      isMinifyEnabled = false
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro",
+      )
+    }
   }
+}
 
-  companion object {
-    var instance: OverrideUnityActivity? = null
+dependencies {
+  api(files("libs/unity-classes.jar"))
+  api(projects.unity.common)
+
+  implementation(libs.androidx.annotation)
+}
+
+winds {
+  mavenPublish {
+    displayName = "2022.3.7f1"
+    name = "2022-3-7f1"
   }
 }

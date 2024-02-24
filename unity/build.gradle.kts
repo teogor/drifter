@@ -13,25 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+plugins {
+  alias(libs.plugins.winds)
+}
 
-package dev.teogor.drifter.integration.activities
-
-import android.os.Bundle
-import dev.teogor.drifter.unity.common.BaseUnityPlayerActivity
-
-abstract class OverrideUnityActivity : BaseUnityPlayerActivity() {
-  protected abstract fun showMainActivity(setToColor: String?)
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    instance = this
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    instance = null
-  }
-
-  companion object {
-    var instance: OverrideUnityActivity? = null
+winds {
+  mavenPublish {
+    displayName = "Unity"
+    name = "unity"
   }
 }

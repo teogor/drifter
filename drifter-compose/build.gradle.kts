@@ -41,7 +41,10 @@ android {
 }
 
 dependencies {
-  implementation(projects.drifterCore)
+  implementation(platform(libs.ceres.bom))
+  api(libs.ceres.core.common)
+
+  implementation(projects.unity.common)
   implementation(projects.drifterIntegration)
   implementation(projects.drifterWallpaper)
 

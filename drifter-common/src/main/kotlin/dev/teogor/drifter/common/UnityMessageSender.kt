@@ -16,7 +16,7 @@
 
 package dev.teogor.drifter.common
 
-import com.unity3d.player.UnityPlayer
+import dev.teogor.drifter.unity.common.UnityEngine
 import org.json.JSONObject
 
 /**
@@ -37,6 +37,6 @@ open class UnityMessageSender(private val receiver: String) {
    * @param data The JSON data to send as arguments to the method.
    */
   fun sendMessage(methodName: String, data: JSONObject) {
-    UnityPlayer.UnitySendMessage(receiver, methodName, data.toString())
+    UnityEngine.sendMessage(receiver, methodName, data.toString())
   }
 }
