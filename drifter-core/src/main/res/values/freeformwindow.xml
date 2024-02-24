@@ -15,9 +15,9 @@
      limitations under the License.
 -->
 <resources>
-  <string name="FreeformWindowSize_maximize"></string>
-  <string name="FreeformWindowSize_tablet"></string>
-  <string name="FreeformWindowSize_phone"></string>
-  <string name="FreeformWindowOrientation_landscape"></string>
-  <string name="FreeformWindowOrientation_portrait"></string>
+  <string name="FreeformWindowSize_maximize" />
+  <string name="FreeformWindowSize_tablet" />
+  <string name="FreeformWindowSize_phone" />
+  <string name="FreeformWindowOrientation_landscape" />
+  <string name="FreeformWindowOrientation_portrait" />
 </resources>
