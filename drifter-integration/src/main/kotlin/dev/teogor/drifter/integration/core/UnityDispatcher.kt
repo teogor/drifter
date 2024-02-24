@@ -16,8 +16,8 @@
 
 package dev.teogor.drifter.integration.core
 
-import com.unity3d.player.UnityPlayer
 import dev.teogor.drifter.integration.utilities.asString
+import dev.teogor.drifter.unity.common.LocalUnityEngine
 
 class UnityDispatcher(
   val gameObject: String,
@@ -26,7 +26,7 @@ class UnityDispatcher(
 ) {
 
   init {
-    UnityPlayer.UnitySendMessage(
+    LocalUnityEngine.current.sendMessage(
       gameObject,
       functionName,
       functionParameter.asString,

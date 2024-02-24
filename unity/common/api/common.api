@@ -1,0 +1,66 @@
+public abstract class dev/teogor/drifter/unity/common/BaseUnityPlayer : android/widget/FrameLayout, dev/teogor/drifter/unity/common/IUnityPlayer {
+	public fun <init> (Landroid/content/Context;)V
+}
+
+public class dev/teogor/drifter/unity/common/BaseUnityPlayerActivity : android/app/Activity {
+	public fun <init> ()V
+}
+
+public final class dev/teogor/drifter/unity/common/BaseUnityPlayerKt {
+	public static final fun applyOptions (Ldev/teogor/drifter/unity/common/BaseUnityPlayer;Ldev/teogor/drifter/unity/common/UnityOptions;Landroid/content/ContextWrapper;)V
+}
+
+public abstract interface class dev/teogor/drifter/unity/common/IUnityPlayer {
+	public abstract fun configurationChanged (Landroid/content/res/Configuration;)V
+	public abstract fun destroy ()V
+	public abstract fun displayChanged (ILandroid/view/Surface;)Z
+	public abstract fun injectEvent (Landroid/view/InputEvent;)Z
+	public abstract fun kill ()V
+	public abstract fun lowMemory ()V
+	public abstract fun onNewCurrentActivity (Landroid/app/Activity;)V
+	public abstract fun pause ()V
+	public abstract fun quit ()V
+	public abstract fun resume ()V
+	public abstract fun unload ()V
+	public abstract fun windowFocusChanged (Z)V
+}
+
+public final class dev/teogor/drifter/unity/common/UnityEngine {
+	public static final field INSTANCE Ldev/teogor/drifter/unity/common/UnityEngine;
+	public final fun sendMessage (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public abstract interface class dev/teogor/drifter/unity/common/UnityEngineFactory {
+	public abstract fun createUnityPlayer (Landroid/content/ContextWrapper;Ldev/teogor/drifter/unity/common/UnityOptions;)Ldev/teogor/drifter/unity/common/IUnityPlayer;
+	public abstract fun getVersion ()Ljava/lang/String;
+	public abstract fun sendMessage (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public final class dev/teogor/drifter/unity/common/UnityEngineFactory$DefaultImpls {
+	public static synthetic fun createUnityPlayer$default (Ldev/teogor/drifter/unity/common/UnityEngineFactory;Landroid/content/ContextWrapper;Ldev/teogor/drifter/unity/common/UnityOptions;ILjava/lang/Object;)Ldev/teogor/drifter/unity/common/IUnityPlayer;
+}
+
+public final class dev/teogor/drifter/unity/common/UnityEngineFactoryKt {
+	public static final fun getLocalUnityEngine ()Ldev/teogor/ceres/core/register/ProvidableRegistryLocal;
+}
+
+public final class dev/teogor/drifter/unity/common/UnityOptions {
+	public fun <init> ()V
+	public final fun getContextFieldConfigurator ()Lkotlin/jvm/functions/Function1;
+	public final fun getDetachFromActivity ()Z
+	public final fun setContextFieldConfigurator (Lkotlin/jvm/functions/Function1;)V
+	public final fun setDetachFromActivity (Z)V
+}
+
+public final class dev/teogor/drifter/unity/common/UnityOptionsKt {
+	public static final fun configureOptions (Ldev/teogor/drifter/unity/common/BaseUnityPlayer;Ldev/teogor/drifter/unity/common/UnityOptions;Landroid/content/ContextWrapper;Lkotlin/jvm/functions/Function1;)Ldev/teogor/drifter/unity/common/BaseUnityPlayer;
+}
+
+public final class dev/teogor/drifter/unity/common/UnityPlayerManager {
+	public static final field INSTANCE Ldev/teogor/drifter/unity/common/UnityPlayerManager;
+	public final fun getActivity ()Landroid/app/Activity;
+	public final fun getUnityPlayer ()Ldev/teogor/drifter/unity/common/IUnityPlayer;
+	public final fun setActivity (Landroid/app/Activity;)V
+	public final fun setUnityPlayer (Ldev/teogor/drifter/unity/common/IUnityPlayer;)V
+}
+

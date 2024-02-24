@@ -13,39 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 plugins {
   alias(libs.plugins.ceres.android.library)
   alias(libs.plugins.winds)
 }
 
 android {
-  namespace = "dev.teogor.drifter.core"
+  namespace = "dev.teogor.drifter.unity.common"
 
   defaultConfig {
-    consumerProguardFiles("proguard-unity.txt")
-  }
-
-  buildTypes {
-    release {
-      isMinifyEnabled = false
-      proguardFiles(
-        getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro",
-      )
-    }
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles("consumer-rules.pro")
   }
 }
 
 dependencies {
-  api(files("libs/unity-classes.jar"))
+  implementation(platform(libs.ceres.bom))
+  api(libs.ceres.core.register)
 
-  implementation(libs.androidx.annotation)
+  implementation(libs.androidx.startup.runtime)
+  implementation(libs.gson)
+  implementation(libs.appcompat)
 }
 
 winds {
   mavenPublish {
-    displayName = "Core"
-    name = "core"
+    displayName = "Common"
+    name = "Common"
   }
 }

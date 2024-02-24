@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-  implementation(projects.drifterCore)
+  api(projects.unity.common)
 
   implementation(libs.androidx.startup.runtime)
   implementation(libs.gson)

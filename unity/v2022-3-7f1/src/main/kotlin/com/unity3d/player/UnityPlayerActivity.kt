@@ -16,15 +16,15 @@
 
 package com.unity3d.player
 
-import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.Window
+import dev.teogor.drifter.unity.common.BaseUnityPlayerActivity
 
-open class UnityPlayerActivity : Activity(), IUnityPlayerLifecycleEvents {
+open class UnityPlayerActivity : BaseUnityPlayerActivity(), IUnityPlayerLifecycleEvents {
   // don't change the name of this variable; referenced from native code
   protected lateinit var mUnityPlayer: UnityPlayer
 

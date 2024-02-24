@@ -28,6 +28,7 @@ import android.os.Message;
 import android.os.Process;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -39,6 +40,8 @@ import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
 
 import com.unity3d.player.components.UnityFrameLayout;
 import com.unity3d.player.components.UnitySplashView;
@@ -53,7 +56,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEvents {
+import dev.teogor.drifter.unity.common.BaseUnityPlayer;
+import dev.teogor.drifter.unity.common.IUnityPlayer;
+
+public class UnityPlayer extends BaseUnityPlayer implements IUnityPlayerLifecycleEvents {
   public static final int ANR_TIMEOUT_SECONDS = 4;
   private static final int RUN_STATE_CHANGED_MSG_CODE = 2269;
   private static final String SPLASH_ENABLE_METADATA_NAME = "unity.splash-enable";
@@ -616,6 +622,12 @@ public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEve
     }
   }
 
+  @Override
+  public void onNewCurrentActivity(@NonNull Activity activity) {
+    currentActivity = activity;
+  }
+
+  @Override
   public boolean displayChanged(int i2, Surface surface) {
     if (i2 == 0) {
       this.mMainDisplayOverride = surface != null;
@@ -654,6 +666,7 @@ public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEve
     return Bundle.EMPTY;
   }
 
+  @Override
   public void quit() {
     destroy();
   }
@@ -714,10 +727,12 @@ public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEve
     unloadNative();
   }
 
-  protected void kill() {
+  @Override
+  public void kill() {
     Process.killProcess(Process.myPid());
   }
 
+  @Override
   public void pause() {
     GoogleARCoreApi googleARCoreApi = this.m_ARCoreApi;
     if (googleARCoreApi != null) {
@@ -740,6 +755,7 @@ public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEve
     pauseUnity();
   }
 
+  @Override
   public void resume() {
     GoogleARCoreApi googleARCoreApi = this.m_ARCoreApi;
     if (googleARCoreApi != null) {
@@ -801,6 +817,7 @@ public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEve
     return this.m_NetworkConnectivity.b();
   }
 
+  @Override
   public void configurationChanged(Configuration configuration) {
     U u2 = this.mVideoPlayerProxy;
     if (u2 != null) {
@@ -808,6 +825,7 @@ public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEve
     }
   }
 
+  @Override
   public void windowFocusChanged(boolean z2) {
     this.mState.b(z2);
     if (this.mState.a()) {
@@ -1010,6 +1028,7 @@ public class UnityPlayer extends FrameLayout implements IUnityPlayerLifecycleEve
     return this.mQuitting;
   }
 
+  @Override
   public boolean injectEvent(InputEvent inputEvent) {
     if (!J.d()) {
       return false;

@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
+import dev.teogor.ceres.core.common.utils.OnLifecycleEvent
 import dev.teogor.drifter.compose.components.UnityPlayerView
 
 @Composable

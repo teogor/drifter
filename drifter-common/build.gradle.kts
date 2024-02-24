@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-  implementation(projects.drifterCore)
+  implementation(projects.unity.common)
   implementation(projects.drifterIntegration)
 }
 

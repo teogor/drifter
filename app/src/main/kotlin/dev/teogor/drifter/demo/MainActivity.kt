@@ -53,7 +53,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import dev.teogor.drifter.compose.OnLifecycleEvent
+import dev.teogor.ceres.core.common.utils.OnLifecycleEvent
 import dev.teogor.drifter.compose.UvpComposable
 import dev.teogor.drifter.demo.ui.theme.UnityViewTheme
 import dev.teogor.drifter.wallpaper.LiveWallpaperUtility

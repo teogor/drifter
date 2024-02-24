@@ -16,7 +16,7 @@
 
 package dev.teogor.drifter.integration.core
 
-import com.unity3d.player.UnityPlayer
+import dev.teogor.drifter.unity.common.LocalUnityEngine
 import org.json.JSONObject
 
 @Deprecated(
@@ -31,6 +31,6 @@ open class UnityControllerBase(
 ) {
 
   fun invokeAction(methodName: String, data: JSONObject) {
-    UnityPlayer.UnitySendMessage(receiver, methodName, data.toString())
+    LocalUnityEngine.current.sendMessage(receiver, methodName, data.toString())
   }
 }

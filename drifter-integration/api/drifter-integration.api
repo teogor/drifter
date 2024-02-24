@@ -5,7 +5,7 @@ public final class dev/teogor/drifter/integration/BuildConfig {
 	public fun <init> ()V
 }
 
-public abstract class dev/teogor/drifter/integration/activities/OverrideUnityActivity : com/unity3d/player/UnityPlayerActivity {
+public abstract class dev/teogor/drifter/integration/activities/OverrideUnityActivity : dev/teogor/drifter/unity/common/BaseUnityPlayerActivity {
 	public static final field Companion Ldev/teogor/drifter/integration/activities/OverrideUnityActivity$Companion;
 	public fun <init> ()V
 	protected fun onCreate (Landroid/os/Bundle;)V
@@ -219,7 +219,7 @@ public final class dev/teogor/drifter/integration/player/UnityPlayerWrapper {
 	public static final field Companion Ldev/teogor/drifter/integration/player/UnityPlayerWrapper$Companion;
 	public fun <init> (Landroid/content/ContextWrapper;)V
 	public final fun getApplicationContext ()Landroid/content/Context;
-	public final fun getUnityPlayer ()Lcom/unity3d/player/UnityPlayer;
+	public final fun getUnityPlayer ()Ldev/teogor/drifter/unity/common/IUnityPlayer;
 	public final fun handleSurfaceDestroyed (Landroid/view/SurfaceHolder;)V
 	public final fun injectConfigurationChange (Landroid/content/res/Configuration;)V
 	public final fun injectInputEvent (Landroid/view/InputEvent;)Z

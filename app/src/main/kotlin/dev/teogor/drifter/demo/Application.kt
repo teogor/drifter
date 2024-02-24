@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-package dev.teogor.drifter.integration.activities
+package dev.teogor.drifter.demo
 
-import android.os.Bundle
-import dev.teogor.drifter.unity.common.BaseUnityPlayerActivity
+import android.app.Application
+import dev.teogor.ceres.core.register.RegistryStartup
+import dev.teogor.drifter.unity.withUnity202237f1Factory
 
-abstract class OverrideUnityActivity : BaseUnityPlayerActivity() {
-  protected abstract fun showMainActivity(setToColor: String?)
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    instance = this
-  }
+/**
+ * Android Application class for Ceres application.
+ *
+ * This class extends the Android [Application] class.
+ */
+class Application : Application() {
 
-  override fun onDestroy() {
-    super.onDestroy()
-    instance = null
-  }
+  override fun onCreate() {
+    super.onCreate()
 
-  companion object {
-    var instance: OverrideUnityActivity? = null
+    RegistryStartup.provides(withUnity202237f1Factory())
   }
 }

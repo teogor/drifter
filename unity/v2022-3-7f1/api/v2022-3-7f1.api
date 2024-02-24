@@ -1,4 +1,4 @@
-public class com/unity3d/player/UnityPlayer : android/widget/FrameLayout, com/unity3d/player/IUnityPlayerLifecycleEvents {
+public class com/unity3d/player/UnityPlayer : dev/teogor/drifter/unity/common/BaseUnityPlayer, com/unity3d/player/IUnityPlayerLifecycleEvents {
 	public static final field ANR_TIMEOUT_SECONDS I
 	public static field currentActivity Landroid/app/Activity;
 	public fun <init> (Landroid/content/Context;)V
@@ -26,7 +26,7 @@ public class com/unity3d/player/UnityPlayer : android/widget/FrameLayout, com/un
 	public fun injectEvent (Landroid/view/InputEvent;)Z
 	protected fun isFinishing ()Z
 	protected fun isUaaLUseCase ()Z
-	protected fun kill ()V
+	public fun kill ()V
 	protected fun loadLibrary (Ljava/lang/String;)Z
 	public fun lowMemory ()V
 	public final fun nativeLowMemory ()V
@@ -37,6 +37,7 @@ public class com/unity3d/player/UnityPlayer : android/widget/FrameLayout, com/un
 	public fun onKeyLongPress (ILandroid/view/KeyEvent;)Z
 	public fun onKeyMultiple (IILandroid/view/KeyEvent;)Z
 	public fun onKeyUp (ILandroid/view/KeyEvent;)Z
+	public fun onNewCurrentActivity (Landroid/app/Activity;)V
 	public fun onTouchEvent (Landroid/view/MotionEvent;)Z
 	public fun onUnityPlayerQuitted ()V
 	public fun onUnityPlayerUnloaded ()V
@@ -123,7 +124,7 @@ public class com/unity3d/player/UnityPlayer$t : java/lang/Runnable {
 	public fun run ()V
 }
 
-public class com/unity3d/player/UnityPlayerActivity : android/app/Activity, com/unity3d/player/IUnityPlayerLifecycleEvents {
+public class com/unity3d/player/UnityPlayerActivity : dev/teogor/drifter/unity/common/BaseUnityPlayerActivity, com/unity3d/player/IUnityPlayerLifecycleEvents {
 	protected field mUnityPlayer Lcom/unity3d/player/UnityPlayer;
 	public fun <init> ()V
 	public fun dispatchKeyEvent (Landroid/view/KeyEvent;)Z
@@ -228,5 +229,16 @@ public final class com/unity3d/player/utils/models/UnityMessage : java/lang/Enum
 	public final fun getValue ()I
 	public static fun valueOf (Ljava/lang/String;)Lcom/unity3d/player/utils/models/UnityMessage;
 	public static fun values ()[Lcom/unity3d/player/utils/models/UnityMessage;
+}
+
+public final class dev/teogor/drifter/unity/Unity202237f1Factory : dev/teogor/drifter/unity/common/UnityEngineFactory {
+	public fun <init> ()V
+	public fun createUnityPlayer (Landroid/content/ContextWrapper;Ldev/teogor/drifter/unity/common/UnityOptions;)Ldev/teogor/drifter/unity/common/IUnityPlayer;
+	public fun getVersion ()Ljava/lang/String;
+	public fun sendMessage (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public final class dev/teogor/drifter/unity/Unity202237f1FactoryKt {
+	public static final fun withUnity202237f1Factory ()Ldev/teogor/ceres/core/register/ProvidedValue;
 }
 

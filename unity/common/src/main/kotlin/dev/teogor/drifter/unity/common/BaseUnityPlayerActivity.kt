@@ -14,24 +14,8 @@
  * limitations under the License.
  */
 
-package dev.teogor.drifter.integration.activities
+package dev.teogor.drifter.unity.common
 
-import android.os.Bundle
-import dev.teogor.drifter.unity.common.BaseUnityPlayerActivity
+import android.app.Activity
 
-abstract class OverrideUnityActivity : BaseUnityPlayerActivity() {
-  protected abstract fun showMainActivity(setToColor: String?)
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    instance = this
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    instance = null
-  }
-
-  companion object {
-    var instance: OverrideUnityActivity? = null
-  }
-}
+open class BaseUnityPlayerActivity : Activity()
