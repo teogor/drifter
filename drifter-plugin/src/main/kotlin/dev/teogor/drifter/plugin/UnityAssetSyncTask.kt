@@ -53,27 +53,19 @@ open class UnityAssetSyncTask : DefaultTask() {
       val options = unityOptions!!
 
       val targetedUnityFolders = listOf(
-        "assets",
-        "Il2CppOutputProject",
-        "jniLibs",
-        "jniStaticLibs",
-      )
-      val targetedUnitySymbols = listOf(
         "symbols",
+        "src/main/assets",
+        "src/main/Il2CppOutputProject",
+        "src/main/jniLibs",
+        "src/main/jniStaticLibs",
+        "src/main/resources/META-INF",
       )
 
-      val rootDirectory = targetDir
-      val srcDirectory = File(rootDirectory, "src/main")
+      val unityModulePath = targetDir
 
       // Delete the specified folders
-      targetedUnitySymbols.forEach { folderName ->
-        val folder = File(rootDirectory, folderName)
-        if (folder.exists()) {
-          folder.deleteRecursively()
-        }
-      }
       targetedUnityFolders.forEach { folderName ->
-        val folder = File(srcDirectory, folderName)
+        val folder = File(unityModulePath, folderName)
         if (folder.exists()) {
           folder.deleteRecursively()
         }
@@ -81,19 +73,17 @@ open class UnityAssetSyncTask : DefaultTask() {
 
       val unityExportLibName = options.libraryName
       val exportRootDirectory = File(sourceDir, unityExportLibName)
-      val exportSrcDirectory = File(exportRootDirectory, "src/main")
-
-      targetedUnitySymbols.forEach { folderName ->
-        val folder = File(exportRootDirectory, folderName)
-        if (folder.exists()) {
-          folder.copyRecursively(File(rootDirectory, folderName))
-        }
-      }
 
       targetedUnityFolders.forEach { folderName ->
-        val folder = File(exportSrcDirectory, folderName)
+        val folder = File(exportRootDirectory, folderName)
         if (folder.exists()) {
-          folder.copyRecursively(File(srcDirectory, folderName))
+          folder.copyRecursively(
+            target = File(unityModulePath, folderName),
+            overwrite = true,
+            onError = { _, _ ->
+              OnErrorAction.SKIP
+            },
+          )
         }
       }
     } catch (e: Exception) {
