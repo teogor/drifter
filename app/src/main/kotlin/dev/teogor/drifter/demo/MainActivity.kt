@@ -54,7 +54,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import dev.teogor.ceres.core.common.utils.OnLifecycleEvent
-import dev.teogor.drifter.compose.UvpComposable
+import dev.teogor.drifter.compose.UnityEngineView
 import dev.teogor.drifter.demo.ui.theme.UnityViewTheme
 import dev.teogor.drifter.wallpaper.LiveWallpaperUtility
 
@@ -85,7 +85,7 @@ class MainActivity : ComponentActivity() {
               val controller = AquariumMessageSender()
               val storage = AquariumStorage()
 
-              UvpComposable(
+              UnityEngineView(
                 modifier = Modifier
                   .fillMaxWidth(.5f)
                   .fillMaxHeight(.5f)
@@ -93,13 +93,13 @@ class MainActivity : ComponentActivity() {
                     color = Color.Green,
                     shape = RoundedCornerShape(20.dp),
                   ),
-                onCreated = {
+                onUnityEngineCreated = {
                   controller.apply {
                     setEditorMode(true)
                     animateToWaterColor(storage.waterColor, false)
                     cycleOption(storage.cycleOption)
                   }
-                },
+                }
               )
 
               UnityColorPicker(

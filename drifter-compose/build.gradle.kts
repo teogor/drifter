@@ -52,6 +52,7 @@ dependencies {
   implementation(libs.ui)
   implementation(libs.ui.graphics)
   implementation(libs.ui.tooling.preview)
+  implementation(libs.androidx.foundation.layout.android)
 
   implementation(libs.lifecycle.runtime.ktx)
 }

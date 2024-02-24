@@ -17,7 +17,13 @@ copyright: Copyright &copy; 2024 Teodor Grigor (Teogor)
 # Page tree
 nav:
   - Home:
-      - Overview: index.md
+    - Overview: index.md
+    - Unity Engine Composable: unity-engine-jetpack-compose.md
+  - Releases:
+    - releases.md
+    - Implementation: releases/implementation.md
+    - Changelog:
+      - 1.0.0-alpha01: releases/changelog/1.0.0-alpha01.md
   - Sponsor: sponsor.md
   - Security: security.md
 
