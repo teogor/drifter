@@ -1,10 +1,23 @@
-# avoid publishing unity build to VS
+# Avoid publishing Unity build artifacts
 
-/build
+# Generated build files, not needed for source control
+build
 
-/symbols
-/src/main/assets/bin/Data/
-/src/main/assets/UnityServicesProjectConfiguration.json
-/src/main/Il2CppOutputProject/
-/src/main/jniLibs/
-/src/main/jniStaticLibs/
+# Debugging symbols, often large and unnecessary
+symbols
+
+# Contains generated data specific to the build
+src/main/assets/bin/Data/
+# Contains project-specific configuration, not essential for sharing
+src/main/assets/UnityServicesProjectConfiguration.json
+
+# IL2CPP generated code, not needed for development
+src/main/Il2CppOutputProject/
+
+# Native libraries, may contain platform-specific binaries
+src/main/jniLibs/
+# Static native libraries, same as jniLibs
+src/main/jniStaticLibs/
+
+# Build fingerprint, unique and not needed for sharing
+src/main/resources/META-INF/com.android.games.engine.build_fingerprint
