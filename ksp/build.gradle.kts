@@ -15,7 +15,7 @@
  */
 plugins {
   alias(libs.plugins.kotlin.jvm)
-  alias(libs.plugins.winds)
+  alias(libs.plugins.teogor.winds)
 }
 
 java {
@@ -39,8 +39,9 @@ dependencies {
 }
 
 winds {
-  mavenPublish {
-    displayName = "KSP"
-    name = "ksp"
+  moduleMetadata {
+    artifactDescriptor {
+      name = "KSP"
+    }
   }
 }

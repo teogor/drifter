@@ -17,7 +17,7 @@
 plugins {
   id("java-library")
   alias(libs.plugins.kotlin.jvm)
-  alias(libs.plugins.winds)
+  alias(libs.plugins.teogor.winds)
 }
 
 java {
@@ -32,8 +32,9 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 winds {
-  mavenPublish {
-    displayName = "Runtime"
-    name = "runtime"
+  moduleMetadata {
+    artifactDescriptor {
+      name = "Runtime"
+    }
   }
 }

@@ -32,13 +32,19 @@ Materials (BoM) and individual libraries, in TOML format.
     [versions]
     drifter = "1.0.0-alpha01"
      = "1.0.0-alpha01"
+    drifter-unity = "1.0.0-alpha01"
 
     [libraries]
-    drifter-compose = { group = "dev.teogor.drifter", name = "compose", version.ref = "drifter" }
-    drifter-core = { group = "dev.teogor.drifter", name = "core", version.ref = "drifter" }
-    drifter-integration = { group = "dev.teogor.drifter", name = "integration", version.ref = "drifter" }
+    drifter-codegen = { group = "dev.teogor.drifter", name = "drifter-codegen", version.ref = "drifter" }
+    drifter-common = { group = "dev.teogor.drifter", name = "drifter-common", version.ref = "drifter" }
+    drifter-compose = { group = "dev.teogor.drifter", name = "drifter-compose", version.ref = "drifter" }
+    drifter-integration = { group = "dev.teogor.drifter", name = "drifter-integration", version.ref = "drifter" }
     drifter = { group = "dev.teogor.drifter", name = "drifter", version.ref = "" }
-    drifter-wallpaper = { group = "dev.teogor.drifter", name = "wallpaper", version.ref = "drifter" }
+    drifter-wallpaper = { group = "dev.teogor.drifter", name = "drifter-wallpaper", version.ref = "drifter" }
+    drifter-ksp = { group = "dev.teogor.drifter", name = "drifter-ksp", version.ref = "drifter" }
+    drifter-runtime = { group = "dev.teogor.drifter", name = "drifter-runtime", version.ref = "drifter" }
+    drifter-unity-common = { group = "dev.teogor.drifter", name = "drifter-unity-common", version.ref = "drifter-unity" }
+    drifter-unity-2022.3.7f1 = { group = "dev.teogor.drifter", name = "drifter-unity-2022-3-7f1", version.ref = "drifter-unity" }
     ```
 
 === "Using BoM"
@@ -48,12 +54,17 @@ Materials (BoM) and individual libraries, in TOML format.
     drifter-bom = "1.0.0-alpha01"
 
     [libraries]
-    drifter-bom = { group = "dev.teogor.drifter", name = "bom", version.ref = "drifter-bom" }
-    drifter-compose = { group = "dev.teogor.drifter", name = "compose" }
-    drifter-core = { group = "dev.teogor.drifter", name = "core" }
-    drifter-integration = { group = "dev.teogor.drifter", name = "integration" }
+    drifter-bom = { group = "dev.teogor.drifter", name = "drifter-bom", version.ref = "drifter-bom" }
+    drifter-codegen = { group = "dev.teogor.drifter", name = "drifter-codegen" }
+    drifter-common = { group = "dev.teogor.drifter", name = "drifter-common" }
+    drifter-compose = { group = "dev.teogor.drifter", name = "drifter-compose" }
+    drifter-integration = { group = "dev.teogor.drifter", name = "drifter-integration" }
     drifter = { group = "dev.teogor.drifter", name = "drifter" }
-    drifter-wallpaper = { group = "dev.teogor.drifter", name = "wallpaper" }
+    drifter-wallpaper = { group = "dev.teogor.drifter", name = "drifter-wallpaper" }
+    drifter-ksp = { group = "dev.teogor.drifter", name = "drifter-ksp" }
+    drifter-runtime = { group = "dev.teogor.drifter", name = "drifter-runtime" }
+    drifter-unity-common = { group = "dev.teogor.drifter", name = "drifter-unity-Common" }
+    drifter-unity-2022.3.7f1 = { group = "dev.teogor.drifter", name = "drifter-unity-2022-3-7f1" }
     ```
 
 #### Dependencies Implementation
@@ -66,11 +77,16 @@ Materials (BoM) and individual libraries, in TOML format.
       implementation(platform(libs.drifter.bom))
 
       // Drifter Libraries
+      implementation(libs.drifter.codegen)
+      implementation(libs.drifter.common)
       implementation(libs.drifter.compose)
-      implementation(libs.drifter.core)
       implementation(libs.drifter.integration)
       implementation(libs.drifter)
       implementation(libs.drifter.wallpaper)
+      implementation(libs.drifter.ksp)
+      implementation(libs.drifter.runtime)
+      implementation(libs.drifter.unity.common)
+      implementation(libs.drifter.unity.2022.3.7f1)
     }
     ```
 
@@ -82,10 +98,15 @@ Materials (BoM) and individual libraries, in TOML format.
       implementation platform(libs.drifter.bom)
 
       // Drifter Libraries
+      implementation libs.drifter.codegen
+      implementation libs.drifter.common
       implementation libs.drifter.compose
-      implementation libs.drifter.core
       implementation libs.drifter.integration
       implementation libs.drifter
       implementation libs.drifter.wallpaper
+      implementation libs.drifter.ksp
+      implementation libs.drifter.runtime
+      implementation libs.drifter.unity.common
+      implementation libs.drifter.unity.2022.3.7f1
     }
     ```

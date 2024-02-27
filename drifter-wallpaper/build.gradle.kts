@@ -15,7 +15,7 @@
  */
 plugins {
   alias(libs.plugins.ceres.android.library)
-  alias(libs.plugins.winds)
+  alias(libs.plugins.teogor.winds)
 }
 
 android {
@@ -50,8 +50,9 @@ dependencies {
 }
 
 winds {
-  mavenPublish {
-    displayName = "Wallpaper"
-    name = "wallpaper"
+  moduleMetadata {
+    artifactDescriptor {
+      name = "Wallpaper"
+    }
   }
 }

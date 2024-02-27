@@ -16,7 +16,7 @@
 
 plugins {
   alias(libs.plugins.ceres.android.library)
-  alias(libs.plugins.winds)
+  alias(libs.plugins.teogor.winds)
 }
 
 android {
@@ -45,8 +45,9 @@ dependencies {
 }
 
 winds {
-  mavenPublish {
-    displayName = "2022.3.7f1"
-    name = "2022-3-7f1"
+  moduleMetadata {
+    artifactDescriptor {
+      name = "2022-3-7f1"
+    }
   }
 }

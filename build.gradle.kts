@@ -1,27 +1,28 @@
 import com.vanniktech.maven.publish.SonatypeHost
-import dev.teogor.winds.api.MavenPublish
-import dev.teogor.winds.api.getValue
-import dev.teogor.winds.api.model.DependencyType
-import dev.teogor.winds.api.model.Developer
-import dev.teogor.winds.api.model.LicenseType
-import dev.teogor.winds.api.model.createVersion
-import dev.teogor.winds.api.provider.Scm
-import dev.teogor.winds.gradle.utils.afterWindsPluginConfiguration
-import dev.teogor.winds.gradle.utils.attachTo
+import dev.teogor.winds.api.ArtifactIdFormat
+import dev.teogor.winds.api.License
+import dev.teogor.winds.api.NameFormat
+import dev.teogor.winds.api.Person
+import dev.teogor.winds.api.Scm
+import dev.teogor.winds.api.TicketSystem
+import dev.teogor.winds.ktx.createVersion
 import org.jetbrains.dokka.gradle.DokkaPlugin
+import dev.teogor.winds.ktx.scm
+import dev.teogor.winds.ktx.ticketSystem
+import dev.teogor.winds.ktx.person
 
 plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.jetbrains.kotlin.android) apply false
-  alias(libs.plugins.kotlin.jvm) apply false
+  alias(libs.plugins.kotlin.jvm) apply true
 
   alias(libs.plugins.ceres.android.application) apply false
   alias(libs.plugins.ceres.android.application.compose) apply false
   alias(libs.plugins.ceres.android.library) apply false
   alias(libs.plugins.ceres.android.library.compose) apply false
 
-  alias(libs.plugins.winds) apply true
+  alias(libs.plugins.teogor.winds) apply true
 
   alias(libs.plugins.vanniktech.maven) apply true
   alias(libs.plugins.dokka) apply true
@@ -29,53 +30,76 @@ plugins {
   alias(libs.plugins.api.validator) apply true
 }
 
-winds {
-  buildFeatures {
-    mavenPublish = true
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
+  }
+}
+tasks.withType<JavaCompile>().configureEach {
+  sourceCompatibility = JavaVersion.VERSION_11.toString()
+  targetCompatibility = JavaVersion.VERSION_11.toString()
+}
 
-    docsGenerator = true
+winds {
+  windsFeatures {
+    mavenPublishing = true
   }
 
-  mavenPublish {
-    displayName = "Drifter"
-    name = "drifter"
+  moduleMetadata {
+    name = "Drifter"
+    description = "\uD83C\uDFAE Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
+    yearCreated = 2023
+    websiteUrl = "https://source.teogor.dev/drifter/"
+    apiDocsUrl = "https://source.teogor.dev/drifter/html/"
 
-    canBePublished = false
-
-    description =
-      "\uD83C\uDFAE Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
-
-    groupId = "dev.teogor.drifter"
-    artifactIdElements = 1
-    url = "https://source.teogor.dev/drifter"
-
-    version = createVersion(1, 0, 0) {
-      alphaRelease(1)
+    artifactDescriptor {
+      group = "dev.teogor.drifter"
+      name = "Drifter"
+      version = createVersion(1, 0, 0) {
+        alphaRelease(2)
+      }
+      nameFormat = NameFormat.FULL
+      artifactIdFormat = ArtifactIdFormat.MODULE_NAME_ONLY
     }
 
-    // TODO winds
-    //  required by dokka
-    project.version = version!!.toString()
+    // Providing SCM (Source Control Management)
+    scm<Scm.GitHub> {
+      owner = "teogor"
+      repository = "drifter"
+    }
 
-    inceptionYear = 2023
+    // Providing Ticket System
+    ticketSystem<TicketSystem.GitHub> {
+      owner = "teogor"
+      repository = "drifter"
+    }
 
-    sourceControlManagement(
-      Scm.Git(
-        owner = "teogor",
-        repo = "drifter",
-      ),
-    )
+    // Providing Licenses
+    licensedUnder(License.Apache2())
 
-    addLicense(LicenseType.APACHE_2_0)
-
-    addDeveloper(TeogorDeveloper())
+    // Providing Persons
+    person<Person.DeveloperContributor> {
+      id = "teogor"
+      name = "Teodor Grigor"
+      email = "open-source@teogor.dev"
+      url = "https://teogor.dev"
+      roles = listOf("Code Owner", "Developer", "Designer", "Maintainer")
+      timezone = "UTC+2"
+      organization = "Teogor"
+      organizationUrl = "https://github.com/teogor"
+    }
   }
 
-  docsGenerator {
-    name = "Drifter"
-    identifier = "drifter"
-    alertOnDependentModules = true
-    dependencyGatheringType = DependencyType.LOCAL
+  publishingOptions {
+    publish = false
+    enablePublicationSigning = true
+    optInForVanniktechPlugin = true
+    cascadePublish = true
+    sonatypeHost = SonatypeHost.S01
+  }
+
+  documentationBuilder {
+    htmlPath = "html/"
   }
 }
 
@@ -84,38 +108,6 @@ val excludedModulesForWinds = listOf(
   ":app",
   ":module-unity",
 )
-afterWindsPluginConfiguration { winds ->
-  if (!excludedModulesForWinds.contains(path)) {
-    val mavenPublish: MavenPublish by winds
-    if (mavenPublish.canBePublished) {
-      mavenPublishing {
-        publishToMavenCentral(SonatypeHost.S01)
-        signAllPublications()
-
-        @Suppress("UnstableApiUsage")
-        pom {
-          coordinates(
-            groupId = mavenPublish.groupId!!,
-            artifactId = mavenPublish.artifactId!!,
-            version = mavenPublish.version!!.toString(),
-          )
-          mavenPublish attachTo this
-        }
-      }
-    }
-  }
-}
-
-data class TeogorDeveloper(
-  override val id: String = "teogor",
-  override val name: String = "Teodor Grigor",
-  override val email: String = "open-source@teogor.dev",
-  override val url: String = "https://teogor.dev",
-  override val roles: List<String> = listOf("Code Owner", "Developer", "Designer", "Maintainer"),
-  override val timezone: String = "UTC+2",
-  override val organization: String = "Teogor",
-  override val organizationUrl: String = "https://github.com/teogor",
-) : Developer
 
 val ktlintVersion = "0.50.0"
 
@@ -133,10 +125,10 @@ subprojects {
         target("**/*.kt")
         targetExclude("**/build/**/*.kt")
         ktlint(ktlintVersion)
-          .userData(
+          .editorConfigOverride(
             mapOf(
               "android" to "true",
-              "ktlint_code_style" to "android",
+              "ktlint_code_style" to "intellij_idea",
               "ij_kotlin_allow_trailing_comma" to "true",
               // These rules were introduced in ktlint 0.46.0 and should not be
               // enabled without further discussion. They are disabled for now.
@@ -196,8 +188,4 @@ subprojects {
   if (!excludeModules.contains(this@subprojects.name)) {
     apply<DokkaPlugin>()
   }
-}
-
-tasks.dokkaHtmlMultiModule {
-  dependsOn(":unity:dokkaHtmlMultiModule")
 }
