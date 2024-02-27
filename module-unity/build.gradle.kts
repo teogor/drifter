@@ -23,7 +23,7 @@ import dev.teogor.drifter.plugin.unityOptions
 plugins {
   alias(libs.plugins.ceres.android.library)
 
-  id("dev.teogor.drifter.plugin")
+  id("dev.teogor.drifter")
 }
 
 val unityStreamingAssets: String? by project

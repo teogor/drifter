@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 plugins {
-  alias(libs.plugins.winds)
+  alias(libs.plugins.teogor.winds)
 }
 
 winds {
-  mavenPublish {
-    displayName = "Unity"
-    name = "unity"
+  moduleMetadata {
+    artifactDescriptor {
+      name = "Unity"
+    }
   }
 }

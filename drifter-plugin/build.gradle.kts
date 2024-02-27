@@ -20,11 +20,9 @@ plugins {
   `kotlin-dsl`
   id("com.gradle.plugin-publish") version "1.1.0"
   alias(libs.plugins.buildconfig)
-  alias(libs.plugins.winds)
+  // todo Crashes
+  //  alias(libs.plugins.teogor.winds)
 }
-
-group = "dev.teogor.drifter.plugin"
-version = "1.0.0-alpha01"
 
 java {
   // Up to Java 11 APIs are available through desugaring
@@ -49,12 +47,12 @@ dependencies {
 
 @Suppress("UnstableApiUsage")
 gradlePlugin {
-  website.set("https://github.com/teogor/drifter")
+  website.set("https://source.teogor.dev/drifter")
   vcsUrl.set("https://github.com/teogor/drifter")
 
   plugins {
     register("unityConfiguratorPlugin") {
-      id = "dev.teogor.drifter.plugin"
+      id = "dev.teogor.drifter"
       implementationClass = "dev.teogor.drifter.plugin.DrifterPlugin"
       displayName = "Gradle Unity Configurator for Drifter Plugin"
       description = "Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
@@ -64,7 +62,7 @@ gradlePlugin {
 }
 
 buildConfig {
-  packageName("dev.teogor.drifter.plugin")
+  packageName("dev.teogor.drifter")
 
   buildConfigField("String", "NAME", "\"${group}\"")
   buildConfigField("String", "VERSION", "\"${version}\"")

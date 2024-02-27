@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 teogor (Teodor Grigor)
+ * Copyright 2024 teogor (Teodor Grigor)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
+import dev.teogor.winds.api.ArtifactIdFormat
+
 plugins {
-  alias(libs.plugins.winds)
+  alias(libs.plugins.teogor.winds)
 }
 
 winds {
-  mavenPublish {
-    displayName = "BoM"
-    name = "bom"
+  moduleMetadata {
+    isBom = true
 
-    defineBoM()
+    artifactDescriptor {
+      name = "BoM"
+      artifactIdFormat = ArtifactIdFormat.NAME_ONLY
+    }
   }
 }

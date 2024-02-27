@@ -15,7 +15,7 @@
  */
 plugins {
   alias(libs.plugins.ceres.android.library)
-  alias(libs.plugins.winds)
+  alias(libs.plugins.teogor.winds)
 }
 
 android {
@@ -37,8 +37,9 @@ dependencies {
 }
 
 winds {
-  mavenPublish {
-    displayName = "Common"
-    name = "Common"
+  moduleMetadata {
+    artifactDescriptor {
+      name = "Common"
+    }
   }
 }

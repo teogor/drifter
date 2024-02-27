@@ -16,7 +16,7 @@
 plugins {
   id("java-library")
   alias(libs.plugins.kotlin.jvm)
-  alias(libs.plugins.winds)
+  alias(libs.plugins.teogor.winds)
 }
 
 java {
@@ -38,8 +38,9 @@ dependencies {
 }
 
 winds {
-  mavenPublish {
-    displayName = "Codegen"
-    name = "codegen"
+  moduleMetadata {
+    artifactDescriptor {
+      name = "Codegen"
+    }
   }
 }
