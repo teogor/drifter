@@ -30,5 +30,9 @@ winds {
       }
       artifactIdFormat = ArtifactIdFormat.FULL
     }
+
+    publishingOptions {
+      publish = false
+    }
   }
 }
