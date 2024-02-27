@@ -47,7 +47,7 @@ dependencies {
 winds {
   moduleMetadata {
     artifactDescriptor {
-      name = "2022.3.7f1"
+      name = "2022-3-7f1"
     }
   }
 }

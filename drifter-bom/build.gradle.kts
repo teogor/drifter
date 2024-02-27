@@ -15,6 +15,7 @@
  */
 
 import dev.teogor.winds.api.ArtifactIdFormat
+import dev.teogor.winds.ktx.createVersion
 
 plugins {
   alias(libs.plugins.teogor.winds)
@@ -26,7 +27,11 @@ winds {
 
     artifactDescriptor {
       name = "BoM"
-      artifactIdFormat = ArtifactIdFormat.NAME_ONLY
+      artifactIdFormat = ArtifactIdFormat.MODULE_NAME_ONLY
+
+      version = createVersion(1, 0, 0) {
+        alphaRelease(2)
+      }
     }
   }
 }

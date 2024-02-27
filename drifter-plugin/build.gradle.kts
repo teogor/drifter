@@ -55,14 +55,27 @@ gradlePlugin {
       id = "dev.teogor.drifter"
       implementationClass = "dev.teogor.drifter.plugin.DrifterPlugin"
       displayName = "Gradle Unity Configurator for Drifter Plugin"
-      description = "Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
-      tags.set(listOf("drifter", "unity", "android", "integration", "performance", "development", "android-library"))
+      description =
+        "Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
+      tags.set(
+        listOf(
+          "drifter",
+          "unity",
+          "android",
+          "integration",
+          "performance",
+          "development",
+          "android-library",
+        ),
+      )
     }
   }
 }
 
+group = "dev.teogor.drifter"
+version = "1.0.0-alpha02"
 buildConfig {
-  packageName("dev.teogor.drifter")
+  packageName(group.toString())
 
   buildConfigField("String", "NAME", "\"${group}\"")
   buildConfigField("String", "VERSION", "\"${version}\"")
