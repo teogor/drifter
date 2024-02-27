@@ -189,3 +189,7 @@ subprojects {
     apply<DokkaPlugin>()
   }
 }
+
+tasks.dokkaHtmlMultiModule {
+  dependsOn(":unity:dokkaHtmlMultiModule")
+}
