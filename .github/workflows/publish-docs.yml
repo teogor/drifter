@@ -3,7 +3,8 @@ name: Publish API Docs
 on:
   push:
     branches:
-      - main
+      - hero
+#      - main
 
 permissions:
   contents: write
