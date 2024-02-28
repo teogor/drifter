@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.winds.api.ArtifactIdFormat
 import dev.teogor.winds.ktx.createVersion
 
@@ -21,6 +22,7 @@ plugins {
   alias(libs.plugins.teogor.winds)
 }
 
+winds.publishingOptions.sonatypeHost = SonatypeHost.S01
 winds {
   moduleMetadata {
     artifactDescriptor {
@@ -29,6 +31,10 @@ winds {
         alphaRelease(1)
       }
       artifactIdFormat = ArtifactIdFormat.FULL
+    }
+
+    publishingOptions {
+      publish = false
     }
   }
 }

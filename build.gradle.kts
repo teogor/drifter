@@ -6,10 +6,10 @@ import dev.teogor.winds.api.Person
 import dev.teogor.winds.api.Scm
 import dev.teogor.winds.api.TicketSystem
 import dev.teogor.winds.ktx.createVersion
-import org.jetbrains.dokka.gradle.DokkaPlugin
+import dev.teogor.winds.ktx.person
 import dev.teogor.winds.ktx.scm
 import dev.teogor.winds.ktx.ticketSystem
-import dev.teogor.winds.ktx.person
+import org.jetbrains.dokka.gradle.DokkaPlugin
 
 plugins {
   alias(libs.plugins.android.application) apply false
@@ -47,7 +47,8 @@ winds {
 
   moduleMetadata {
     name = "Drifter"
-    description = "\uD83C\uDFAE Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
+    description =
+      "\uD83C\uDFAE Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly."
     yearCreated = 2023
     websiteUrl = "https://source.teogor.dev/drifter/"
     apiDocsUrl = "https://source.teogor.dev/drifter/html/"

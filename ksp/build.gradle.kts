@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.teogor.winds)
@@ -38,6 +41,7 @@ dependencies {
   implementation(libs.ksp.api)
 }
 
+winds.publishingOptions.sonatypeHost = SonatypeHost.S01
 winds {
   moduleMetadata {
     artifactDescriptor {

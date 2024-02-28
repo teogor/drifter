@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 pluginManagement {
   repositories {
     google()
@@ -35,5 +36,7 @@ dependencyResolutionManagement {
     }
   }
 }
+
+rootProject.name = "gradle-plugin"
 
 include(":gradle-plugin-api")

@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
   id("java-library")
   alias(libs.plugins.kotlin.jvm)
@@ -31,6 +33,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
   }
 }
 
+winds.publishingOptions.sonatypeHost = SonatypeHost.S01
 winds {
   moduleMetadata {
     artifactDescriptor {

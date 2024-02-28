@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
   alias(libs.plugins.ceres.android.library)
   alias(libs.plugins.teogor.winds)
@@ -28,6 +30,7 @@ dependencies {
   implementation(projects.drifterIntegration)
 }
 
+winds.publishingOptions.sonatypeHost = SonatypeHost.S01
 winds {
   moduleMetadata {
     artifactDescriptor {

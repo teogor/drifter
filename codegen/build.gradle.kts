@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
   id("java-library")
   alias(libs.plugins.kotlin.jvm)
@@ -37,6 +40,7 @@ dependencies {
   api(libs.kotlin.poet.ksp)
 }
 
+winds.publishingOptions.sonatypeHost = SonatypeHost.S01
 winds {
   moduleMetadata {
     artifactDescriptor {

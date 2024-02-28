@@ -74,6 +74,7 @@ gradlePlugin {
 
 group = "dev.teogor.drifter"
 version = "1.0.0-alpha02"
+
 buildConfig {
   packageName(group.toString())
 
