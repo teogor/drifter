@@ -17,6 +17,7 @@
 package dev.teogor.drifter.plugin
 
 import dev.teogor.drifter.plugin.models.UnityOptions
+import dev.teogor.drifter.plugin.utils.error.UnityOptionsNotInitializedException
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
@@ -178,19 +179,6 @@ open class RefreshUnityAssetsTask : DefaultTask() {
     const val TASK_NAME = "refreshUnityAssets"
   }
 }
-
-/**
- * Exception thrown when attempting to use the task before initializing UnityOptions.
- *
- * @see [RefreshUnityAssetsTask.checkInitialized]
- */
-class UnityOptionsNotInitializedException : RuntimeException(
-  """
-  |UnityOptions is not initialized. Please call setUnityOptions() before using this task.
-  |
-  |To report this problem, file an issue on GitHub: https://github.com/teogor/drifter/issues
-  """.trimMargin(),
-)
 
 /**
  * Exception thrown when folder deletion fails during the task execution.

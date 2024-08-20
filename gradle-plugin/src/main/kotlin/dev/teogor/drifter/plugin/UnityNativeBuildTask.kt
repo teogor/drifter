@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2023 teogor (Teodor Grigor)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,7 @@ import com.android.build.api.dsl.SdkComponents
 import com.android.build.api.variant.AndroidComponents
 import dev.teogor.drifter.plugin.models.PlatformArch
 import dev.teogor.drifter.plugin.models.UnityOptions
+import dev.teogor.drifter.plugin.utils.error.UnityOptionsNotInitializedException
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.CopySpec
@@ -39,8 +40,7 @@ import org.gradle.process.ExecSpec
  * @see [createUnityNativeBuildTask]
  */
 open class UnityNativeBuildTask : DefaultTask() {
-
-  private var unityOptions: UnityOptions? = null
+  private lateinit var unityOptions: UnityOptions
 
   private val workingDir: String by lazy {
     project.projectDir.toString().replace("\\\\", "/")
@@ -61,13 +61,10 @@ open class UnityNativeBuildTask : DefaultTask() {
    */
   @TaskAction
   fun buildUnityNative() {
+    checkInitialized()
+
     try {
-      if (unityOptions == null) {
-        throw RuntimeException(
-          "An error occurred when trying to access 'unityOptions.' Please help us by reporting this issue at https://github.com/teogor/drifter/issues/new.",
-        )
-      }
-      val options = unityOptions!!
+      val options = unityOptions
 
       val configuration = options.configuration.value
       val staticLibraries = emptyArray<String>()
@@ -194,6 +191,17 @@ open class UnityNativeBuildTask : DefaultTask() {
     executableExtension: String,
   ): String {
     return "$workingDir/src/main/Il2CppOutputProject/IL2CPP/build/deploy/il2cpp$executableExtension"
+  }
+
+  /**
+   * Checks if UnityOptions has been initialized. Throws an exception if it has not.
+   *
+   * @throws UnityOptionsNotInitializedException if UnityOptions is not initialized.
+   */
+  private fun checkInitialized() {
+    if (!::unityOptions.isInitialized) {
+      throw UnityOptionsNotInitializedException()
+    }
   }
 
   companion object {
