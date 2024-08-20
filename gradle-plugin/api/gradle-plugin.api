@@ -13,6 +13,11 @@ public final class dev/teogor/drifter/plugin/BuildIl2CppTaskKt$inlined$sam$i$org
 	public final synthetic fun execute (Ljava/lang/Object;)V
 }
 
+public final class dev/teogor/drifter/plugin/ContentCopyException : java/lang/RuntimeException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
 public final class dev/teogor/drifter/plugin/DrifterPlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
@@ -24,6 +29,11 @@ public final class dev/teogor/drifter/plugin/DrifterPropertiesKt {
 	public static final fun getDrifterUnityPathNdk (Lorg/gradle/api/Project;)Ljava/lang/String;
 	public static final fun getSafeDrifterUnityPathExport (Lorg/gradle/api/Project;)Ljava/lang/String;
 	public static final fun getSafeDrifterUnityPathNdk (Lorg/gradle/api/Project;)Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/plugin/FolderDeletionException : java/lang/RuntimeException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
 
 public abstract interface annotation class dev/teogor/drifter/plugin/InternalDrifterApi : java/lang/annotation/Annotation {

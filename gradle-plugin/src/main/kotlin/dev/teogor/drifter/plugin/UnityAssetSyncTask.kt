@@ -23,7 +23,18 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskExecutionException
 import org.gradle.kotlin.dsl.register
 import java.io.File
+import java.io.IOException
 
+/**
+ * A Gradle task for synchronizing Unity exported content with the project's directory.
+ *
+ * This task performs the following actions:
+ * - Deletes specific folders from the target directory.
+ * - Copies updated content from the Unity export directory, including symbols, assets,
+ *   JNI libraries, and other resources.
+ *
+ * @see [createUnityAssetSyncTask]
+ */
 open class UnityAssetSyncTask : DefaultTask() {
 
   private lateinit var unityOptions: UnityOptions
@@ -42,11 +53,32 @@ open class UnityAssetSyncTask : DefaultTask() {
     description = "Synchronizes Unity exported content with the project's directory."
   }
 
+  /**
+   * Executes the synchronization task.
+   *
+   * This method orchestrates the synchronization process by calling individual methods
+   * for folder deletion and content copying.
+   *
+   * @throws UnityOptionsNotInitializedException if the UnityOptions is not initialized.
+   * @throws TaskExecutionException if an error occurs during the task execution.
+   */
   @TaskAction
   fun importContent() {
-    checkInitialized()
+    try {
+      checkInitialized()
+      deleteTargetFolders()
+      copyUpdatedContent()
+    } catch (e: Exception) {
+      throw TaskExecutionException(this, e)
+    }
+  }
 
-    val options = unityOptions
+  /**
+   * Deletes specified folders from the target directory.
+   *
+   * @throws IOException if an error occurs during file deletion.
+   */
+  private fun deleteTargetFolders() {
     val targetedUnityFolders = listOf(
       "symbols",
       "src/main/assets",
@@ -59,38 +91,77 @@ open class UnityAssetSyncTask : DefaultTask() {
     val unityModulePath = targetDir
 
     try {
-      // Delete the specified folders
       targetedUnityFolders.forEach { folderName ->
         val folder = File(unityModulePath, folderName)
         if (folder.exists()) {
           folder.deleteRecursively()
         }
       }
+    } catch (e: Exception) {
+      // Log and rethrow the exception to be handled in the main method
+      logger.error("Failed to delete target folders", e)
+      throw FolderDeletionException(
+        "Failed to delete one or more target folders. This may be due to permission issues or file system errors.",
+        e,
+      )
+    }
+  }
 
-      val unityExportLibName = options.libraryName
-      val exportRootDirectory = File(sourceDir, unityExportLibName)
+  /**
+   * Copies updated content from the Unity export directory to the target directory.
+   *
+   * @throws IOException if an error occurs during file copying.
+   */
+  private fun copyUpdatedContent() {
+    val options = unityOptions
+    val targetedUnityFolders = listOf(
+      "symbols",
+      "src/main/assets",
+      "src/main/Il2CppOutputProject",
+      "src/main/jniLibs",
+      "src/main/jniStaticLibs",
+      "src/main/resources/META-INF",
+    )
 
+    val unityExportLibName = options.libraryName
+    val exportRootDirectory = File(sourceDir, unityExportLibName)
+    val unityModulePath = targetDir
+
+    try {
       targetedUnityFolders.forEach { folderName ->
         val folder = File(exportRootDirectory, folderName)
         if (folder.exists()) {
           folder.copyRecursively(
             target = File(unityModulePath, folderName),
             overwrite = true,
-            onError = { _, _ ->
-              OnErrorAction.SKIP
-            },
+            onError = { _, _ -> OnErrorAction.SKIP },
           )
         }
       }
     } catch (e: Exception) {
-      throw TaskExecutionException(this, e)
+      // Log and rethrow the exception to be handled in the main method
+      logger.error("Failed to copy updated content", e)
+      throw ContentCopyException(
+        "Failed to copy content from the Unity export directory. This may be due to file access issues or I/O errors.",
+        e,
+      )
     }
   }
 
+  /**
+   * Sets the UnityOptions for this task.
+   *
+   * @param unityOptions The UnityOptions to be used by this task.
+   */
   fun setUnityOptions(unityOptions: UnityOptions) {
     this.unityOptions = unityOptions
   }
 
+  /**
+   * Checks if UnityOptions has been initialized. Throws an exception if it has not.
+   *
+   * @throws UnityOptionsNotInitializedException if UnityOptions is not initialized.
+   */
   private fun checkInitialized() {
     if (!::unityOptions.isInitialized) {
       throw UnityOptionsNotInitializedException()
@@ -98,14 +169,64 @@ open class UnityAssetSyncTask : DefaultTask() {
   }
 }
 
+/**
+ * Exception thrown when attempting to use the task before initializing UnityOptions.
+ *
+ * @see [UnityAssetSyncTask.checkInitialized]
+ */
 class UnityOptionsNotInitializedException : RuntimeException(
   """
   |UnityOptions is not initialized. Please call setUnityOptions() before using this task.
   |
-  |To report this problem file an issue on GitHub: https://github.com/teogor/drifter/issues
+  |To report this problem, file an issue on GitHub: https://github.com/teogor/drifter/issues
   """.trimMargin(),
 )
 
+/**
+ * Exception thrown when folder deletion fails during the task execution.
+ *
+ * @param message A description of the error that occurred.
+ * @param cause The cause of the error, or `null` if the cause is nonexistent or unknown.
+ *
+ * @see [UnityAssetSyncTask.deleteTargetFolders]
+ */
+class FolderDeletionException(message: String, cause: Throwable? = null) : RuntimeException(
+  """
+  |Failed to delete one or more target folders. This may be due to permission issues or file system errors.
+  |
+  |$message
+  |
+  |To report this problem, file an issue on GitHub: https://github.com/teogor/drifter/issues
+  """.trimMargin(),
+  cause,
+)
+
+/**
+ * Exception thrown when copying content fails during the task execution.
+ *
+ * @param message A description of the error that occurred.
+ * @param cause The cause of the error, or `null` if the cause is nonexistent or unknown.
+ *
+ * @see [UnityAssetSyncTask.copyUpdatedContent]
+ */
+class ContentCopyException(message: String, cause: Throwable? = null) : RuntimeException(
+  """
+  |Failed to copy content from the Unity export directory. This may be due to file access issues or I/O errors.
+  |
+  |$message
+  |
+  |To report this problem, file an issue on GitHub: https://github.com/teogor/drifter/issues
+  """.trimMargin(),
+  cause,
+)
+
+/**
+ * Creates and registers a [UnityAssetSyncTask] with the given [unityOptions].
+ *
+ * @param unityOptions The UnityOptions to be used by the task.
+ *
+ * @see [UnityAssetSyncTask]
+ */
 fun Project.createUnityAssetSyncTask(
   unityOptions: UnityOptions,
 ) {
