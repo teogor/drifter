@@ -23,20 +23,18 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskExecutionException
 import org.gradle.kotlin.dsl.register
 import java.io.File
-import java.io.IOException
 
 /**
- * A Gradle task for synchronizing Unity exported content with the project's directory.
+ * A Gradle task for refreshing and updating Unity assets and resources in the project's directory.
  *
  * This task performs the following actions:
  * - Deletes specific folders from the target directory.
  * - Copies updated content from the Unity export directory, including symbols, assets,
  *   JNI libraries, and other resources.
  *
- * @see [createUnityAssetSyncTask]
+ * @see [createRefreshUnityAssetsTask]
  */
-open class UnityAssetSyncTask : DefaultTask() {
-
+open class RefreshUnityAssetsTask : DefaultTask() {
   private lateinit var unityOptions: UnityOptions
 
   private val sourceDir: File by lazy {
@@ -50,20 +48,20 @@ open class UnityAssetSyncTask : DefaultTask() {
 
   init {
     group = "dev.teogor.drifter"
-    description = "Synchronizes Unity exported content with the project's directory."
+    description = "Refreshes and updates Unity assets and resources in the project's directory."
   }
 
   /**
-   * Executes the synchronization task.
+   * Executes the asset refresh task.
    *
-   * This method orchestrates the synchronization process by calling individual methods
+   * This method orchestrates the refresh process by calling individual methods
    * for folder deletion and content copying.
    *
    * @throws UnityOptionsNotInitializedException if the UnityOptions is not initialized.
    * @throws TaskExecutionException if an error occurs during the task execution.
    */
   @TaskAction
-  fun importContent() {
+  fun executeTask() {
     try {
       checkInitialized()
       deleteTargetFolders()
@@ -76,7 +74,7 @@ open class UnityAssetSyncTask : DefaultTask() {
   /**
    * Deletes specified folders from the target directory.
    *
-   * @throws IOException if an error occurs during file deletion.
+   * @throws FolderDeletionException if an error occurs during folder deletion.
    */
   private fun deleteTargetFolders() {
     val targetedUnityFolders = listOf(
@@ -98,7 +96,7 @@ open class UnityAssetSyncTask : DefaultTask() {
         }
       }
     } catch (e: Exception) {
-      // Log and rethrow the exception to be handled in the main method
+      // Log and throw a custom exception for folder deletion failure
       logger.error("Failed to delete target folders", e)
       throw FolderDeletionException(
         "Failed to delete one or more target folders. This may be due to permission issues or file system errors.",
@@ -110,7 +108,7 @@ open class UnityAssetSyncTask : DefaultTask() {
   /**
    * Copies updated content from the Unity export directory to the target directory.
    *
-   * @throws IOException if an error occurs during file copying.
+   * @throws ContentCopyException if an error occurs during content copying.
    */
   private fun copyUpdatedContent() {
     val options = unityOptions
@@ -139,7 +137,7 @@ open class UnityAssetSyncTask : DefaultTask() {
         }
       }
     } catch (e: Exception) {
-      // Log and rethrow the exception to be handled in the main method
+      // Log and throw a custom exception for content copy failure
       logger.error("Failed to copy updated content", e)
       throw ContentCopyException(
         "Failed to copy content from the Unity export directory. This may be due to file access issues or I/O errors.",
@@ -151,7 +149,7 @@ open class UnityAssetSyncTask : DefaultTask() {
   /**
    * Sets the UnityOptions for this task.
    *
-   * @param unityOptions The UnityOptions to be used by this task.
+   * @param unityOptions The UnityOptions to be used by the task.
    */
   fun setUnityOptions(unityOptions: UnityOptions) {
     this.unityOptions = unityOptions
@@ -167,12 +165,24 @@ open class UnityAssetSyncTask : DefaultTask() {
       throw UnityOptionsNotInitializedException()
     }
   }
+
+  companion object {
+    /**
+     * The name of the Gradle task for refreshing Unity assets.
+     *
+     * This constant is used to identify the task in Gradle's task registry and can be used
+     * when registering or configuring the task in build scripts or other Gradle-related code.
+     *
+     * @see [createRefreshUnityAssetsTask]
+     */
+    const val TASK_NAME = "refreshUnityAssets"
+  }
 }
 
 /**
  * Exception thrown when attempting to use the task before initializing UnityOptions.
  *
- * @see [UnityAssetSyncTask.checkInitialized]
+ * @see [RefreshUnityAssetsTask.checkInitialized]
  */
 class UnityOptionsNotInitializedException : RuntimeException(
   """
@@ -188,7 +198,7 @@ class UnityOptionsNotInitializedException : RuntimeException(
  * @param message A description of the error that occurred.
  * @param cause The cause of the error, or `null` if the cause is nonexistent or unknown.
  *
- * @see [UnityAssetSyncTask.deleteTargetFolders]
+ * @see [RefreshUnityAssetsTask.deleteTargetFolders]
  */
 class FolderDeletionException(message: String, cause: Throwable? = null) : RuntimeException(
   """
@@ -207,7 +217,7 @@ class FolderDeletionException(message: String, cause: Throwable? = null) : Runti
  * @param message A description of the error that occurred.
  * @param cause The cause of the error, or `null` if the cause is nonexistent or unknown.
  *
- * @see [UnityAssetSyncTask.copyUpdatedContent]
+ * @see [RefreshUnityAssetsTask.copyUpdatedContent]
  */
 class ContentCopyException(message: String, cause: Throwable? = null) : RuntimeException(
   """
@@ -221,16 +231,16 @@ class ContentCopyException(message: String, cause: Throwable? = null) : RuntimeE
 )
 
 /**
- * Creates and registers a [UnityAssetSyncTask] with the given [unityOptions].
+ * Creates and registers a [RefreshUnityAssetsTask] with the given [unityOptions].
  *
  * @param unityOptions The UnityOptions to be used by the task.
  *
- * @see [UnityAssetSyncTask]
+ * @see [RefreshUnityAssetsTask]
  */
-fun Project.createUnityAssetSyncTask(
+fun Project.createRefreshUnityAssetsTask(
   unityOptions: UnityOptions,
 ) {
-  tasks.register<UnityAssetSyncTask>("syncUnityAssets") {
+  tasks.register<RefreshUnityAssetsTask>(RefreshUnityAssetsTask.TASK_NAME) {
     setUnityOptions(unityOptions)
   }
 }

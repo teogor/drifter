@@ -40,7 +40,7 @@ fun Project.unityOptions(
     unityOptions = unityOptions,
   )
 
-  createUnityAssetSyncTask(
+  createRefreshUnityAssetsTask(
     unityOptions = unityOptions,
   )
 
