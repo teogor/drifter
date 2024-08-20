@@ -56,6 +56,7 @@ package dev.teogor.drifter.plugin.models
  *
  * @param libraryName The name of the library to create.
  */
+@Suppress("DEPRECATION")
 data class UnityOptions(
   var splashMode: Int = 0,
   var splashEnable: Boolean = false,
@@ -67,6 +68,19 @@ data class UnityOptions(
   var platforms: List<PlatformArch> = emptyList(),
   var configuration: Configuration = Configuration.Debug,
   var streamingAssets: List<String> = emptyList(),
-  var exportFolder: String = "",
+  var exportedProjectLocation: String = "",
   var libraryName: String = "unityLibrary",
-)
+
+  @Deprecated(
+    message = "Use exportedProjectLocation instead",
+    replaceWith = ReplaceWith("exportedProjectLocation"),
+  )
+  var exportFolder: String = "",
+) {
+  init {
+    // If exportFolder is provided and exportedProjectLocation is not, set it
+    if (exportFolder.isNotEmpty() && exportedProjectLocation.isEmpty()) {
+      exportedProjectLocation = exportFolder
+    }
+  }
+}

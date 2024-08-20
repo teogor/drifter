@@ -29,7 +29,7 @@ open class UnityAssetSyncTask : DefaultTask() {
   private var unityOptions: UnityOptions? = null
 
   private val sourceDir: File by lazy {
-    File(unityOptions!!.exportFolder)
+    File(unityOptions!!.exportedProjectLocation)
   }
 
   private val targetDir: File by lazy {
