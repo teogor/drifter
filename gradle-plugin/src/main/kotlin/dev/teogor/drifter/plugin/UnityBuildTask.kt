@@ -19,6 +19,7 @@ package dev.teogor.drifter.plugin
 import com.android.build.api.dsl.CommonExtension
 import dev.teogor.drifter.plugin.models.UnityOptions
 import org.gradle.api.Project
+import java.util.Locale
 
 @OptIn(InternalDrifterApi::class)
 fun Project.unityBuildTask(
@@ -57,14 +58,18 @@ fun Project.unityBuildTask(
     }
 
     afterEvaluate {
-      if (project(path).tasks.findByName("mergeDebugJniLibFolders") != null) {
-        project(path).tasks.named("mergeDebugJniLibFolders").get()
-          .dependsOn(unityNativeBuildTask)
+      val buildTypeTaskNames = commonExtension.buildTypes.map {
+        val formattedBuildType = it.name.splitCamelCase().toTitleCase()
+        formattedBuildType
       }
-      if (project(path).tasks.findByName("mergeReleaseJniLibFolders") != null) {
-        project(path).tasks.named("mergeReleaseJniLibFolders").get()
-          .dependsOn(unityNativeBuildTask)
-      }
+
+      buildTypeTaskNames
+        .mapNotNull { formattedName ->
+          project(path).tasks.named("merge${formattedName}JniLibFolders").getOrNull()
+        }
+        .forEach { task ->
+          task.dependsOn(unityNativeBuildTask)
+        }
     }
 
     androidResources {
@@ -83,6 +88,29 @@ fun Project.unityBuildTask(
 
     lint {
       abortOnError = false
+    }
+  }
+}
+
+/**
+ * Splits a camel case string into separate words.
+ */
+private fun String.splitCamelCase(): String {
+  return this.replace(Regex("([a-z])([A-Z])"), "$1 $2")
+}
+
+/**
+ * Converts a string to title case.
+ *
+ * Title case means that the first character of each word is capitalized.
+ *
+ * @return The string in title case.
+ */
+private fun String.toTitleCase(): String {
+  return this.split(" ").joinToString(" ") { word ->
+    word.replaceFirstChar { char ->
+      if (char.isLowerCase()) char.titlecase(Locale.getDefault())
+      else char.toString()
     }
   }
 }

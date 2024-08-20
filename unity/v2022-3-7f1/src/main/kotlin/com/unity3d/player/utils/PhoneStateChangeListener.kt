@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package com.unity3d.player.utils
 
 import android.annotation.TargetApi
@@ -25,7 +27,6 @@ import android.telephony.TelephonyManager
 import androidx.annotation.RequiresApi
 import com.unity3d.player.UnityPlayer
 
-@Suppress("DEPRECATION")
 class PhoneStateChangeListener(
   private val context: Context,
   private val unityPlayer: UnityPlayer,

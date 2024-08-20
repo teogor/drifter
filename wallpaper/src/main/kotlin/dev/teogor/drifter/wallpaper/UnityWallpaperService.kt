@@ -258,8 +258,6 @@ class UnityWallpaperService : WallpaperService() {
       xPixelOffset: Int,
       yPixelOffset: Int,
     ) {
-      if (mUnityEventsProxy == null) return
-
       // Pass event to C#
       mUnityEventsProxy.offsetsChanged(
         xOffset,
@@ -272,8 +270,6 @@ class UnityWallpaperService : WallpaperService() {
     }
 
     override fun onDesiredSizeChanged(desiredWidth: Int, desiredHeight: Int) {
-      if (mUnityEventsProxy == null) return
-
       // Pass event to C#
       if (mLiveWallpaperUnityFacade == null || mLiveWallpaperUnityFacade?.activeWallpaperEngine === this) {
         mUnityEventsProxy.desiredSizeChanged(desiredWidth, desiredHeight)
@@ -296,7 +292,7 @@ class UnityWallpaperService : WallpaperService() {
         unityPlayerHolder!!.onVisibilityChanged(true, mCurrentSurfaceHolder)
 
         // Send events to C#
-        mUnityEventsProxy!!.desiredSizeChanged(desiredMinimumWidth, desiredMinimumHeight)
+        mUnityEventsProxy.desiredSizeChanged(desiredMinimumWidth, desiredMinimumHeight)
         mUnityEventsProxy.visibilityChanged(true)
         mUnityEventsProxy.isPreviewChanged(isPreview)
       } else {
@@ -309,7 +305,7 @@ class UnityWallpaperService : WallpaperService() {
         // Send events to C#.
         // Do this before Unity was paused to avoid them being received in paused state
         if (mLiveWallpaperUnityFacade == null || mUnityPlayerInstanceManager!!.activeUnityPlayerHolder == unityPlayerHolder) {
-          mUnityEventsProxy!!.visibilityChanged(false)
+          mUnityEventsProxy.visibilityChanged(false)
         }
         unityPlayerHolder!!.onVisibilityChanged(false, null)
       }
@@ -348,7 +344,7 @@ class UnityWallpaperService : WallpaperService() {
     }
 
     override fun onMultiTapDetected(finalTapPositionX: Float, finalTapPositionY: Float) {
-      mUnityEventsProxy!!.multiTapDetected(finalTapPositionX, finalTapPositionY)
+      mUnityEventsProxy.multiTapDetected(finalTapPositionX, finalTapPositionY)
     }
 
     private fun log(obj: Any?, isVerbose: Boolean = false) {

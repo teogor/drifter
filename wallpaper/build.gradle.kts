@@ -48,6 +48,7 @@ dependencies {
   implementation(libs.appcompat)
   implementation(libs.androidx.startup.runtime)
   implementation(libs.gson)
+  implementation(libs.androidx.preference)
 }
 
 winds {

@@ -26,9 +26,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -39,7 +37,6 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
@@ -57,8 +54,10 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import dev.teogor.drifter.unity.common.BaseUnityPlayer;
-import dev.teogor.drifter.unity.common.IUnityPlayer;
 
+/**
+ * @noinspection ALL
+ */
 public class UnityPlayer extends BaseUnityPlayer implements IUnityPlayerLifecycleEvents {
   public static final int ANR_TIMEOUT_SECONDS = 4;
   private static final int RUN_STATE_CHANGED_MSG_CODE = 2269;
@@ -189,7 +188,6 @@ public class UnityPlayer extends BaseUnityPlayer implements IUnityPlayerLifecycl
    * @param gameObject The name of the Unity GameObject to receive the message.
    * @param methodName The name of the method to invoke on the GameObject.
    * @param funcParam  The parameter to pass to the method as a UTF-8 encoded string.
-   *
    * @throws UnsupportedOperationException If native libraries are not loaded.
    */
   public static void UnitySendMessage(String gameObject, String methodName, String funcParam) {
@@ -205,8 +203,8 @@ public class UnityPlayer extends BaseUnityPlayer implements IUnityPlayerLifecycl
    *
    * <p>This method is native and should be implemented in a platform-specific manner.</p>
    *
-   * @param gameObject The name of the Unity GameObject to receive the message.
-   * @param methodName The name of the method to invoke on the GameObject.
+   * @param gameObject  The name of the Unity GameObject to receive the message.
+   * @param methodName  The name of the method to invoke on the GameObject.
    * @param messageData The message data to pass to the method as a byte array.
    */
   private static native void nativeUnitySendMessage(String gameObject, String methodName, byte[] messageData);

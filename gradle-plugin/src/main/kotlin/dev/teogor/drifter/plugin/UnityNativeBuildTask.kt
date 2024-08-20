@@ -27,6 +27,7 @@ import org.gradle.api.file.CopySpec
 import org.gradle.api.file.DeleteSpec
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskExecutionException
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 import org.gradle.process.ExecSpec
 
@@ -69,7 +70,7 @@ open class UnityNativeBuildTask : DefaultTask() {
       val configuration = options.configuration.value
       val staticLibraries = emptyArray<String>()
 
-      val android = project.extensions.getByType(AndroidComponents::class.java)
+      val android = project.extensions.getByType<AndroidComponents>()
       val sdkComponents = android.sdkComponents
 
       options.platforms.forEach { architecture ->

@@ -226,7 +226,7 @@ abstract class LiveWallpaperCompatibleUnityPlayerActivity : Activity() {
   // Force event injection by overriding dispatchKeyEvent().
   override fun dispatchKeyEvent(event: KeyEvent): Boolean {
     // todo KeyEvent.ACTION_MULTIPLE deprecated
-    return if (mUnityPlayerWrapper == null && event.action == KeyEvent.ACTION_MULTIPLE) {
+    return if (mUnityPlayerWrapper != null && event.action == KeyEvent.ACTION_MULTIPLE) {
       mUnityPlayerWrapper!!.injectInputEvent(
         event,
       )
