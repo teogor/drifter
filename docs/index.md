@@ -1,49 +1,63 @@
-# Drifter Repository
+# Drifter
 
-Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and
-effortlessly.
+Learn more: **[User Guide](user-guide.md)** and **[Code Samples](code-samples.md)**
+
+🎮 Drifter simplifies the integration between Unity and Android, enhancing performance seamlessly and effortlessly.
 
 ## Download
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Maven Central](https://img.shields.io/maven-central/v/dev.teogor.drifter/bom.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=g%3Adev.teogor.drifter+a%3Abom&smo=true)
+[![Maven Central](https://img.shields.io/maven-central/v/dev.teogor.drifter/drifter-bom.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=g%3Adev.teogor.drifter&smo=true)
 [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 [![Profile](https://source.teogor.dev/badges/teogor-github.svg)](https://github.com/teogor)
 [![Portfolio](https://source.teogor.dev/badges/teogor-dev.svg)](https://teogor.dev)
 
-## Table of Contents
+[//]: # (REGION-API-REFERENCE)
 
-- [Modules](#modules)
-  - [drifter-compose](#drifter-compose)
-  - [drifter-integration](#drifter-integration)
-  - [drifter-core](#drifter-core)
-  - [drifter-wallpaper](#drifter-wallpaper)
-  - [drifter-plugin](#drifter-plugin)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+API Reference
+[`dev.teogor.drifter:*`](html/)
 
-### Gradle
+[//]: # (REGION-API-REFERENCE)
 
-Add the dependency below to your **module**'s `build.*` file.
+[//]: # (REGION-GROUP-OVERVIEW)
 
-- for `build.gradle`
+**Drifter** is formed by combining 1 Maven Group Ids within dev.teogor.drifter. Each Group encompasses a targeted subset of functionality, with individual sets of release notes.
 
-```gradle
-dependencies {
-  implementation platform('dev.teogor.drifter:bom:1.0.0-alpha01')
-}
-```
+This table provides an overview of the groups and their corresponding links to individual sets of release notes.
 
-- for `build.gradle.kts`
+| Group                               | Description    |
+|:------------------------------------|:---------------|
+| [drifter.unity](./unity/index.md)   | not provided   |
 
-```kotlin
-dependencies {
-  implementation(platform("dev.teogor.drifter:bom:1.0.0-alpha01"))
-}
-```
+[//]: # (REGION-GROUP-OVERVIEW)
 
-> **Note**: This library has more modules therefore include only the ones that you want to use.
+[//]: # (REGION-GROUP-VERSION-OVERVIEW)
+
+## Version
+
+Refer to the table below for an overview of the current versions associated with each group.
+
+| Maven Group ID                      | Latest Update        |  Stable Release  |  Release Candidate  |  Beta Release  |  Alpha Release  |
+|:------------------------------------|:---------------------|:----------------:|:-------------------:|:--------------:|:---------------:|
+| [drifter.unity](./unity/index.md)   | September 26, 2023   |        -         |          -          |       -        |  1.0.0-alpha01  |
+
+[//]: # (REGION-GROUP-VERSION-OVERVIEW)
+
+[//]: # (REGION-REPORT-ISSUE-FEEDBACK)
+
+## Feedback
+
+Your feedback helps make Drifter better. Let us know if you discover new issues or have
+ideas for improving this library. Please take a look at the [existing issues on GitHub](https://github.com/teogor/drifter/issues)
+for this library before you create a new one.
+
+[Create a new issue](https://github.com/teogor/drifter/issues/new){ .md-button }
+
+[//]: # (REGION-REPORT-ISSUE-FEEDBACK)
+
+## BOMs
+
+To stay updated with the latest BOM releases, explore the [Drifter BOM Mapping Page](./bom/bom-mapping.md).
 
 ## Simplifying Unity Engine Integration with Jetpack Compose
 
@@ -69,49 +83,6 @@ Learn step-by-step instructions, explore code examples, and gain best practices 
 potential of Unity Engine in your Compose projects.
 n in a markdown code snippet format.
 
-## Modules
-
-### drifter-compose
-
-The `drifter-compose` module provides functionality for working with Jetpack Compose in Android
-applications. It includes utilities and components to simplify Compose-based UI development.
-
-[Explore the source code](/drifter-compose)
-
-### drifter-integration
-
-The `drifter-integration` module offers integration points and connectors for third-party libraries
-and services commonly used in Android development. It allows you to seamlessly integrate your
-Android app with various services.
-
-[Explore the source code](/drifter-integration)
-
-### drifter-core
-
-The `drifter-core` module contains core functionality and utilities that are commonly used across
-Android projects. It provides a foundation for building robust Android applications.
-
-[Explore the source code](/drifter-core)
-
-### drifter-wallpaper
-
-The `drifter-wallpaper` module focuses on wallpaper-related features and tools for Android. It
-simplifies the development of live wallpapers and wallpaper-related functionalities.
-
-[Explore the source code](/drifter-wallpaper)
-
-### drifter-plugin
-
-The `drifter-plugin` module provides a Gradle plugin that can be used to enhance your Android
-project build process. It offers features such as code generation, resource management, and more.
-
-This Gradle plugin simplifies Unity integration for your project by providing two essential tasks:
-
-1. **BuildIl2CppTask**: Compiles and builds Il2Cpp for Unity integration.
-2. **UnityAssetSyncTask**: Synchronizes Unity exported assets for project preparation.
-
-[Explore the source code](/drifter-plugin)
-
 ## Find this repository useful? :heart:
 
 Show your appreciation by starring this project :star: and joining our community of _
@@ -120,14 +91,19 @@ _[stargazers](https://github.com/teogor/drifter/stargazers)__.
 Want to stay updated on my latest projects and contributions? Be sure to _
 _[follow me](https://github.com/teogor)__ on GitHub! 🤩
 
-# License
-
+## License
 ```xml
 Designed and developed by 2023 teogor (Teodor Grigor)
 
-  Licensed under the Apache License, Version 2.0 (the "License");you may not use this file except in compliance with the License.You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, softwaredistributed under the License is distributed on an "AS IS" BASIS,WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.See the License for the specific language governing permissions andlimitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```

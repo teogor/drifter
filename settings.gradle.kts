@@ -1,6 +1,7 @@
 pluginManagement {
-  includeBuild("${rootProject.projectDir}\\drifter-plugin") {
-    name = "drifter-gradle-plugin-test"
+  // TODO better way of testing and including plugin
+  includeBuild("${rootProject.projectDir}\\gradle-plugin") {
+    name = "drifter-plugin"
   }
   repositories {
     google()
@@ -23,18 +24,22 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "Drifter"
 
 // Demo Application
-include(":app")
-include(":module-unity")
+include(":demo:app")
+include(":demo:module-unity")
 
 // Drifter
-include(":drifter-bom")
-include(":drifter-common")
-include(":drifter-compose")
-include(":drifter-integration")
-include(":drifter-plugin")
-include(":drifter-wallpaper")
+include(":bom")
 include(":codegen")
-include(":ksp")
+include(":compiler")
+include(":compose")
+include(":core")
+include(":integration")
 include(":runtime")
+include(":wallpaper")
+
+// Plugin
+include(":gradle-plugin")
+
+// Unity
 include(":unity:common")
 include(":unity:v2022-3-7f1")

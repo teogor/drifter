@@ -1,0 +1,37 @@
+[
+  {
+    "module": "dev.teogor.drifter:drifter-unity",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "flag": "Alpha",
+      "versionQualifier": 1
+    },
+    "date": 1695696000,
+    "dependencies": [
+      {
+        "module": "dev.teogor.drifter:drifter-unity-common",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-unity-2022-3-7f1",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      }
+    ]
+  }
+]

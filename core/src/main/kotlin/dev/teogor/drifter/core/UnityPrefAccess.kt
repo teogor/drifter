@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-import dev.teogor.winds.api.ArtifactIdFormat
-import dev.teogor.winds.ktx.createVersion
+package dev.teogor.drifter.core
 
-plugins {
-  alias(libs.plugins.teogor.winds)
-}
-
-winds {
-  moduleMetadata {
-    artifactDescriptor {
-      name = "Unity"
-      version = createVersion(1, 0, 0) {
-        alphaRelease(1)
-      }
-      artifactIdFormat = ArtifactIdFormat.FULL
-    }
-
-    publishing {
-      enabled = false
-    }
-  }
-}
+@RequiresOptIn(
+  message = "This function interacts directly with Unity PlayerPrefs. Incorrect usage can lead to data corruption or security vulnerabilities.",
+)
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+annotation class UnityPrefAccess

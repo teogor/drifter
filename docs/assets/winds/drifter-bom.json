@@ -1,0 +1,248 @@
+[
+  {
+    "module": "dev.teogor.drifter:drifter-bom",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "flag": "Alpha",
+      "versionQualifier": 1
+    },
+    "date": 1695696000,
+    "dependencies": [
+      {
+        "module": "dev.teogor.drifter:drifter-codegen",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-bom",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-common",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-compose",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-integration",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-wallpaper",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-ksp",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-runtime",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-unity-common",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-unity-2022-3-7f1",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1695696000
+      }
+    ]
+  },
+  {
+    "module": "dev.teogor.drifter:drifter-bom",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "flag": "Alpha",
+      "versionQualifier": 2
+    },
+    "date": 1709078400,
+    "dependencies": [
+      {
+        "module": "dev.teogor.drifter:drifter-bom",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 2
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-codegen",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 2
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-ksp",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 2
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-compose",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 2
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-integration",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 2
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-runtime",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 2
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-wallpaper",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 2
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-unity-common",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-unity-2022-3-7f1",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 1
+        },
+        "date": 1709078400
+      },
+      {
+        "module": "dev.teogor.drifter:drifter-core",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 0,
+          "flag": "Alpha",
+          "versionQualifier": 2
+        },
+        "date": 1724150675
+      }
+    ]
+  }
+]
