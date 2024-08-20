@@ -109,8 +109,11 @@ private fun String.splitCamelCase(): String {
 private fun String.toTitleCase(): String {
   return this.split(" ").joinToString(" ") { word ->
     word.replaceFirstChar { char ->
-      if (char.isLowerCase()) char.titlecase(Locale.getDefault())
-      else char.toString()
+      if (char.isLowerCase()) {
+        char.titlecase(Locale.getDefault())
+      } else {
+        char.toString()
+      }
     }
   }
 }
