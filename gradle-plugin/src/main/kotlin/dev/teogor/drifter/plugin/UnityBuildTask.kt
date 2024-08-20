@@ -25,7 +25,7 @@ fun Project.unityBuildTask(
   commonExtension: CommonExtension<*, *, *, *, *, *>,
   unityOptions: UnityOptions,
 ) {
-  val buildIl2CppTask = project.tasks.getByName("buildIl2Cpp")
+  val unityNativeBuildTask = project.tasks.getByName(UnityNativeBuildTask.TASK_NAME)
 
   if (unityOptions.ndkPath.isEmpty()) {
     unityOptions.ndkPath = drifterUnityPathNdk ?: ""
@@ -59,11 +59,11 @@ fun Project.unityBuildTask(
     afterEvaluate {
       if (project(path).tasks.findByName("mergeDebugJniLibFolders") != null) {
         project(path).tasks.named("mergeDebugJniLibFolders").get()
-          .dependsOn(buildIl2CppTask)
+          .dependsOn(unityNativeBuildTask)
       }
       if (project(path).tasks.findByName("mergeReleaseJniLibFolders") != null) {
         project(path).tasks.named("mergeReleaseJniLibFolders").get()
-          .dependsOn(buildIl2CppTask)
+          .dependsOn(unityNativeBuildTask)
       }
     }
 

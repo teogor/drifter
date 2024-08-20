@@ -3,7 +3,7 @@
 ## Overview
 
 The Unity Integration Plugin simplifies the process of integrating Unity projects into your
-Gradle-based project. It provides two essential tasks: `BuildIl2CppTask`
+Gradle-based project. It provides two essential tasks: `UnityNativeBuildTask`
 and `RefreshUnityAssetsTask`. This guide explains how to use these tasks effectively.
 
 ## Prerequisites
@@ -31,37 +31,81 @@ To get started, add the Unity Integration Plugin to your `build.gradle` file:
     }
     ```
 
-## Using `BuildIl2CppTask`
+## Using `UnityNativeBuildTask`
 
 ### Purpose
 
-The `BuildIl2CppTask` automates the compilation and building of Il2Cpp for Unity integration. It
-enhances the efficiency of your development workflow by handling complex build processes.
+The `UnityNativeBuildTask` compiles and builds native code for Unity integration, managing
+architecture-specific binaries and output directories. It enhances the efficiency of your
+development workflow by automating the complex build processes required for Unity native code.
 
 ### Configuration
 
-To use `BuildIl2CppTask`, follow these steps:
+To use `UnityNativeBuildTask`, follow these steps:
 
 1. Configure Unity options in your `build.gradle` file:
 
 === "Groovy"
 
     ```groovy title="build.gradle"
-    unityOptions {
-        exportFolder = 'path/to/unity/export/folder'
-        libraryName = 'YourUnityLibrary'
-        // Add more configuration options as needed
+    android {
+        namespace = "dev.teogor.drifter.demo.module.unity"
+
+        unityOptions {
+            splashMode = 0
+            splashEnable = true
+            buildId = "ea574d1a-3365-44b3-9676-33bceabcf351"
+            notchConfig = "portrait|landscape"
+            version = "2022.3.7f1"
+
+            ndkVersion = "23.1.7779620"
+            ndkPath = getSafeDrifterUnityPathNdk()
+
+            platforms = [
+               PlatformArch.Arm64,
+               PlatformArch.Armv7
+            ]
+            configuration = Configuration.Release
+            streamingAssets.addAll(unityStreamingAssetsList)
+
+            exportedProjectLocation = getSafeDrifterUnityPathExport()
+            libraryName = 'YourUnityLibrary'
+        }
     }
     ```
 
 === "Kotlin"
 
     ```kotlin title="build.gradle.kts"
-    val unityOptions = mapOf(
-        "exportFolder" to "path/to/unity/export/folder",
-        "libraryName" to "YourUnityLibrary"
-        // Add more configuration options as needed
-    )
+    val unityStreamingAssets: String? by project
+    val unityStreamingAssetsList: List<String> = unityStreamingAssets?.split(",") ?: emptyList()
+
+    android {
+        namespace = "dev.teogor.drifter.demo.module.unity"
+
+        unityOptions(
+            androidConfig = this,
+        ) {
+            splashMode = 0
+            splashEnable = true
+            buildId = "ea574d1a-3365-44b3-9676-33bceabcf351"
+            notchConfig = "portrait|landscape"
+            version = "2022.3.7f1"
+
+            ndkVersion = "23.1.7779620"
+            ndkPath = getSafeDrifterUnityPathNdk()
+
+            platforms = listOf(
+              PlatformArch.Arm64,
+              PlatformArch.Armv7
+            )
+            configuration = Configuration.Release
+            streamingAssets += unityStreamingAssetsList
+
+            exportedProjectLocation = getSafeDrifterUnityPathExport()
+            libraryName = "YourUnityLibrary"
+        }
+    }
     ```
 
 2. Create the task and set Unity options:
@@ -69,19 +113,19 @@ To use `BuildIl2CppTask`, follow these steps:
 === "Groovy"
 
     ```groovy title="build.gradle"
-    createBuildIl2CppTask(unityOptions)
+    createUnityNativeBuildTask(unityOptions)
     ```
 
 === "Kotlin"
 
     ```kotlin title="build.gradle.kts"
-    createBuildIl2CppTask(unityOptions)
+    createUnityNativeBuildTask(unityOptions)
     ```
 
 3. Execute the task:
 
 ```shell
-./gradlew buildIl2Cpp
+./gradlew unityNativeBuild
 ```
 
 Here's a Kotlin code snippet for your `build.gradle` file that demonstrates the configuration and
@@ -97,11 +141,11 @@ usage:
         // Add more configuration options as needed
     )
 
-    // Create and set up the BuildIl2CppTask
-    createBuildIl2CppTask(unityOptions)
+    // Create and set up the UnityNativeBuildTask
+    createUnityNativeBuildTask(unityOptions)
 
-    // Execute the BuildIl2CppTask
-    tasks.named("buildIl2Cpp").configure {
+    // Execute the UnityNativeBuildTask
+    tasks.named("unityNativeBuild").configure {
         // Add any additional configuration or dependencies here if needed
         // For example:
         // dependsOn("someOtherTask")
@@ -113,7 +157,8 @@ usage:
 ### Purpose
 
 The `RefreshUnityAssetsTask` streamlines the synchronization and updating of Unity exported assets
-with your project. It prepares the project for Unity integration by updating essential folders.
+with your project. It prepares the project for Unity integration by updating essential folders and
+removing outdated content.
 
 ### Configuration
 
@@ -167,6 +212,6 @@ any issues or have feature requests, please don't hesitate to contribute or reac
 ## Quick References
 
 1. [Installation](#installation)
-2. [Using `BuildIl2CppTask`](#using-buildil2cpptask)
+2. [Using `UnityNativeBuildTask`](#using-unitynativebuildtask)
 3. [Using `RefreshUnityAssetsTask`](#using-refreshunityassetstask)
 4. [Conclusion](#conclusion)
