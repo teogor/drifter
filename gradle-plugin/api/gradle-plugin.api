@@ -155,6 +155,56 @@ public final class dev/teogor/drifter/plugin/models/UnityOptions {
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class dev/teogor/drifter/plugin/unity/BuildFingerprint {
+	public fun <init> (Ldev/teogor/drifter/plugin/unity/UnityVersion;Ljava/lang/String;Ljava/lang/String;II)V
+	public final fun component1 ()Ldev/teogor/drifter/plugin/unity/UnityVersion;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun copy (Ldev/teogor/drifter/plugin/unity/UnityVersion;Ljava/lang/String;Ljava/lang/String;II)Ldev/teogor/drifter/plugin/unity/BuildFingerprint;
+	public static synthetic fun copy$default (Ldev/teogor/drifter/plugin/unity/BuildFingerprint;Ldev/teogor/drifter/plugin/unity/UnityVersion;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/Object;)Ldev/teogor/drifter/plugin/unity/BuildFingerprint;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBuildType ()Ljava/lang/String;
+	public final fun getOptimizedFramePacing ()I
+	public final fun getScriptingBackend ()Ljava/lang/String;
+	public final fun getStripEngineCode ()I
+	public final fun getUnityVersion ()Ldev/teogor/drifter/plugin/unity/UnityVersion;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/plugin/unity/BuildFingerprintKt {
+	public static final fun readBuildFingerprint (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/teogor/drifter/plugin/unity/BuildFingerprint;
+	public static synthetic fun readBuildFingerprint$default (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ldev/teogor/drifter/plugin/unity/BuildFingerprint;
+}
+
+public final class dev/teogor/drifter/plugin/unity/UnityVersion {
+	public static final field Companion Ldev/teogor/drifter/plugin/unity/UnityVersion$Companion;
+	public fun <init> (IIILjava/lang/String;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (IIILjava/lang/String;)Ldev/teogor/drifter/plugin/unity/UnityVersion;
+	public static synthetic fun copy$default (Ldev/teogor/drifter/plugin/unity/UnityVersion;IIILjava/lang/String;ILjava/lang/Object;)Ldev/teogor/drifter/plugin/unity/UnityVersion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMajor ()I
+	public final fun getMinor ()I
+	public final fun getPatch ()Ljava/lang/String;
+	public final fun getYear ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/teogor/drifter/plugin/unity/UnityVersion$Companion {
+	public final fun parseString (Ljava/lang/String;)Ldev/teogor/drifter/plugin/unity/UnityVersion;
+}
+
+public final class dev/teogor/drifter/plugin/unity/UnityVersionKt {
+	public static final fun toUnityVersion (Ljava/lang/String;)Ldev/teogor/drifter/plugin/unity/UnityVersion;
+}
+
 public final class dev/teogor/drifter/plugin/utils/error/UnityOptionsNotInitializedException : java/lang/RuntimeException {
 	public fun <init> ()V
 }
