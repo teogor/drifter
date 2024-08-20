@@ -20,11 +20,20 @@ import com.android.build.api.dsl.CommonExtension
 import dev.teogor.drifter.plugin.models.UnityOptions
 import org.gradle.api.Project
 
+@OptIn(InternalDrifterApi::class)
 fun Project.unityBuildTask(
   commonExtension: CommonExtension<*, *, *, *, *, *>,
   unityOptions: UnityOptions,
 ) {
   val buildIl2CppTask = project.tasks.getByName("buildIl2Cpp")
+
+  if (unityOptions.ndkPath.isEmpty()) {
+    unityOptions.ndkPath = drifterUnityPathNdk ?: ""
+  }
+
+  if (unityOptions.exportedProjectLocation.isEmpty()) {
+    unityOptions.exportedProjectLocation = drifterUnityPathExport ?: ""
+  }
 
   commonExtension.apply {
     ndkVersion = unityOptions.ndkVersion
