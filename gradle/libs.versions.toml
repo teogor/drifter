@@ -4,48 +4,48 @@ androidDesugarJdkLibs = "2.0.4"
 
 # @todo-ceres required by id::ceres.android.application.compose
 androidxComposeCompiler = "1.5.8"
-androidxComposeBom = "2024.02.01"
+androidxComposeBom = "2024.06.00"
 
 # @todo-ceres required by id::ceres.android.application.firebase
-firebaseBom = "32.7.2"
-firebaseCrashlyticsPlugin = "2.9.9"
+firebaseBom = "33.1.2"
+firebaseCrashlyticsPlugin = "3.0.2"
 firebasePerfPlugin = "1.4.2"
 
 # @todo-ceres required by id::ceres.android.library
 junit4 = "4.13.2"
 
 # @todo-ceres required by id::ceres.android.hilt
-hilt = "2.50"
+hilt = "2.51.1"
 hiltExt = "1.2.0"
 
-teogor-winds = "1.0.0-beta03"
+teogor-winds = "1.0.2"
 teogor-ceres = "1.0.0-alpha04"
 
 # @todo-ceres required by id::ceres.*
-androidGradlePlugin = "8.2.2"
-gmsPlugin = "4.4.1"
+androidGradlePlugin = "8.5.2"
+gmsPlugin = "4.4.2"
 protobufPlugin = "0.9.4"
 
-api-validator = "0.14.0"
-annotation = "1.7.1"
-buildConfig = "3.1.0"
-core-ktx = "1.12.0"
+api-validator = "0.16.3"
+annotation = "1.8.2"
+buildConfig = "5.4.0"
+core-ktx = "1.13.1"
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
-lifecycle-runtime-ktx = "2.7.0"
-activity-compose = "1.8.2"
-compose-bom = "2024.02.01"
-appcompat = "1.6.1"
-kotlin = "1.9.22"
-ksp = "1.9.22-1.0.17"
-material = "1.11.0"
+androidx-test-ext-junit = "1.2.1"
+espresso-core = "3.6.1"
+lifecycle-runtime-ktx = "2.8.4"
+activity-compose = "1.9.1"
+compose-bom = "2024.06.00"
+appcompat = "1.7.0"
+kotlin = "2.0.10"
+ksp = "2.0.10-1.0.24"
+material = "1.12.0"
 startup-runtime = "1.2.0-alpha02"
-gson = "2.10.1"
-vanniktechMavenPlugin = "0.27.0"
-dokka = "1.9.10"
+gson = "2.11.0"
+vanniktechMavenPlugin = "0.29.0"
+dokka = "1.9.20"
 spotless = "6.25.0"
-kotlin-poet = "1.14.2"
+kotlin-poet = "1.18.1"
 
 [libraries]
 # @todo-ceres required by id::ceres.android.application
@@ -124,22 +124,12 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 # @todo-ceres required by id::ceres.*
 ceres-android-application = { id = "dev.teogor.ceres.android.application", version.ref = "teogor-ceres" }
 ceres-android-application-compose = { id = "dev.teogor.ceres.android.application.compose", version.ref = "teogor-ceres" }
-ceres-android-application-firebase = { id = "dev.teogor.ceres.android.application.firebase", version.ref = "teogor-ceres" }
-ceres-android-application-flavors = { id = "dev.teogor.ceres.android.application.flavors", version.ref = "teogor-ceres" }
-ceres-android-application-jacoco = { id = "dev.teogor.ceres.android.application.jacoco", version.ref = "teogor-ceres" }
-ceres-android-feature = { id = "dev.teogor.ceres.android.feature", version.ref = "teogor-ceres" }
-ceres-android-hilt = { id = "dev.teogor.ceres.android.hilt", version.ref = "teogor-ceres" }
 ceres-android-library = { id = "dev.teogor.ceres.android.library", version.ref = "teogor-ceres" }
 ceres-android-library-compose = { id = "dev.teogor.ceres.android.library.compose", version.ref = "teogor-ceres" }
-ceres-android-library-config = { id = "dev.teogor.ceres.android.library.config", version.ref = "teogor-ceres" }
-ceres-android-room = { id = "dev.teogor.ceres.android.room", version.ref = "teogor-ceres" }
-ceres-android-test = { id = "dev.teogor.ceres.android.test", version.ref = "teogor-ceres" }
-ceres-docs = { id = "dev.teogor.ceres.docs", version.ref = "teogor-ceres" }
 
-# @todo-ceres required by id::ceres.*
+jetbrains-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
-android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
@@ -150,3 +140,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 teogor-winds = { id = "dev.teogor.winds", version.ref = "teogor-winds" }
+teogor-drifter = { id = "dev.teogor.drifter", version = "0.0.0" }

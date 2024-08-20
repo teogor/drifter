@@ -1,9 +1,9 @@
-import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.winds.api.ArtifactIdFormat
 import dev.teogor.winds.api.License
 import dev.teogor.winds.api.NameFormat
 import dev.teogor.winds.api.Person
 import dev.teogor.winds.api.Scm
+import dev.teogor.winds.api.SonatypeHost
 import dev.teogor.winds.api.TicketSystem
 import dev.teogor.winds.ktx.createVersion
 import dev.teogor.winds.ktx.person
@@ -16,6 +16,7 @@ plugins {
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.jetbrains.kotlin.android) apply false
   alias(libs.plugins.kotlin.jvm) apply true
+  alias(libs.plugins.jetbrains.compose.compiler) apply false
 
   alias(libs.plugins.ceres.android.application) apply false
   alias(libs.plugins.ceres.android.application.compose) apply false
@@ -23,6 +24,7 @@ plugins {
   alias(libs.plugins.ceres.android.library.compose) apply false
 
   alias(libs.plugins.teogor.winds) apply true
+  alias(libs.plugins.teogor.drifter) apply false
 
   alias(libs.plugins.vanniktech.maven) apply true
   alias(libs.plugins.dokka) apply true
@@ -41,8 +43,9 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 winds {
-  windsFeatures {
+  features {
     mavenPublishing = true
+    docsGenerator = true
   }
 
   moduleMetadata {
@@ -91,11 +94,11 @@ winds {
     }
   }
 
-  publishingOptions {
-    publish = false
+  publishing {
+    enabled = false
     enablePublicationSigning = true
     optInForVanniktechPlugin = true
-    cascadePublish = true
+    cascade = true
     sonatypeHost = SonatypeHost.S01
   }
 
@@ -106,8 +109,8 @@ winds {
 
 val excludedModulesForWinds = listOf(
   ":drifter-plugin",
-  ":app",
-  ":module-unity",
+  ":demo:app",
+  ":demo:module-unity",
 )
 
 val ktlintVersion = "0.50.0"

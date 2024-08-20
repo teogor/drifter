@@ -22,15 +22,14 @@ import dev.teogor.drifter.plugin.unityOptions
 
 plugins {
   alias(libs.plugins.ceres.android.library)
-
-  id("dev.teogor.drifter")
+  alias(libs.plugins.teogor.drifter)
 }
 
 val unityStreamingAssets: String? by project
 val unityStreamingAssetsList: List<String> = unityStreamingAssets?.split(",") ?: emptyList()
 
 android {
-  namespace = "dev.teogor.drifter.demo.unity.library"
+  namespace = "dev.teogor.drifter.demo.module.unity"
 
   unityOptions(
     androidConfig = this,
@@ -45,8 +44,8 @@ android {
     ndkPath = getSafeDrifterUnityPathNdk()
 
     platforms = listOf(
-      PlatformArch("armeabi-v7a", "armv7"),
-      PlatformArch("arm64-v8a", "arm64"),
+      PlatformArch.Arm64,
+      PlatformArch.Armv7,
     )
     configuration = Configuration.Release
     streamingAssets += unityStreamingAssetsList
