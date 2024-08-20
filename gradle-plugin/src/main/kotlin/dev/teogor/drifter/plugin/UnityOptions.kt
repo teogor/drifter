@@ -36,7 +36,7 @@ fun Project.unityOptions(
     unityOptions = unityOptions,
   )
 
-  createBuildIl2CppTask(
+  createUnityNativeBuildTask(
     unityOptions = unityOptions,
   )
 
