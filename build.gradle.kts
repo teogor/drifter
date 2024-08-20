@@ -107,8 +107,9 @@ winds {
   }
 }
 
-val excludedModulesForWinds = listOf(
+val modulesByPath = listOf(
   ":drifter-plugin",
+  ":demo",
   ":demo:app",
   ":demo:module-unity",
 )
@@ -189,7 +190,7 @@ apiValidation {
 }
 
 subprojects {
-  if (!excludeModules.contains(this@subprojects.name)) {
+  if (!modulesByPath.contains(this@subprojects.path)) {
     apply<DokkaPlugin>()
   }
 }
