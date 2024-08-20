@@ -17,7 +17,9 @@
 package dev.teogor.drifter.plugin
 
 import com.android.build.api.dsl.CommonExtension
+import dev.teogor.drifter.plugin.models.Configuration
 import dev.teogor.drifter.plugin.models.UnityOptions
+import dev.teogor.drifter.plugin.unity.readBuildFingerprint
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
@@ -30,7 +32,11 @@ fun Project.unityOptions(
   androidConfig: CommonExtension<*, *, *, *, *, *>,
   configure: UnityOptions.() -> Unit,
 ) {
-  val unityOptions = UnityOptions().apply(configure)
+  val unityOptions = UnityOptions()
+    .apply(configure)
+    .let { parseBuildFingerprint(it) }
+
+  parseBuildFingerprint(unityOptions)
 
   androidConfig.applyUnityManifestPlaceholders(
     unityOptions = unityOptions,
@@ -54,4 +60,34 @@ fun Project.unityOptions(
       // add("api", project(":unity-wallpaper"))
     }
   }
+}
+
+/**
+ * Updates the given [UnityOptions] based on the build fingerprint read from a file.
+ *
+ * This function reads the build fingerprint file located at the root project directory
+ * and updates the `configuration` property of the provided [UnityOptions] instance
+ * based on the build type specified in the fingerprint.
+ *
+ * @param unityOptions The [UnityOptions] instance to be updated.
+ * @return The updated [UnityOptions] instance with configuration set according to the build fingerprint.
+ */
+private fun Project.parseBuildFingerprint(
+  unityOptions: UnityOptions,
+): UnityOptions {
+  val parsedFingerprint = readBuildFingerprint(
+    dirPath = projectDir.absolutePath,
+  )
+
+  if (parsedFingerprint != null) {
+    unityOptions.apply {
+      configuration = when (parsedFingerprint.buildType) {
+        "Release" -> Configuration.Release
+        "Debug" -> Configuration.Debug
+        else -> configuration
+      }
+    }
+  }
+
+  return unityOptions
 }

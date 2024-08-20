@@ -39,6 +39,7 @@ tasks.withType<KotlinCompile>().configureEach {
 dependencies {
   api(gradleApi())
 
+  compileOnly(libs.jetbrains.kotlinx.serialization.json)
   compileOnly(libs.android.gradlePlugin)
   compileOnly(libs.kotlin.gradlePlugin)
   compileOnly(libs.ksp.gradlePlugin)

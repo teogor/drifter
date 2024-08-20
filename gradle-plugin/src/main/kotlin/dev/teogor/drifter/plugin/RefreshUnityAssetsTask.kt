@@ -43,9 +43,7 @@ open class RefreshUnityAssetsTask : DefaultTask() {
     File(unityOptions.exportedProjectLocation)
   }
 
-  private val targetDir: File by lazy {
-    project.projectDir
-  }
+  private val targetDir: File by lazy { project.projectDir }
 
   init {
     group = "dev.teogor.drifter"
