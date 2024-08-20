@@ -56,6 +56,10 @@ public final class dev/teogor/drifter/plugin/UnityOptionsKt {
 	public static final fun unityOptions (Lorg/gradle/api/Project;Lcom/android/build/api/dsl/CommonExtension;Lkotlin/jvm/functions/Function1;)V
 }
 
+public final class dev/teogor/drifter/plugin/UnityOptionsNotInitializedException : java/lang/RuntimeException {
+	public fun <init> ()V
+}
+
 public final class dev/teogor/drifter/plugin/models/Configuration : java/lang/Enum {
 	public static final field Debug Ldev/teogor/drifter/plugin/models/Configuration;
 	public static final field Release Ldev/teogor/drifter/plugin/models/Configuration;

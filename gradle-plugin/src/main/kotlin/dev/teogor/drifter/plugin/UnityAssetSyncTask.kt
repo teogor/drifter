@@ -26,10 +26,11 @@ import java.io.File
 
 open class UnityAssetSyncTask : DefaultTask() {
 
-  private var unityOptions: UnityOptions? = null
+  private lateinit var unityOptions: UnityOptions
 
   private val sourceDir: File by lazy {
-    File(unityOptions!!.exportedProjectLocation)
+    checkInitialized()
+    File(unityOptions.exportedProjectLocation)
   }
 
   private val targetDir: File by lazy {
@@ -38,31 +39,26 @@ open class UnityAssetSyncTask : DefaultTask() {
 
   init {
     group = "dev.teogor.drifter"
-    description = "Sync Unity Exported Content"
+    description = "Synchronizes Unity exported content with the project's directory."
   }
 
   @TaskAction
   fun importContent() {
+    checkInitialized()
+
+    val options = unityOptions
+    val targetedUnityFolders = listOf(
+      "symbols",
+      "src/main/assets",
+      "src/main/Il2CppOutputProject",
+      "src/main/jniLibs",
+      "src/main/jniStaticLibs",
+      "src/main/resources/META-INF",
+    )
+
+    val unityModulePath = targetDir
+
     try {
-      if (unityOptions == null) {
-        // TODO: Consider making 'unityOptions' a global variable to handle null scenarios.
-        throw RuntimeException(
-          "An error occurred when trying to access 'unityOptions.' Please help us by reporting this issue at https://github.com/teogor/drifter/issues/new.",
-        )
-      }
-      val options = unityOptions!!
-
-      val targetedUnityFolders = listOf(
-        "symbols",
-        "src/main/assets",
-        "src/main/Il2CppOutputProject",
-        "src/main/jniLibs",
-        "src/main/jniStaticLibs",
-        "src/main/resources/META-INF",
-      )
-
-      val unityModulePath = targetDir
-
       // Delete the specified folders
       targetedUnityFolders.forEach { folderName ->
         val folder = File(unityModulePath, folderName)
@@ -94,7 +90,21 @@ open class UnityAssetSyncTask : DefaultTask() {
   fun setUnityOptions(unityOptions: UnityOptions) {
     this.unityOptions = unityOptions
   }
+
+  private fun checkInitialized() {
+    if (!::unityOptions.isInitialized) {
+      throw UnityOptionsNotInitializedException()
+    }
+  }
 }
+
+class UnityOptionsNotInitializedException : RuntimeException(
+  """
+  |UnityOptions is not initialized. Please call setUnityOptions() before using this task.
+  |
+  |To report this problem file an issue on GitHub: https://github.com/teogor/drifter/issues
+  """.trimMargin(),
+)
 
 fun Project.createUnityAssetSyncTask(
   unityOptions: UnityOptions,
