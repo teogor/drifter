@@ -14,11 +14,28 @@
  * limitations under the License.
  */
 
-package dev.teogor.drifter.codegen.commons
+package dev.teogor.drifter.codegen
 
 import com.squareup.kotlinpoet.ClassName
 
-val UnityMessageSender = ClassName(
-  "dev.teogor.drifter.common",
-  "UnityMessageSender",
-)
+/**
+ * Container for constants and utility objects related to the Drifter library.
+ */
+object DrifterConstants {
+
+  /**
+   * Contains constants related to Drifter's integration with Unity.
+   */
+  object UnityIntegration {
+
+    /**
+     * Represents the fully qualified class name of the `UnityMessageSender` class within the Drifter core library.
+     *
+     * This class is responsible for sending messages between Unity and the native side of the application.
+     */
+    val UnityMessageSender = ClassName(
+      "dev.teogor.drifter.core",
+      "UnityMessageSender",
+    )
+  }
+}

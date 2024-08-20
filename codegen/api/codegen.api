@@ -5,8 +5,13 @@ public final class dev/teogor/drifter/codegen/CodeGenerator : dev/teogor/drifter
 	public fun getCodeOutputStreamMaker ()Ldev/teogor/drifter/codegen/facades/CodeOutputStreamMaker;
 }
 
-public final class dev/teogor/drifter/codegen/commons/ConstantsKt {
-	public static final fun getUnityMessageSender ()Lcom/squareup/kotlinpoet/ClassName;
+public final class dev/teogor/drifter/codegen/DrifterConstants {
+	public static final field INSTANCE Ldev/teogor/drifter/codegen/DrifterConstants;
+}
+
+public final class dev/teogor/drifter/codegen/DrifterConstants$UnityIntegration {
+	public static final field INSTANCE Ldev/teogor/drifter/codegen/DrifterConstants$UnityIntegration;
+	public final fun getUnityMessageSender ()Lcom/squareup/kotlinpoet/ClassName;
 }
 
 public final class dev/teogor/drifter/codegen/commons/UtilsKt {

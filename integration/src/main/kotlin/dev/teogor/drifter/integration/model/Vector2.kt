@@ -19,6 +19,7 @@ package dev.teogor.drifter.integration.model
 import android.view.MotionEvent
 import dev.teogor.drifter.integration.core.Message
 
+@Suppress("unused")
 class Vector2(
   val x: Float,
   val y: Float,

@@ -20,14 +20,21 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Point
-import android.preference.PreferenceManager
+import android.service.wallpaper.WallpaperService
+import androidx.preference.PreferenceManager
 import dev.teogor.drifter.integration.player.UnityPlayerInstanceManager
 import dev.teogor.drifter.integration.utilities.MultiTapDetector
 import dev.teogor.drifter.wallpaper.UnityWallpaperService.UnityWallpaperEngine
 import dev.teogor.drifter.wallpaper.activities.LiveWallpaperCompatibleUnityPlayerActivity
 
 /**
- * Central class for communicating with Unity C# side. All interactions to and from C# side are done here.
+ * Central class for interacting with Unity from the wallpaper service.
+ *
+ * This class provides access to various functionalities required for communication
+ * with the Unity C# side of the application, including managing preferences and
+ * interacting with the wallpaper engine.
+ *
+ * @property applicationContext The application context used for various operations.
  */
 class LiveWallpaperUnityFacade private constructor(
   /**
@@ -39,49 +46,41 @@ class LiveWallpaperUnityFacade private constructor(
 ) {
 
   /**
+   * Provides access to shared preferences for editing and retrieval.
+   *
    * Note: Called from C# code.
    *
-   * @return Instance of `LiveWallpaperUnityFacade.PreferenceEditorFacade`.
+   * @return Instance of [PreferenceEditorFacade].
    */
-  val preferencesEditorFacade: LiveWallpaperUnityFacade.PreferenceEditorFacade
+  val preferencesEditorFacade: PreferenceEditorFacade = PreferenceEditorFacade()
 
   /**
+   * Provides access to the current wallpaper engine state.
+   *
    * Note: Called from C# code.
    *
-   * @return Instance of `LiveWallpaperUnityFacade.WallpaperEngineFacade`.
+   * @return Instance of [WallpaperEngineFacade].
    */
-  val wallpaperEngineFacade: LiveWallpaperUnityFacade.WallpaperEngineFacade
+  val wallpaperEngineFacade: WallpaperEngineFacade = WallpaperEngineFacade()
 
   /**
+   * Detects multi-tap gestures within the wallpaper area.
+   *
    * Note: Called from C# code.
    *
-   * @return Instance of `MultiTapDetector`.
+   * @return Instance of [MultiTapDetector].
    */
   val multiTapDetector = MultiTapDetector(Point(0, 0))
+
   /**
-   * @return Currently active `UnityWallpaperService.UnityWallpaperEngine`, or null if none is active.
-   */
-  /**
-   * Sets the currently  active `UnityWallpaperService.UnityWallpaperEngine`.
-   *
-   * @param activeWallpaperEngine Currently active `UnityWallpaperService.UnityWallpaperEngine`.
-   */
-  /**
-   * Currently active `UnityWallpaperService.UnityWallpaperEngine`, or null if none is active.
+   * The currently active wallpaper engine, or `null` if no engine is active.
    */
   var activeWallpaperEngine: UnityWallpaperEngine? = null
 
   /**
-   * @param context Application Context.
-   */
-  init {
-    preferencesEditorFacade = PreferenceEditorFacade()
-    wallpaperEngineFacade = WallpaperEngineFacade()
-  }
-
-  /**
-   * Updates the current Context of the `LiveWallpaperCompatibleUnityPlayerActivity`
-   * to allow using soft input.
+   * Updates the context of [LiveWallpaperCompatibleUnityPlayerActivity] to allow
+   * using soft input.
+   *
    * Note: Called from C# code.
    */
   fun updateUnityPlayerActivityContext() {
@@ -89,33 +88,40 @@ class LiveWallpaperUnityFacade private constructor(
   }
 
   /**
-   * Provides safe access to current `WallpaperService.Engine` methods.
+   * Provides safe access to current [WallpaperService.Engine] methods.
    */
   inner class WallpaperEngineFacade {
+    /**
+     * Indicates whether the wallpaper engine is currently visible.
+     *
+     * @return `true` if the engine is visible, `false` otherwise.
+     */
     val isVisible: Boolean
-      get() = if (activeWallpaperEngine == null) false else activeWallpaperEngine!!.isVisible
+      get() = activeWallpaperEngine?.isVisible ?: false
+
+    /**
+     * Indicates whether the wallpaper engine is in preview mode.
+     *
+     * @return `true` if the engine is in preview mode, `false` otherwise.
+     */
     val isPreview: Boolean
-      get() = if (activeWallpaperEngine == null) false else activeWallpaperEngine!!.isPreview
+      get() = activeWallpaperEngine?.isPreview ?: false
   }
 
   /**
-   * Provides safe access to `SharedPreferences` read/write operations.
+   * Provides safe access to shared preferences read/write operations.
    */
   inner class PreferenceEditorFacade {
-    private val mDefaultSharedPreferences: SharedPreferences
+    private val mDefaultSharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+      applicationContext,
+    )
     private var mCurrentPreferencesEditor: SharedPreferences.Editor? = null
 
-    init {
-      mDefaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(
-        applicationContext,
-      )
-    }
-
     /**
-     * Commit your preferences changes back from this Editor to the
-     * [SharedPreferences] object it is editing.  This atomically
-     * performs the requested modifications, replacing whatever is currently
-     * in the SharedPreferences.
+     * Begins editing the shared preferences. Changes are not committed until
+     * [finishEditing] is called.
+     *
+     * @return `true` if editing has started successfully, `false` otherwise.
      */
     @SuppressLint("CommitPrefEdits")
     fun startEditing(): Boolean {
@@ -125,237 +131,229 @@ class LiveWallpaperUnityFacade private constructor(
     }
 
     /**
-     * Commit your preferences changes back from this Editor to the
-     * [SharedPreferences] object it is editing.  This atomically
-     * performs the requested modifications, replacing whatever is currently
-     * in the SharedPreferences.
+     * Commits changes made during editing to the shared preferences.
+     *
+     * @return `true` if changes were committed successfully, `false` otherwise.
      */
     fun finishEditing(): Boolean {
       if (mCurrentPreferencesEditor == null) return false
-      mCurrentPreferencesEditor!!.apply()
+      mCurrentPreferencesEditor?.apply()
       mCurrentPreferencesEditor = null
       return true
     }
 
     /**
-     * Checks whether the preferences contains a preference.
+     * Checks if the shared preferences contain a specific key.
      *
      * @param key The name of the preference to check.
-     * @return Returns true if the preference exists in the preferences, otherwise false.
+     * @return `true` if the preference exists, `false` otherwise.
      */
     fun hasKey(key: String?): Boolean {
       return mDefaultSharedPreferences.contains(key)
     }
 
     /**
-     * Retrieve a String value from the preferences.
+     * Retrieves a String value from the shared preferences.
      *
-     * @param key      The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * a String.
-     * @throws ClassCastException
+     * @param key The name of the preference to retrieve.
+     * @param defValue Value to return if the preference does not exist.
+     * @return The preference value if it exists, otherwise `defValue`.
+     * @throws ClassCastException If there is a preference with this name that is not a String.
      */
     fun getString(key: String?, defValue: String?): String? {
       return mDefaultSharedPreferences.getString(key, defValue)
     }
+
     /**
-     * Retrieve a set of String values from the preferences.
+     * Retrieves a set of String values from the shared preferences.
      *
-     *
-     * Note that you *must not* modify the set instance returned
-     * by this call.  The consistency of the stored data is not guaranteed
-     * if you do, nor is your ability to modify the instance at all.
+     * Note that the returned set should not be modified.
      *
      * @param key The name of the preference to retrieve.
      * @param defValues Values to return if this preference does not exist.
-     *
-     * @return Returns the preference values if they exist, or defValues.
-     * Throws ClassCastException if there is a preference with this name
-     * that is not a Set.
-     *
-     * @throws ClassCastException
+     * @return The set of preference values if they exist, otherwise `defValues`.
+     * @throws ClassCastException If there is a preference with this name that is not a Set.
      */
-    // @Nullable
-    // Set<String> getStringSet(String key, @Nullable Set<String> defValues);
+    fun getStringSet(key: String, defValues: Set<String>? = null): Set<String>? {
+      return mDefaultSharedPreferences.getStringSet(key, defValues)
+    }
+
     /**
-     * Retrieve an int value from the preferences.
+     * Retrieves an int value from the shared preferences.
      *
-     * @param key      The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * an int.
-     * @throws ClassCastException
+     * @param key The name of the preference to retrieve.
+     * @param defValue Value to return if the preference does not exist.
+     * @return The preference value if it exists, otherwise `defValue`.
+     * @throws ClassCastException If there is a preference with this name that is not an int.
      */
     fun getInt(key: String?, defValue: Int): Int {
       return mDefaultSharedPreferences.getInt(key, defValue)
     }
 
     /**
-     * Retrieve a long value from the preferences.
+     * Retrieves a long value from the shared preferences.
      *
-     * @param key      The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * a long.
-     * @throws ClassCastException
+     * @param key The name of the preference to retrieve.
+     * @param defValue Value to return if the preference does not exist.
+     * @return The preference value if it exists, otherwise `defValue`.
+     * @throws ClassCastException If there is a preference with this name that is not a long.
      */
     fun getLong(key: String?, defValue: Long): Long {
       return mDefaultSharedPreferences.getLong(key, defValue)
     }
 
     /**
-     * Retrieve a float value from the preferences.
+     * Retrieves a float value from the shared preferences.
      *
-     * @param key      The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * a float.
-     * @throws ClassCastException
+     * @param key The name of the preference to retrieve.
+     * @param defValue Value to return if the preference does not exist.
+     * @return The preference value if it exists, otherwise `defValue`.
+     * @throws ClassCastException If there is a preference with this name that is not a float.
      */
     fun getFloat(key: String?, defValue: Float): Float {
       return mDefaultSharedPreferences.getFloat(key, defValue)
     }
 
     /**
-     * Retrieve a boolean value from the preferences.
+     * Retrieves a boolean value from the shared preferences.
      *
-     * @param key      The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * a boolean.
-     * @throws ClassCastException
+     * @param key The name of the preference to retrieve.
+     * @param defValue Value to return if the preference does not exist.
+     * @return The preference value if it exists, otherwise `defValue`.
+     * @throws ClassCastException If there is a preference with this name that is not a boolean.
      */
     fun getBoolean(key: String?, defValue: Boolean): Boolean {
       return mDefaultSharedPreferences.getBoolean(key, defValue)
     }
 
     /**
-     * Set a String value in the preferences.
+     * Sets a String value in the shared preferences.
      *
-     * @param key   The name of the preference to modify.
+     * @param key The name of the preference to modify.
      * @param value The new value for the preference.
-     * @return true if editing has started and operation succeeded, false otherwise.
+     * @return `true` if the value was set successfully, `false` otherwise.
      */
     fun putString(key: String?, value: String?): Boolean {
       if (mCurrentPreferencesEditor == null) return false
-      mCurrentPreferencesEditor!!.putString(key, value)
+      mCurrentPreferencesEditor?.putString(key, value)
       return true
     }
+
     /**
-     * Set a set of String values in the preferences.
+     * Sets a set of String values in the shared preferences.
      *
      * @param key The name of the preference to modify.
-     * @param values The set of new values for the preference.  Passing `null`
-     * for this argument is equivalent to calling [.remove] with
-     * this key.
-     * @return true if editing has started and operation succeeded, false otherwise.
+     * @param values The set of new values for the preference. Passing `null` is equivalent to calling
+     * [.remove] with this key.
+     * @return `true` if the values were set successfully, `false` otherwise.
      */
-    // Editor putStringSet(String key, @Nullable Set<String> values);
+    fun putStringSet(key: String, values: Set<String>?): Boolean {
+      mCurrentPreferencesEditor?.putStringSet(key, values)
+      return true
+    }
+
     /**
-     * Set an int value in the preferences.
+     * Sets an int value in the shared preferences.
      *
-     * @param key   The name of the preference to modify.
+     * @param key The name of the preference to modify.
      * @param value The new value for the preference.
-     * @return true if editing has started and operation succeeded, false otherwise.
+     * @return `true` if the value was set successfully, `false` otherwise.
      */
     fun putInt(key: String?, value: Int): Boolean {
       if (mCurrentPreferencesEditor == null) return false
-      mCurrentPreferencesEditor!!.putInt(key, value)
+      mCurrentPreferencesEditor?.putInt(key, value)
       return true
     }
 
     /**
-     * Set a long value in the preferences
+     * Sets a long value in the shared preferences.
      *
-     * @param key   The name of the preference to modify.
+     * @param key The name of the preference to modify.
      * @param value The new value for the preference.
-     * @return true if editing has started and operation succeeded, false otherwise.
+     * @return `true` if the value was set successfully, `false` otherwise.
      */
     fun putLong(key: String?, value: Long): Boolean {
       if (mCurrentPreferencesEditor == null) return false
-      mCurrentPreferencesEditor!!.putLong(key, value)
+      mCurrentPreferencesEditor?.putLong(key, value)
       return true
     }
 
     /**
-     * Set a float value in the preferences.
+     * Sets a float value in the shared preferences.
      *
-     * @param key   The name of the preference to modify.
+     * @param key The name of the preference to modify.
      * @param value The new value for the preference.
-     * @return true if editing has started and operation succeeded, false otherwise.
+     * @return `true` if the value was set successfully, `false` otherwise.
      */
     fun putFloat(key: String?, value: Float): Boolean {
       if (mCurrentPreferencesEditor == null) return false
-      mCurrentPreferencesEditor!!.putFloat(key, value)
+      mCurrentPreferencesEditor?.putFloat(key, value)
       return true
     }
 
     /**
-     * Set a boolean value in the preferences.
+     * Sets a boolean value in the shared preferences.
      *
-     * @param key   The name of the preference to modify.
+     * @param key The name of the preference to modify.
      * @param value The new value for the preference.
-     * @return true if editing has started and operation succeeded, false otherwise.
+     * @return `true` if the value was set successfully, `false` otherwise.
      */
     fun putBoolean(key: String?, value: Boolean): Boolean {
       if (mCurrentPreferencesEditor == null) return false
-      mCurrentPreferencesEditor!!.putBoolean(key, value)
+      mCurrentPreferencesEditor?.putBoolean(key, value)
       return true
     }
 
     /**
-     * Remove value from the preferences.
+     * Removes a preference from the shared preferences.
      *
      * @param key The name of the preference to remove.
-     * @return true if editing has started and operation succeeded, false otherwise.
+     * @return `true` if the value was removed successfully, `false` otherwise.
      */
     fun remove(key: String?): Boolean {
       if (mCurrentPreferencesEditor == null) return false
-      mCurrentPreferencesEditor!!.remove(key)
+      mCurrentPreferencesEditor?.remove(key)
       return true
     }
 
     /**
-     * Remove all values from the preferences.
+     * Clears all preferences from the shared preferences.
      *
-     * @return true if editing has started and operation succeeded, false otherwise.
+     * @return `true` if all values were removed successfully, `false` otherwise.
      */
     fun clear(): Boolean {
       if (mCurrentPreferencesEditor == null) return false
-      mCurrentPreferencesEditor!!.clear()
+      mCurrentPreferencesEditor?.clear()
       return true
     }
   }
 
   companion object {
     /**
+     * Provides access to Unity events.
+     *
      * Note: Called from C# code.
      *
-     * @return Instance of `UnityEventsProxy`.
+     * @return Instance of [UnityEventsProxy].
      */
     val eventsProxy = UnityEventsProxy()
 
-    private var liveWallpaperUnityFacadeInstance: LiveWallpaperUnityFacade? =
-      null
+    private var liveWallpaperUnityFacadeInstance: LiveWallpaperUnityFacade? = null
 
-    val instance: LiveWallpaperUnityFacade? by lazy(
-      LazyThreadSafetyMode.SYNCHRONIZED,
-    ) {
-      if (liveWallpaperUnityFacadeInstance == null) {
-        UnityPlayerInstanceManager.instance.unityPlayerWrapperInstance
-          ?.let { unityPlayerWrapper ->
-            val applicationContext = unityPlayerWrapper.applicationContext
-            liveWallpaperUnityFacadeInstance =
-              LiveWallpaperUnityFacade(applicationContext)
-          }
+    /**
+     * Provides the singleton instance of [LiveWallpaperUnityFacade].
+     *
+     * Initializes the instance if it has not been created yet using
+     * [UnityPlayerInstanceManager].
+     *
+     * @return Singleton instance of [LiveWallpaperUnityFacade].
+     */
+    val instance: LiveWallpaperUnityFacade? by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+      liveWallpaperUnityFacadeInstance ?: UnityPlayerInstanceManager.instance.unityPlayerWrapperInstance?.let { unityPlayerWrapper ->
+        LiveWallpaperUnityFacade(unityPlayerWrapper.applicationContext).also {
+          liveWallpaperUnityFacadeInstance = it
+        }
       }
-      liveWallpaperUnityFacadeInstance
     }
   }
 }

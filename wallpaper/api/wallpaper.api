@@ -41,12 +41,15 @@ public final class dev/teogor/drifter/wallpaper/LiveWallpaperUnityFacade$Prefere
 	public final fun getInt (Ljava/lang/String;I)I
 	public final fun getLong (Ljava/lang/String;J)J
 	public final fun getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public final fun getStringSet (Ljava/lang/String;Ljava/util/Set;)Ljava/util/Set;
+	public static synthetic fun getStringSet$default (Ldev/teogor/drifter/wallpaper/LiveWallpaperUnityFacade$PreferenceEditorFacade;Ljava/lang/String;Ljava/util/Set;ILjava/lang/Object;)Ljava/util/Set;
 	public final fun hasKey (Ljava/lang/String;)Z
 	public final fun putBoolean (Ljava/lang/String;Z)Z
 	public final fun putFloat (Ljava/lang/String;F)Z
 	public final fun putInt (Ljava/lang/String;I)Z
 	public final fun putLong (Ljava/lang/String;J)Z
 	public final fun putString (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun putStringSet (Ljava/lang/String;Ljava/util/Set;)Z
 	public final fun remove (Ljava/lang/String;)Z
 	public final fun startEditing ()Z
 }

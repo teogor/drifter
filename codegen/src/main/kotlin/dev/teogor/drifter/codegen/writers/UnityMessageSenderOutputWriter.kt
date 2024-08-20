@@ -22,7 +22,7 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
-import dev.teogor.drifter.codegen.commons.UnityMessageSender
+import dev.teogor.drifter.codegen.DrifterConstants
 import dev.teogor.drifter.codegen.commons.fileBuilder
 import dev.teogor.drifter.codegen.commons.safe
 import dev.teogor.drifter.codegen.commons.toTitleCase
@@ -49,7 +49,7 @@ class UnityMessageSenderOutputWriter(
     ) {
       addType(
         TypeSpec.classBuilder(name)
-          .superclass(UnityMessageSender)
+          .superclass(DrifterConstants.UnityIntegration.UnityMessageSender)
           .addSuperclassConstructorParameter(
             "receiver = %S",
             actionBridge.receiverGameObject,

@@ -79,7 +79,7 @@ class UnityVersionInfo private constructor(
         )
       ) {
         try {
-          val unityVersion = applicationInfo.metaData[metaDataName] as String?
+          val unityVersion = applicationInfo.metaData.getString(metaDataName)
           instance = UnityVersionInfo(unityVersion)
           return
         } catch (th: Throwable) {
