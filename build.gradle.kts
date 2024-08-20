@@ -116,11 +116,18 @@ val modulesByPath = listOf(
 
 val ktlintVersion = "0.50.0"
 
-val excludeModules = listOf(
-  project.name,
-  "app",
-  "module-unity",
-)
+val isCI = System.getenv("CI") != null
+val excludeModules = if (!isCI) {
+  listOf(
+    project.name,
+    "app",
+    "module-unity",
+  )
+} else {
+  listOf(
+    project.name,
+  )
+}
 
 subprojects {
   if (!excludeModules.contains(this.name)) {

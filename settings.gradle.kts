@@ -23,9 +23,12 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Drifter"
 
-// Demo Application
-include(":demo:app")
-include(":demo:module-unity")
+val isCI = System.getenv("CI") != null
+if (!isCI) {
+  // Demo Application
+  include(":demo:app")
+  include(":demo:module-unity")
+}
 
 // Drifter
 include(":bom")
