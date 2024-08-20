@@ -19,6 +19,8 @@ nav:
   - Home:
     - Overview: index.md
     - Unity Engine Composable: unity-engine-jetpack-compose.md
+    - Unity Compatibility: unity-compatibility.md
+    - Plugin Usage Guide: plugin-usage-guide.md
   - Releases:
     - releases.md
     - Implementation: releases/implementation.md
