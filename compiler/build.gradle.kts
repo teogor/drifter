@@ -14,25 +14,40 @@
  * limitations under the License.
  */
 
-import dev.teogor.winds.api.ArtifactIdFormat
-import dev.teogor.winds.ktx.createVersion
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
+  alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.teogor.winds)
+}
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+  compilerOptions {
+    freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+    jvmTarget = JvmTarget.JVM_11
+  }
+}
+
+dependencies {
+  api(projects.runtime)
+  implementation(projects.codegen)
+
+  implementation(libs.ksp.api)
 }
 
 winds {
   moduleMetadata {
     artifactDescriptor {
-      name = "Unity"
-      version = createVersion(1, 0, 0) {
-        alphaRelease(1)
-      }
-      artifactIdFormat = ArtifactIdFormat.FULL
+      name = "KSP"
     }
+  }
 
-    publishing {
-      enabled = false
-    }
+  documentationBuilder {
+    isCompiler = true
   }
 }

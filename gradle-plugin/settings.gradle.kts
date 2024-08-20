@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
-import dev.teogor.winds.api.ArtifactIdFormat
-import dev.teogor.winds.ktx.createVersion
-
-plugins {
-  alias(libs.plugins.teogor.winds)
+pluginManagement {
+  repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+  }
 }
 
-winds {
-  moduleMetadata {
-    artifactDescriptor {
-      name = "Unity"
-      version = createVersion(1, 0, 0) {
-        alphaRelease(1)
-      }
-      artifactIdFormat = ArtifactIdFormat.FULL
-    }
+@Suppress("UnstableApiUsage")
+dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositories {
+    google()
+    mavenCentral()
+  }
 
-    publishing {
-      enabled = false
+  versionCatalogs {
+    create("libs") {
+      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
     }
   }
 }
+
+rootProject.name = "gradle-plugin"

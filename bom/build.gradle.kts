@@ -23,16 +23,15 @@ plugins {
 
 winds {
   moduleMetadata {
-    artifactDescriptor {
-      name = "Unity"
-      version = createVersion(1, 0, 0) {
-        alphaRelease(1)
-      }
-      artifactIdFormat = ArtifactIdFormat.FULL
-    }
+    isBom = true
 
-    publishing {
-      enabled = false
+    artifactDescriptor {
+      name = "BoM"
+      artifactIdFormat = ArtifactIdFormat.MODULE_NAME_ONLY
+
+      version = createVersion(1, 0, 0) {
+        alphaRelease(2)
+      }
     }
   }
 }

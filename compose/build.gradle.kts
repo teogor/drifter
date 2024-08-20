@@ -16,14 +16,18 @@
 
 plugins {
   alias(libs.plugins.ceres.android.library)
+  alias(libs.plugins.ceres.android.library.compose)
+  alias(libs.plugins.jetbrains.compose.compiler)
   alias(libs.plugins.teogor.winds)
 }
 
 android {
-  namespace = "dev.teogor.drifter.unity.v2022.x3.x7f1"
+  namespace = "dev.teogor.drifter.compose"
 
   defaultConfig {
-    consumerProguardFiles("proguard-unity.txt")
+
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes {
@@ -38,16 +42,26 @@ android {
 }
 
 dependencies {
-  api(files("libs/unity-classes.jar"))
-  api(projects.unity.common)
+  implementation(platform(libs.ceres.bom))
+  api(libs.ceres.core.common)
 
-  implementation(libs.androidx.annotation)
+  implementation(projects.unity.common)
+  implementation(projects.integration)
+  implementation(projects.wallpaper)
+
+  implementation(platform(libs.compose.bom))
+  implementation(libs.ui)
+  implementation(libs.ui.graphics)
+  implementation(libs.ui.tooling.preview)
+  implementation(libs.androidx.foundation.layout.android)
+
+  implementation(libs.lifecycle.runtime.ktx)
 }
 
 winds {
   moduleMetadata {
     artifactDescriptor {
-      name = "2022-3-7f1"
+      name = "Compose"
     }
   }
 }

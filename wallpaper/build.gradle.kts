@@ -20,10 +20,11 @@ plugins {
 }
 
 android {
-  namespace = "dev.teogor.drifter.unity.v2022.x3.x7f1"
+  namespace = "dev.teogor.drifter.wallpaper"
 
   defaultConfig {
-    consumerProguardFiles("proguard-unity.txt")
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes {
@@ -35,19 +36,24 @@ android {
       )
     }
   }
+
+  buildFeatures {
+    buildConfig = true
+  }
 }
 
 dependencies {
-  api(files("libs/unity-classes.jar"))
-  api(projects.unity.common)
+  implementation(projects.integration)
 
-  implementation(libs.androidx.annotation)
+  implementation(libs.appcompat)
+  implementation(libs.androidx.startup.runtime)
+  implementation(libs.gson)
 }
 
 winds {
   moduleMetadata {
     artifactDescriptor {
-      name = "2022-3-7f1"
+      name = "Wallpaper"
     }
   }
 }
