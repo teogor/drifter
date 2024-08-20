@@ -2,7 +2,9 @@
 
 ## Overview
 
-The Unity Integration Plugin simplifies the process of integrating Unity projects into your Gradle-based project. It provides two essential tasks: `BuildIl2CppTask` and `UnityAssetSyncTask`. This guide explains how to use these tasks effectively.
+The Unity Integration Plugin simplifies the process of integrating Unity projects into your
+Gradle-based project. It provides two essential tasks: `BuildIl2CppTask`
+and `RefreshUnityAssetsTask`. This guide explains how to use these tasks effectively.
 
 ## Prerequisites
 
@@ -33,7 +35,8 @@ To get started, add the Unity Integration Plugin to your `build.gradle` file:
 
 ### Purpose
 
-The `BuildIl2CppTask` automates the compilation and building of Il2Cpp for Unity integration. It enhances the efficiency of your development workflow by handling complex build processes.
+The `BuildIl2CppTask` automates the compilation and building of Il2Cpp for Unity integration. It
+enhances the efficiency of your development workflow by handling complex build processes.
 
 ### Configuration
 
@@ -81,7 +84,8 @@ To use `BuildIl2CppTask`, follow these steps:
 ./gradlew buildIl2Cpp
 ```
 
-Here's a Kotlin code snippet for your `build.gradle` file that demonstrates the configuration and usage:
+Here's a Kotlin code snippet for your `build.gradle` file that demonstrates the configuration and
+usage:
 
 === "Kotlin"
 
@@ -104,15 +108,16 @@ Here's a Kotlin code snippet for your `build.gradle` file that demonstrates the 
     }
     ```
 
-### Using `UnityAssetSyncTask`
+## Using `RefreshUnityAssetsTask`
 
 ### Purpose
 
-The `UnityAssetSyncTask` streamlines the synchronization of Unity exported assets with your project. It prepares the project for Unity integration by copying essential folders.
+The `RefreshUnityAssetsTask` streamlines the synchronization and updating of Unity exported assets
+with your project. It prepares the project for Unity integration by updating essential folders.
 
 ### Configuration
 
-To use `UnityAssetSyncTask`, follow these steps:
+To use `RefreshUnityAssetsTask`, follow these steps:
 
 1. Configure Unity options in your `build.gradle` file (if not already done).
 
@@ -121,31 +126,32 @@ To use `UnityAssetSyncTask`, follow these steps:
 === "Groovy"
 
     ```groovy title="build.gradle"
-    createUnityAssetSyncTask(unityOptions)
+    createRefreshUnityAssetsTask(unityOptions)
     ```
 
 === "Kotlin"
 
     ```kotlin title="build.gradle.kts"
-    createUnityAssetSyncTask(unityOptions)
+    createRefreshUnityAssetsTask(unityOptions)
     ```
 
 3. Execute the task:
 
 ```shell
-./gradlew syncUnityAssets
+./gradlew refreshUnityAssets
 ```
 
-Here's a Kotlin code snippet for your `build.gradle` file that demonstrates the configuration and usage:
+Here's a Kotlin code snippet for your `build.gradle` file that demonstrates the configuration and
+usage:
 
 === "Kotlin"
 
     ```kotlin title="build.gradle.kts"
-    // Create and set up the UnityAssetSyncTask
-    createUnityAssetSyncTask(unityOptions)
+    // Create and set up the RefreshUnityAssetsTask
+    createRefreshUnityAssetsTask(unityOptions)
 
-    // Execute the UnityAssetSyncTask
-    tasks.named("syncUnityAssets").configure {
+    // Execute the RefreshUnityAssetsTask
+    tasks.named("refreshUnityAssets").configure {
         // Add any additional configuration or dependencies here if needed
         // For example:
         // dependsOn("anotherTask")
@@ -154,11 +160,13 @@ Here's a Kotlin code snippet for your `build.gradle` file that demonstrates the 
 
 ## Conclusion
 
-With the Unity Integration Plugin, you can seamlessly integrate Unity projects into your Gradle-based project, enhancing the development process and ensuring consistency. If you encounter any issues or have feature requests, please don't hesitate to contribute or reach out for support.
+With the Unity Integration Plugin, you can seamlessly integrate Unity projects into your
+Gradle-based project, enhancing the development process and ensuring consistency. If you encounter
+any issues or have feature requests, please don't hesitate to contribute or reach out for support.
 
 ## Quick References
 
 1. [Installation](#installation)
 2. [Using `BuildIl2CppTask`](#using-buildil2cpptask)
-3. [Using `UnityAssetSyncTask`](#using-unityassetsynctask)
+3. [Using `RefreshUnityAssetsTask`](#using-refreshunityassetstask)
 4. [Conclusion](#conclusion)

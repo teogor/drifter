@@ -39,17 +39,22 @@ public final class dev/teogor/drifter/plugin/FolderDeletionException : java/lang
 public abstract interface annotation class dev/teogor/drifter/plugin/InternalDrifterApi : java/lang/annotation/Annotation {
 }
 
-public class dev/teogor/drifter/plugin/UnityAssetSyncTask : org/gradle/api/DefaultTask {
+public class dev/teogor/drifter/plugin/RefreshUnityAssetsTask : org/gradle/api/DefaultTask {
+	public static final field Companion Ldev/teogor/drifter/plugin/RefreshUnityAssetsTask$Companion;
+	public static final field TASK_NAME Ljava/lang/String;
 	public fun <init> ()V
-	public final fun importContent ()V
+	public final fun executeTask ()V
 	public final fun setUnityOptions (Ldev/teogor/drifter/plugin/models/UnityOptions;)V
 }
 
-public final class dev/teogor/drifter/plugin/UnityAssetSyncTaskKt {
-	public static final fun createUnityAssetSyncTask (Lorg/gradle/api/Project;Ldev/teogor/drifter/plugin/models/UnityOptions;)V
+public final class dev/teogor/drifter/plugin/RefreshUnityAssetsTask$Companion {
 }
 
-public final class dev/teogor/drifter/plugin/UnityAssetSyncTaskKt$inlined$sam$i$org_gradle_api_Action$0 : org/gradle/api/Action {
+public final class dev/teogor/drifter/plugin/RefreshUnityAssetsTaskKt {
+	public static final fun createRefreshUnityAssetsTask (Lorg/gradle/api/Project;Ldev/teogor/drifter/plugin/models/UnityOptions;)V
+}
+
+public final class dev/teogor/drifter/plugin/RefreshUnityAssetsTaskKt$inlined$sam$i$org_gradle_api_Action$0 : org/gradle/api/Action {
 	public fun <init> (Lkotlin/jvm/functions/Function1;)V
 	public final synthetic fun execute (Ljava/lang/Object;)V
 }
